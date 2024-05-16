@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/static/utils/fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+}
+:root {
+  --white: #FFFFFF;
+  --white_gray: #F8F8F8;
+  --saturated_white_gray: #EEEEEE;
+  --white_gray: #FAFBFB;
+  --saturated_white_gray: #D0D5DD;
+  --dark_gray: #535353;
+  --light_gray: #6A6E83;
+  --blue_gray: #42526D;
+  --yellow_primary: #FFC000;
+  --dark_red: #B40B00;
+  --light_red: #F15046;
+  --black: #1C1C1C;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--saturated_white_gray);
+  color: var(--black);
+  font-size: 18px;
+  font-family: "Inter";
+}
+
+.side_section {
+  background-color: var(--yellow_primary);
+  width: -moz-fit-content;
+  width: fit-content;
+}/*# sourceMappingURL=style.css.map */
