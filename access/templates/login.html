@@ -11,8 +11,20 @@
 <body>
     <h1>Entrar | PetCare</h1>
 
-    <div class="side_section">
+    <form action="{% url 'login' %}" method="post">
+        {% csrf_token %}
+
+        <label for="email">E-mail</label>
+        <input type="text" name="email">
+
+        <label for="password">Senha</label>
+        <input type="text" name="password">
+
+        <button type="submit">Entrar</button>
+    </form>
+
+    <!-- <div class="side_section">
         <img src="{% static '/utils/images/petCare_illustration.svg' %}" alt="PetCare illustration">
-    </div>
+    </div> -->
 </body>
 </html>

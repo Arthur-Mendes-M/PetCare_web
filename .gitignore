@@ -6,4 +6,6 @@ migrations/
 
 env/
 
+.env
+
 .DS_Store
