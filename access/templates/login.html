@@ -10,6 +10,7 @@
 </head>
 <body>
     <h1>Entrar | PetCare</h1>
+    <h2>Usuário: {{ employee }}</h2>
 
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
@@ -19,6 +20,14 @@
 
         <label for="password">Senha</label>
         <input type="text" name="password">
+        {% if messages  %}
+            <!-- <p>E-mail ou senha incorretos</p> -->
+            {% for message in messages %}
+                {% if forloop.counter == 1 %}  
+                    <p>{{ message }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
 
         <button type="submit">Entrar</button>
     </form>
