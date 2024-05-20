@@ -15,7 +15,13 @@ def login(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
        
-        validated_user_data = validate_access(email, password)['employee']
+        # validated_user_data = validate_access(email, password)['employee']
+        # MOCKED LOGIC FLOW
+        validated_user_data = {
+            'name': 'Arthur Mendes',
+            'email': 'arthur@gmail.com',
+            'password': '123'
+        }
 
         if not validated_user_data:
             messages.error(request, 'E-mail ou senha incorretos!')
@@ -24,16 +30,11 @@ def login(request):
             response = redirect(reverse('home'))
 
             session_handler(request, 'employee', validated_user_data, 'set')
-            # request.session['employee'] = validated_user_data
 
         return response
 
-    # already_user = request.session.get('employee')
-    already_user = session_handler(request, 'employee', False, 'get')
+    return render(request, 'login.html')
 
-    if already_user == None:
-        response = render(request, 'login.html')
-        return response
+def signup(request):
+    return render(request, 'signup.html')
 
-    response = redirect(reverse('home'))
-    return response
