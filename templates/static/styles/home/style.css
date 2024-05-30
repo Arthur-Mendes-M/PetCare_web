@@ -29,10 +29,4 @@ html {
   color: var(--black);
   font-size: 18px;
   font-family: "Inter";
-}
-
-.side_section {
-  background-color: var(--yellow_primary);
-  width: -moz-fit-content;
-  width: fit-content;
 }/*# sourceMappingURL=style.css.map */

@@ -1,14 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial | PetCare</title>
-</head>
-<body>
-    <!-- TODO: split the repeated html code using blocks concept-->
+{% extends 'standard/base.html' %}
+{% load static %}
 
+{% block title %}Página Inicial{% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static '/styles/home/style.css' %}">
+{% endblock %}
+
+{% block content %}
     <h1>Página inicial</h1>
     <h2>Sessão: {{ request.session.employee }}</h2>
-</body>
-</html>
+{% endblock %}

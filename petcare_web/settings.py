@@ -49,7 +49,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'petcare_web.middlewares.AuthenticateRoutes'
+    'petcare_web.middlewares.AuthenticateRoutes',
+    'petcare_web.middlewares.ErrorHandler'
 ]
 
 ROOT_URLCONF = 'petcare_web.urls'

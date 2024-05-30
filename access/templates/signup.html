@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro | PetCare</title>
-</head>
-<body>
+{% extends 'standard/base.html' %}
+{% load static %}
+
+{% block title %}Cadastro{% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static '/styles/signup/style.css' %}">
+{% endblock %}
+
+{% block content %}
     <h1>Cadastro | PetCare</h1>
     <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -29,5 +30,4 @@
     </form>
     <span>Já possui cadastro? <a href="{% url 'login' %}">Realizar login.</a></span>
 
-</body>
-</html>
+{% endblock %}

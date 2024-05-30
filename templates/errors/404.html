@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página não encontrada</title>
-</head>
-<body>
+{% extends 'standard/base.html' %}
+{% block title %}Página não encontrada{% endblock %}
+
+{% block content %}
     <h1>Página de erro 404</h1>
     <p>Página não encontrada</p>
+    <span>Erro: {{error}}</span>
     <a href="{% url 'home' %}">Voltar para a página inicial</a>
-</body>
-</html>
+{% endblock %}
