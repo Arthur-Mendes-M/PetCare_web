@@ -1,0 +1,18 @@
+{
+    "builds": [
+        {
+            "src": "petcare_web/wsgi.py",
+            "use": "@vercel/python",
+            "config": {
+                "maxLambdaSize": "20mb",
+                "runtime": "python3.10.0"
+            }
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "petcare_web/wsgi.py"
+        }
+    ]
+}
