@@ -1,0 +1,152 @@
+@import '../pattern';
+
+// Build mobile logic
+
+body {
+    display: flex;
+
+}
+
+#side_menu {
+    @include flexBox($direction: column, $content: space-between, $gap: 2rem);
+    background-color: var(--white_gray);
+    width: 40%;
+    min-height: 100vh;
+    padding: 1rem;
+
+    nav, .logo {
+        width: 100%;
+    }
+
+    .logo {
+        @include flexBox();
+
+        img {
+            max-width: 80px;
+        }
+    }
+
+    nav {
+        flex-grow: 1;
+        ul {
+            @include flexBox($direction: column, $gap: 2rem);
+
+            li {
+                @include flexBox($content: flex-start, $gap: .8rem);
+                border-radius: .5rem;
+                width: 100%;
+                padding: .5rem;
+                transition: all .25s linear;
+                position: relative;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: var(--saturated_gray);
+                }
+                
+                a {
+                    position: absolute;
+                    opacity: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+
+                &.current {
+                    background-color: var(--yellow_primary);
+                    color: var(--white);
+
+                    &:hover {
+                        background-color: var(--yellow_secondary);
+                    }
+                }
+            }
+        }
+    }
+
+    #logout {
+        @include flexBox($direction: row-reverse, $gap: 1rem);
+        border-radius: .5rem;
+        width: 100%;
+        padding: .5rem;
+        transition: all .25s linear;
+
+        &:hover {
+            background-color: var(--light_red);
+            color: var(--white);
+        }
+    }
+}
+
+main {
+    #top_menu {
+        width: 100%;
+        background-color: var(--white);    
+        padding: 1rem 1.5rem;
+
+        .search_bar {
+            .input {
+                background-color: var(--white_gray);
+                padding: .3rem;
+
+                input {
+                    background: none;
+                    border: none;
+                }
+            }
+        }
+
+        .profile {
+            @include flexBox($gap: .5rem);
+            width: fit-content;
+            padding: .4rem .8rem;
+            border-radius: 5rem;
+            background-color: var(--white_gray);
+
+            .hamburguer_menu {
+                @include flexBox();
+                width: 40px;
+                height: 40px;
+
+                span {
+                    position: relative;
+                    width: 100%;
+                    height: 4px;
+                    background-color: var(--light_gray);
+                    border-radius: 1rem;
+
+                    &::before, &::after {
+                        content: '';
+                        position: absolute;
+                        width: inherit;
+                        height: inherit;
+                        top: 0;
+                        left: 0;
+                        background-color: inherit;
+                        border-radius: 1rem;
+                    }
+
+                    &::before {
+                        top: -10px;
+                    }
+
+                    &::after {
+                        top: 10px;
+                    }
+                }
+            }
+
+            .user_photo {
+                img {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    #current_content {
+        padding: 2rem;
+    }
+}

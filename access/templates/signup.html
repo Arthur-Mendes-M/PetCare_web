@@ -1,12 +1,17 @@
-{% extends 'standard/base.html' %}
 {% load static %}
 
-{% block title %}Cadastro{% endblock %}
-{% block links %}
-    <link rel="stylesheet" href="{% static '/styles/signup/style.css' %}">
-{% endblock %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'assets/images/short_brand.svg' %}" type="image/x-icon">
+    <title>Cadastro | PetCare</title>
 
-{% block content %}
+    <link rel="stylesheet" href="{% static '/styles/signup/style.css' %}">
+
+</head>
+<body>
     <h1>Cadastro | PetCare</h1>
     <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -30,4 +35,5 @@
     </form>
     <span>Já possui cadastro? <a href="{% url 'login' %}">Realizar login.</a></span>
 
-{% endblock %}
+</body>
+</html>

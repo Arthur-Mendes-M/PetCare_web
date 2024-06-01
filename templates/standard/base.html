@@ -7,11 +7,108 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'assets/images/short_brand.svg' %}" type="image/x-icon">
     <title>{% block title %}{% endblock %} | PetCare</title>
+
+    <link rel="stylesheet" href="{% static 'styles/base/style.css' %}">
+
     {% block links %}
     {% endblock %}
+
+    <!-- LUCIDE ICONS - Development version -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- LUCIDE ICONS - Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+    <aside id="side_menu">
+        <div class="logo">
+            <img src="{% static 'assets/images/short_brand.svg' %}" alt="PerCare">
+        </div>
+    
+        <nav>
+            <ul>
+                <li class="current">
+                    <!-- TODO: create and links the apps on links -->
+                    <a href="https://source.unsplash.com/random" target="_blank"></a>
+                    <div class="icon">
+                        <i data-lucide="users"></i>
+                    </div>
+                    <div class="name">
+                        Funcionários
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <i data-lucide="shopping-cart"></i>
+                    </div>
+                    <div class="name">
+                        Vendas
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <i data-lucide="area-chart"></i>
+                    </div>
+                    <div class="name">
+                        Análises
+                    </div>
+                </li>
+                <li>
+                    <div class="icon">
+                        <i data-lucide="newspaper"></i>
+                    </div>
+                    <div class="name">
+                        Relatórios
+                    </div>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- TODO: build logout view and call it here -->
+        <a href="https://source.unsplash.com/random" id="logout">
+            <i data-lucide="truck"></i>
+            Sair do sistema
+        </a>
+    </aside>
+
+    <main>
+        <!-- TODO: build mobile logic/style -->
+        <header id="top_menu">
+            <div class="search_bar">
+                <div class="input">
+                    <input type="text">
+    
+                    <i data-lucide="search"></i>
+                </div>
+                <button type="button">
+                    <i data-lucide="sliders-horizontal"></i>
+                </button>
+            </div>
+    
+            <div class="profile">
+                <div class="hamburguer_menu">
+                    <span></span>
+                </div>
+
+                <div class="user_photo">
+                    <!-- TODO: change to user photo (saved on local storage) -->
+                    <img src="https://source.unsplash.com/random" alt="Usuário">
+                </div>
+            </div>
+        </header>
+
+        <section id="current_content">
+            <h1>Nome: {{ request.session.employee.name }}</h1>
+            <br>
+
+            {% block content %}
+            {% endblock %}
+        </section>
+    </main>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
