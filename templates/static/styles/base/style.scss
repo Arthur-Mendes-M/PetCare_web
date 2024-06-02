@@ -244,6 +244,7 @@ main {
             background-color: var(--white);
             padding: 1rem;
             transition: all .3s linear;
+            border-end-start-radius: .5rem;
 
             &.show {
                 right: 0;

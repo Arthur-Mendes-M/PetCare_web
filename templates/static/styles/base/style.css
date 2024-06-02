@@ -310,6 +310,7 @@ main #top_menu .secondary_menu {
   background-color: var(--white);
   padding: 1rem;
   transition: all 0.3s linear;
+  border-end-start-radius: 0.5rem;
 }
 main #top_menu .secondary_menu.show {
   right: 0;
