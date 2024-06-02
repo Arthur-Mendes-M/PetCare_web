@@ -30,6 +30,9 @@ html {
   color: var(--black);
   font-size: 18px;
   font-family: "Inter";
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 li {
@@ -39,4 +42,8 @@ li {
 a {
   text-decoration: none;
   color: var(--black);
+}
+
+button, input {
+  font-family: "Inter";
 }/*# sourceMappingURL=style.css.map */

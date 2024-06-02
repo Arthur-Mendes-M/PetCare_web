@@ -30,6 +30,9 @@ html {
   color: var(--black);
   font-size: 18px;
   font-family: "Inter";
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 li {
@@ -41,11 +44,18 @@ a {
   color: var(--black);
 }
 
+button, input {
+  font-family: "Inter";
+}
+
 body {
   display: flex;
+  height: 100%;
+  overflow-x: hidden;
 }
 
 #side_menu {
+  position: sticky;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,7 +63,7 @@ body {
   gap: 2rem;
   flex-wrap: nowrap;
   background-color: var(--white_gray);
-  width: 40%;
+  width: 20%;
   min-height: 100vh;
   padding: 1rem;
 }
@@ -119,28 +129,97 @@ body {
   justify-content: center;
   gap: 1rem;
   flex-wrap: nowrap;
+  border: none;
+  background: none;
   border-radius: 0.5rem;
   width: 100%;
   padding: 0.5rem;
   transition: all 0.25s linear;
+  cursor: pointer;
 }
 #side_menu #logout:hover {
   background-color: var(--light_red);
   color: var(--white);
 }
 
+main {
+  flex-grow: 10;
+}
 main #top_menu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  flex-wrap: nowrap;
+  position: relative;
   width: 100%;
   background-color: var(--white);
   padding: 1rem 1.5rem;
 }
+main #top_menu .search_bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  width: 100%;
+  flex-grow: 1;
+}
 main #top_menu .search_bar .input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: nowrap;
   background-color: var(--white_gray);
-  padding: 0.3rem;
+  padding: 0.8rem;
+  height: 50px;
+  width: 80%;
+  flex-grow: 1;
+  border-radius: 2rem;
 }
 main #top_menu .search_bar .input input {
   background: none;
   border: none;
+  height: 100%;
+  width: 100%;
+  padding-left: 0.6rem;
+}
+main #top_menu .search_bar .input .search_button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+main #top_menu .search_bar .input .search_button svg {
+  color: var(--light_gray);
+  transition: all 0.25s linear;
+}
+main #top_menu .search_bar .input .search_button:hover svg {
+  color: var(--yellow_secondary);
+}
+main #top_menu .search_bar .config {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: nowrap;
+  padding: 0.8rem;
+  border: none;
+  background: none;
+  border-radius: 50%;
+  background-color: var(--yellow_primary);
+  color: var(--white);
+  transition: all 0.3s linear;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+main #top_menu .search_bar .config:hover {
+  background-color: var(--yellow_secondary);
 }
 main #top_menu .profile {
   display: flex;
@@ -151,11 +230,11 @@ main #top_menu .profile {
   flex-wrap: nowrap;
   width: -moz-fit-content;
   width: fit-content;
-  padding: 0.4rem 0.8rem;
+  padding: 0.2rem 0.2rem 0.2rem 0.8rem;
   border-radius: 5rem;
   background-color: var(--white_gray);
 }
-main #top_menu .profile .hamburguer_menu {
+main #top_menu .profile #hamburger_menu {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -164,37 +243,143 @@ main #top_menu .profile .hamburguer_menu {
   flex-wrap: nowrap;
   width: 40px;
   height: 40px;
+  cursor: pointer;
+  background: none;
+  border: none;
 }
-main #top_menu .profile .hamburguer_menu span {
+main #top_menu .profile #hamburger_menu span {
   position: relative;
   width: 100%;
   height: 4px;
   background-color: var(--light_gray);
   border-radius: 1rem;
+  transition: all 0.3s linear;
 }
-main #top_menu .profile .hamburguer_menu span::before, main #top_menu .profile .hamburguer_menu span::after {
+main #top_menu .profile #hamburger_menu span.show {
+  transform: rotate(-45deg);
+}
+main #top_menu .profile #hamburger_menu span.show::before {
+  top: 0;
+  transform: rotate(90deg);
+}
+main #top_menu .profile #hamburger_menu span.show::after {
+  top: 0;
+  transform: rotate(-90deg);
+}
+main #top_menu .profile #hamburger_menu span::before, main #top_menu .profile #hamburger_menu span::after {
   content: "";
   position: absolute;
   width: inherit;
   height: inherit;
   top: 0;
-  left: 0;
+  right: 0;
   background-color: inherit;
   border-radius: 1rem;
+  transition: all 0.3s linear;
 }
-main #top_menu .profile .hamburguer_menu span::before {
+main #top_menu .profile #hamburger_menu span::before {
   top: -10px;
 }
-main #top_menu .profile .hamburguer_menu span::after {
+main #top_menu .profile #hamburger_menu span::after {
   top: 10px;
 }
-main #top_menu .profile .user_photo img {
+main #top_menu .profile #hamburger_menu:hover span:not(.show) {
+  width: 100%;
+}
+main #top_menu .profile #hamburger_menu:hover span:not(.show)::before {
+  width: 80%;
+}
+main #top_menu .profile #hamburger_menu:hover span:not(.show)::after {
+  width: 60%;
+}
+main #top_menu .profile .user_photo {
   width: 50px;
   height: 50px;
+}
+main #top_menu .profile .user_photo img {
+  width: 100%;
+  height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
   border-radius: 50%;
 }
+main #top_menu .secondary_menu {
+  position: absolute;
+  right: -100%;
+  top: 100%;
+  background-color: var(--white);
+  padding: 1rem;
+  transition: all 0.3s linear;
+}
+main #top_menu .secondary_menu.show {
+  right: 0;
+}
+main #top_menu .secondary_menu nav {
+  display: flex;
+  flex-direction: column;
+  align-items: unset;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+main #top_menu .secondary_menu nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+}
+main #top_menu .secondary_menu nav ul.mobile_version {
+  display: none;
+  border-top: 1px solid var(--yellow_primary);
+  padding-top: 0.5rem;
+}
+main #top_menu .secondary_menu nav ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.8rem;
+  flex-wrap: nowrap;
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  transition: all 0.25s linear;
+  position: relative;
+  cursor: pointer;
+}
+main #top_menu .secondary_menu nav ul li:hover {
+  background-color: var(--saturated_gray);
+}
+main #top_menu .secondary_menu nav ul li a {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+}
+main #top_menu .secondary_menu nav ul li.current {
+  background-color: var(--yellow_primary);
+  color: var(--white);
+}
+main #top_menu .secondary_menu nav ul li.current:hover {
+  background-color: var(--yellow_secondary);
+}
 main #current_content {
-  padding: 2rem;
+  padding: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  #side_menu {
+    display: none;
+  }
+  main #top_menu {
+    gap: 1rem;
+  }
+  main #top_menu .search_bar .config {
+    display: none;
+  }
+  main #top_menu .secondary_menu nav ul.mobile_version {
+    display: block;
+  }
 }/*# sourceMappingURL=style.css.map */

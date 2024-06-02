@@ -28,7 +28,7 @@
         <nav>
             <ul>
                 <li class="current">
-                    <!-- TODO: create and links the apps on links -->
+                    <!-- TODO: create and links the apps on links (?JS scripts?) -->
                     <a href="https://source.unsplash.com/random" target="_blank"></a>
                     <div class="icon">
                         <i data-lucide="users"></i>
@@ -65,10 +65,10 @@
         </nav>
 
         <!-- TODO: build logout view and call it here -->
-        <a href="https://source.unsplash.com/random" id="logout">
+        <button id="logout" type="button">
             <i data-lucide="truck"></i>
             Sair do sistema
-        </a>
+        </button>
     </aside>
 
     <main>
@@ -76,24 +76,85 @@
         <header id="top_menu">
             <div class="search_bar">
                 <div class="input">
-                    <input type="text">
+                    <input type="text" placeholder="Buscar...">
     
-                    <i data-lucide="search"></i>
+                    <button type="button" class="search_button">
+                        <i data-lucide="search"></i>
+                    </button>
                 </div>
-                <button type="button">
+
+                <button type="button" class="config">
                     <i data-lucide="sliders-horizontal"></i>
                 </button>
             </div>
     
             <div class="profile">
-                <div class="hamburguer_menu">
+                <button id="hamburger_menu" type="button">
                     <span></span>
-                </div>
+                </button>
 
                 <div class="user_photo">
                     <!-- TODO: change to user photo (saved on local storage) -->
-                    <img src="https://source.unsplash.com/random" alt="Usuário">
+                    {% if request.session.employee.avatar_url == none %}
+                        <img src="https://source.unsplash.com/random?pet&dogs&cats&animals" alt={{ request.session.employee.name }}>
+                    {% else %}
+                        <img src={{ request.session.employee.avatar_url }} alt={{ request.session.employee.name }}>
+                    {% endif %}
                 </div>
+            </div>
+
+            <div class="secondary_menu">
+                <nav>
+                    <ul class="simple_version">
+                        <li>
+                            <a href="https://source.unsplash.com/random"></a>
+
+                            <div class="icon">
+                                <i data-lucide="circle-user-round"></i>
+                            </div>
+                            <div class="name">
+                                Perfil
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="mobile_version">
+                        <li class="current">
+                            <!-- TODO: create and links the apps on links -->
+                            <a href="https://source.unsplash.com/random" target="_blank"></a>
+                            <div class="icon">
+                                <i data-lucide="users"></i>
+                            </div>
+                            <div class="name">
+                                Funcionários
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i data-lucide="shopping-cart"></i>
+                            </div>
+                            <div class="name">
+                                Vendas
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i data-lucide="area-chart"></i>
+                            </div>
+                            <div class="name">
+                                Análises
+                            </div>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <i data-lucide="newspaper"></i>
+                            </div>
+                            <div class="name">
+                                Relatórios
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </header>
 
@@ -107,8 +168,28 @@
     </main>
 
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- TODO: split the script to js files -->
     <script>
         lucide.createIcons();
+
+        let hamburger_menu = document.getElementById("hamburger_menu")
+        let hamburger_menu_middle_bar = document.querySelector("#hamburger_menu span")
+
+        let secondary_menu = document.querySelector(".secondary_menu")
+
+        hamburger_menu.addEventListener('click', () => {
+            hamburger_menu_middle_bar.classList.toggle('show')
+            secondary_menu.classList.toggle('show')
+        })
+
+        let logout_button = document.getElementById("logout")
+        logout_button.addEventListener('click', () => {
+            let confirmation = confirm("Você realmente deseja sair do sistema?")
+
+            if (confirmation) {
+                window.location.href = '/logout'
+            }
+        })
     </script>
 </body>
 </html>

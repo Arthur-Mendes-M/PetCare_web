@@ -1,16 +1,19 @@
 @import '../pattern';
 
-// Build mobile logic
+// TODO: Build mobile logic
 
 body {
     display: flex;
+    height: 100%;
 
+    overflow-x: hidden;
 }
 
 #side_menu {
+    position: sticky;
     @include flexBox($direction: column, $content: space-between, $gap: 2rem);
     background-color: var(--white_gray);
-    width: 40%;
+    width: 20%;
     min-height: 100vh;
     padding: 1rem;
 
@@ -65,10 +68,14 @@ body {
 
     #logout {
         @include flexBox($direction: row-reverse, $gap: 1rem);
+        border: none;
+        background: none;
+
         border-radius: .5rem;
         width: 100%;
         padding: .5rem;
         transition: all .25s linear;
+        cursor: pointer;
 
         &:hover {
             background-color: var(--light_red);
@@ -78,19 +85,68 @@ body {
 }
 
 main {
+    flex-grow: 10;
     #top_menu {
+        @include flexBox($content: space-between, $gap: 3rem);
+        position: relative;
+
         width: 100%;
         background-color: var(--white);    
         padding: 1rem 1.5rem;
 
         .search_bar {
+            @include flexBox($content: space-between, $gap: 2rem);
+            width: 100%;
+            flex-grow: 1;
+
             .input {
+                @include flexBox($content: space-between, $gap: 1rem);
                 background-color: var(--white_gray);
-                padding: .3rem;
+                padding: .8rem;
+                height: 50px;
+                width: 80%;
+                flex-grow: 1;
+                border-radius: 2rem;
 
                 input {
                     background: none;
                     border: none;
+                    height: 100%;
+                    width: 100%;
+                    padding-left: .6rem;
+                }
+
+                .search_button {
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    
+                    svg {
+                        color: var(--light_gray);
+                        transition: all .25s linear;
+                    }
+
+                    &:hover svg {
+                        color: var(--yellow_secondary);
+                    }
+                }
+            }
+
+            .config {
+                @include flexBox();
+                padding: .8rem;
+                border: none;
+                background: none;
+                border-radius: 50%;
+                background-color: var(--yellow_primary);
+                color: var(--white);
+                transition: all .3s linear;
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+
+                &:hover {
+                    background-color: var(--yellow_secondary);
                 }
             }
         }
@@ -98,14 +154,17 @@ main {
         .profile {
             @include flexBox($gap: .5rem);
             width: fit-content;
-            padding: .4rem .8rem;
+            padding: .2rem .2rem .2rem .8rem;
             border-radius: 5rem;
             background-color: var(--white_gray);
 
-            .hamburguer_menu {
+            #hamburger_menu {
                 @include flexBox();
                 width: 40px;
                 height: 40px;
+                cursor: pointer;
+                background: none;
+                border: none;
 
                 span {
                     position: relative;
@@ -113,6 +172,21 @@ main {
                     height: 4px;
                     background-color: var(--light_gray);
                     border-radius: 1rem;
+                    transition: all .3s linear;
+
+                    &.show {
+                        transform: rotate(-45deg);
+
+                        &::before {
+                            top: 0;
+                            transform: rotate(90deg);
+                        }
+    
+                        &::after {
+                            top: 0;
+                            transform: rotate(-90deg);
+                        }
+                    }
 
                     &::before, &::after {
                         content: '';
@@ -120,9 +194,10 @@ main {
                         width: inherit;
                         height: inherit;
                         top: 0;
-                        left: 0;
+                        right: 0;
                         background-color: inherit;
                         border-radius: 1rem;
+                        transition: all .3s linear;
                     }
 
                     &::before {
@@ -133,20 +208,129 @@ main {
                         top: 10px;
                     }
                 }
+
+                &:hover {
+                    span:not(.show) {
+                        width: 100%;
+
+                        &::before {
+                            width: 80%;
+                        }
+
+                        &::after {
+                            width: 60%;
+                        }
+                    }
+                }
             }
 
             .user_photo {
+                width: 50px;
+                height: 50px;
+
                 img {
-                    width: 50px;
-                    height: 50px;
+                    width: 100%;
+                    height: 100%;
                     object-fit: cover;
                     border-radius: 50%;
+                }
+            }
+        }
+
+        .secondary_menu {
+            position: absolute;
+            right: -100%;
+            top: 100%;
+            background-color: var(--white);
+            padding: 1rem;
+            transition: all .3s linear;
+
+            &.show {
+                right: 0;
+            }
+
+            nav {
+                @include flexBox($direction: column, $items: unset, $gap: .5rem);
+
+                ul {
+                    @include flexBox($direction: column, $gap: .5rem);
+            
+                    &.mobile_version {
+                        display: none;
+                        border-top: 1px solid var(--yellow_primary);
+                        padding-top: .5rem;
+                    }
+
+                    li {
+                        @include flexBox($content: flex-start, $gap: .8rem);
+                        border-radius: .5rem;
+                        width: 100%;
+                        padding: .5rem;
+                        transition: all .25s linear;
+                        position: relative;
+                        cursor: pointer;
+            
+                        &:hover {
+                            background-color: var(--saturated_gray);
+                        }
+                        
+                        a {
+                            position: absolute;
+                            opacity: 0;
+                            width: 100%;
+                            height: 100%;
+                        }
+            
+                        &.current {
+                            background-color: var(--yellow_primary);
+                            color: var(--white);
+            
+                            &:hover {
+                                background-color: var(--yellow_secondary);
+                            }
+                        }
+                    }
                 }
             }
         }
     }
 
     #current_content {
-        padding: 2rem;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    #side_menu {
+        display: none;
+        // position: absolute;
+        // width: 90%;
+        // max-width: 450px;
+        // z-index: 1;
+
+        // transform: translateX(-100%);
+    }
+
+    main {
+        #top_menu {
+            gap: 1rem;
+
+            .search_bar {
+                
+                .config {
+                    display: none;
+                }
+            }
+
+            .secondary_menu {
+                nav {
+                    ul {
+                        &.mobile_version {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

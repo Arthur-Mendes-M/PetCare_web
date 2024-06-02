@@ -47,3 +47,7 @@ def signup(request):
 
     return render(request, 'signup.html')
 
+def logout(request):
+    session_handler(request, 'employee', None, 'delete')
+
+    return redirect(reverse('login'))
