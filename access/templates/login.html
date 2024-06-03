@@ -22,22 +22,13 @@
 
         <label for="password">Senha</label>
         <input type="password" name="password">
-        {% if messages  %}
-            <!-- <p>E-mail ou senha incorretos</p> -->
-            {% for message in messages %}
-                {% if forloop.counter == 1 %}  
-                    <p>{{ message }}</p>
-                {% endif %}
-            {% endfor %}
+        {% if login_error  %}
+            <p>Erro: {{ login_error }}</p>
         {% endif %}
 
         <button type="submit">Entrar</button>
     </form>
 
     <span>Não possui cadastro? <a href="{% url 'signup' %}">Cadastre-se aqui.</a></span>
-
-    <!-- <div class="side_section">
-        <img src="{% static '/assets/images/petCare_illustration.svg' %}" alt="Logo do PetCare">
-    </div> -->
 </body>
 </html>
