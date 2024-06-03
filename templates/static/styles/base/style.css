@@ -381,6 +381,6 @@ main #current_content {
     display: none;
   }
   main #top_menu .secondary_menu nav ul.mobile_version {
-    display: block;
+    display: flex;
   }
 }/*# sourceMappingURL=style.css.map */

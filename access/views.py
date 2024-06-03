@@ -5,8 +5,6 @@ from dotenv import load_dotenv
 from utils.session_handler import session_handler
 from utils.API import Employees
 
-import ast
-
 # Load environment variables from .env file
 load_dotenv()
 
@@ -22,7 +20,7 @@ def login(request):
             session_handler(request, 'employee', api_data[0], 'set')
             response = redirect(reverse('home'))
         else:
-            response = render(request, 'login.html', {'login_error': api_data['description']})
+            response = render(request, 'login.html', {'login_error': 'E-mail e/ou senha incorreto(s)'})
             
         return response
 
@@ -41,24 +39,21 @@ def signup(request):
             'image': request.FILES['image'] if request.FILES and request.FILES['image'] else None
         }
     
-        # TEMP
-        Employees().save_one(data=data, files=file)
+        response = Employees().save_one(data=data, files=file)
+        response_in_str = str(response.json())
 
-        # UPDATE THE LOGIC BELOW - SIMPLIFY
-        # FIX THE PROBLEMS
-        # response = Employees().save_one(data=data, files=file)
-        # response_to_obj = ""
+        if response.status_code == 200:
+            return redirect(reverse('login'))
+        
+        signup_error = "Ocorreu algum erro no cadastro :/ Pedimos que, por favor, reinicie a página e tente novamente."
 
-        # if 'error' in response.json():
-        #     response_to_obj = ast.literal_eval(response.json()["error"])
-        # elif 'description' in response.json() and 'megabytes' in response.json()['description']:
-        #     return render(request, 'signup.html', {"signup_error": "Imagem muito grande. Utilize imagens de até 3M e com extensões .jpeg, .jpg ou .png"})
+        if 'already exists' in response_in_str:
+            signup_error = "Esse e-mail já existe! Utilize outro."
+        elif 'megabyte' in response_in_str:
+            signup_error = "Imagem muito grande ou no formato incorreto. Utilize imagens de até 3M e com extensões .jpeg, .jpg ou .png"
 
-        # if 'code' in response_to_obj and response_to_obj['code'] == '23505':
-        #     return render(request, 'signup.html', {"signup_error": "Esse e-mail já existe! Utilize outro."})
+        return render(request, 'signup.html', {"signup_error": signup_error})
 
-
-        return redirect(reverse('login'))
 
     return render(request, 'signup.html')
 

@@ -1,7 +1,5 @@
 @import '../pattern';
 
-// TODO: Build mobile logic
-
 body {
     display: flex;
     height: 100%;
@@ -327,7 +325,7 @@ main {
                 nav {
                     ul {
                         &.mobile_version {
-                            display: block;
+                            display: flex;
                         }
                     }
                 }
