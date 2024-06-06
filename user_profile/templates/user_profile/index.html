@@ -1,0 +1,13 @@
+{% extends 'standard/base.html' %}
+{% load static %}
+
+{% block title %}Perfil{% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static '/styles/user_profile/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Perfil</h1>
+    <h2>Nome: {{ request.session.employee.name }}</h2>
+    <h2>Email: {{ request.session.employee.email }}</h2>
+{% endblock %}

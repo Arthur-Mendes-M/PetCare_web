@@ -149,7 +149,7 @@ main {
             }
         }
 
-        .profile {
+        .user_profile {
             @include flexBox($gap: .5rem);
             width: fit-content;
             padding: .2rem .2rem .2rem .8rem;

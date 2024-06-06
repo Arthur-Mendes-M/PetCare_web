@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="{% static 'assets/images/short_brand.svg' %}" type="image/x-icon">
     <title>{% block title %}{% endblock %} | PetCare</title>
 
-    <link rel="stylesheet" href="{% static 'styles/base/style.css' %}">
+    <link rel="stylesheet" href="{% static '/styles/base/style.css' %}">
 
     {% block links %}
     {% endblock %}
@@ -29,7 +29,7 @@
             <ul>
                 <li data-page="home">
                     <!-- TODO: CHANGE TO APPLICATION LINKS -->
-                    <a href="https://source.unsplash.com/random" target="_blank"></a>
+                    <a href="{% url 'home' %}"></a>
                     <div class="icon">
                         <i data-lucide="users"></i>
                     </div>
@@ -38,7 +38,7 @@
                     </div>
                 </li>
                 <li data-page="sales">
-                    <a href="https://source.unsplash.com/random" target="_blank"></a>
+                    <a href="{% url 'sales' %}"></a>
                     <div class="icon">
                         <i data-lucide="shopping-cart"></i>
                     </div>
@@ -47,7 +47,7 @@
                     </div>
                 </li>
                 <li data-page="analytics">
-                    <a href="https://source.unsplash.com/random" target="_blank"></a>
+                    <a href="{% url 'analytics' %}"></a>
                     <div class="icon">
                         <i data-lucide="area-chart"></i>
                     </div>
@@ -55,8 +55,8 @@
                         Análises
                     </div>
                 </li>
-                <li data-page="report">
-                    <a href="https://source.unsplash.com/random" target="_blank"></a>
+                <li data-page="reports">
+                    <a href="{% url 'reports' %}"></a>
                     <div class="icon">
                         <i data-lucide="newspaper"></i>
                     </div>
@@ -89,7 +89,7 @@
                 </button>
             </div>
     
-            <div class="profile">
+            <div class="user_profile">
                 <button id="hamburger_menu" type="button">
                     <span></span>
                 </button>
@@ -106,8 +106,8 @@
             <div class="secondary_menu">
                 <nav>
                     <ul class="simple_version">
-                        <li data-page="profile">
-                            <a href="https://source.unsplash.com/random"></a>
+                        <li data-page="user_profile">
+                            <a href="{% url 'user_profile' %}"></a>
 
                             <div class="icon">
                                 <i data-lucide="circle-user-round"></i>
@@ -121,7 +121,7 @@
                     <ul class="mobile_version">
                         <li data-page="home">
                             <!-- TODO: create and links the apps on links -->
-                            <a href="https://source.unsplash.com/random" target="_blank"></a>
+                            <a href="{% url 'home' %}"></a>
                             <div class="icon">
                                 <i data-lucide="users"></i>
                             </div>
@@ -130,7 +130,7 @@
                             </div>
                         </li>
                         <li data-page="sales">
-                            <a href="https://source.unsplash.com/random" target="_blank"></a>
+                            <a href="{% url 'sales' %}"></a>
                             <div class="icon">
                                 <i data-lucide="shopping-cart"></i>
                             </div>
@@ -139,7 +139,7 @@
                             </div>
                         </li>
                         <li data-page="analytics">
-                            <a href="https://source.unsplash.com/random" target="_blank"></a>
+                            <a href="{% url 'analytics' %}"></a>
                             <div class="icon">
                                 <i data-lucide="area-chart"></i>
                             </div>
@@ -147,8 +147,8 @@
                                 Análises
                             </div>
                         </li>
-                        <li data-page="report">
-                            <a href="https://source.unsplash.com/random" target="_blank"></a>
+                        <li data-page="reports">
+                            <a href="{% url 'reports' %}"></a>
                             <div class="icon">
                                 <i data-lucide="newspaper"></i>
                             </div>
@@ -162,9 +162,6 @@
         </header>
 
         <section id="current_content">
-            <h1>Nome: {{ request.session.employee.name }}</h1>
-            <br>
-
             {% block content %}
             {% endblock %}
         </section>

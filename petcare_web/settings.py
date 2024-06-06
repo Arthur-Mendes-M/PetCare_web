@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'access',
     'home',
+    'sales',
+    'analytics',
+    'user_profile',
+    'reports'
 ]
 
 # CHANGED TO NOT USE A DEPENDENCIES WITH DB

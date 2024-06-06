@@ -1,0 +1,12 @@
+{% extends 'standard/base.html' %}
+{% load static %}
+
+{% block title %}Vendas{% endblock %}
+{% block links %}
+    <link rel="stylesheet" href="{% static '/styles/sales/style.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1>Página de vendas</h1>
+    <!-- <h2>Sessão: {{ request.session.employee }}</h2> -->
+{% endblock %}

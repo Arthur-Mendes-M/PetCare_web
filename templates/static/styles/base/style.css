@@ -221,7 +221,7 @@ main #top_menu .search_bar .config {
 main #top_menu .search_bar .config:hover {
   background-color: var(--yellow_secondary);
 }
-main #top_menu .profile {
+main #top_menu .user_profile {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -234,7 +234,7 @@ main #top_menu .profile {
   border-radius: 5rem;
   background-color: var(--white_gray);
 }
-main #top_menu .profile #hamburger_menu {
+main #top_menu .user_profile #hamburger_menu {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -247,7 +247,7 @@ main #top_menu .profile #hamburger_menu {
   background: none;
   border: none;
 }
-main #top_menu .profile #hamburger_menu span {
+main #top_menu .user_profile #hamburger_menu span {
   position: relative;
   width: 100%;
   height: 4px;
@@ -255,18 +255,18 @@ main #top_menu .profile #hamburger_menu span {
   border-radius: 1rem;
   transition: all 0.3s linear;
 }
-main #top_menu .profile #hamburger_menu span.show {
+main #top_menu .user_profile #hamburger_menu span.show {
   transform: rotate(-45deg);
 }
-main #top_menu .profile #hamburger_menu span.show::before {
+main #top_menu .user_profile #hamburger_menu span.show::before {
   top: 0;
   transform: rotate(90deg);
 }
-main #top_menu .profile #hamburger_menu span.show::after {
+main #top_menu .user_profile #hamburger_menu span.show::after {
   top: 0;
   transform: rotate(-90deg);
 }
-main #top_menu .profile #hamburger_menu span::before, main #top_menu .profile #hamburger_menu span::after {
+main #top_menu .user_profile #hamburger_menu span::before, main #top_menu .user_profile #hamburger_menu span::after {
   content: "";
   position: absolute;
   width: inherit;
@@ -277,26 +277,26 @@ main #top_menu .profile #hamburger_menu span::before, main #top_menu .profile #h
   border-radius: 1rem;
   transition: all 0.3s linear;
 }
-main #top_menu .profile #hamburger_menu span::before {
+main #top_menu .user_profile #hamburger_menu span::before {
   top: -10px;
 }
-main #top_menu .profile #hamburger_menu span::after {
+main #top_menu .user_profile #hamburger_menu span::after {
   top: 10px;
 }
-main #top_menu .profile #hamburger_menu:hover span:not(.show) {
+main #top_menu .user_profile #hamburger_menu:hover span:not(.show) {
   width: 100%;
 }
-main #top_menu .profile #hamburger_menu:hover span:not(.show)::before {
+main #top_menu .user_profile #hamburger_menu:hover span:not(.show)::before {
   width: 80%;
 }
-main #top_menu .profile #hamburger_menu:hover span:not(.show)::after {
+main #top_menu .user_profile #hamburger_menu:hover span:not(.show)::after {
   width: 60%;
 }
-main #top_menu .profile .user_photo {
+main #top_menu .user_profile .user_photo {
   width: 50px;
   height: 50px;
 }
-main #top_menu .profile .user_photo img {
+main #top_menu .user_profile .user_photo img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
