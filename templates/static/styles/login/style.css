@@ -46,4 +46,55 @@ a {
 
 button, input {
   font-family: "Inter";
+}
+
+body {
+  background: #B9B9B9;
+}
+body h1 {
+  font-size: 24px;
+}
+
+.login {
+  background-color: transparent;
+  border: none;
+  color: #FFC000;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+}
+.login::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #FFC000;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+.login:hover::after {
+  height: 4px;
+}
+
+.signup {
+  background-color: transparent;
+  border: none;
+  color: #6A6E83;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+}
+.signup::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #FFC000;
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+}
+.signup:hover::after {
+  height: 4px;
 }/*# sourceMappingURL=style.css.map */

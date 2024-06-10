@@ -1,1 +1,62 @@
 @import '../pattern';
+
+$background: #B9B9B9;
+$primary: #FFC000;
+$secondary: #6A6E83;
+$line-height: 2px;
+$line-hover-height: 4px;
+$line-spacing: -5px;
+
+body{
+    background: $background;
+    
+}
+
+{% comment %} .login {
+    background-color: transparent; 
+    border: none; 
+    color: $primary; 
+    font-size: 16px; 
+    cursor: pointer;
+    position: relative; 
+
+    &::after {
+        content: ""; 
+        display: block;
+        width: 100%; 
+        height: $line-height; 
+        background-color: $primary; 
+        position: absolute;
+        bottom: $line-spacing; 
+        left: 0; 
+    }
+
+    &:hover::after {
+        height: $line-hover-height; 
+    }
+}
+
+.signup{
+    background-color: transparent; 
+    border: none; 
+    color: $secondary; 
+    font-size: 16px; 
+    cursor: pointer;
+    position: relative; 
+
+    &::after {
+        content: ""; 
+        display: block;
+        width: 100%; 
+        height: $line-height; 
+        background-color: $primary; 
+        position: absolute;
+        bottom: $line-spacing; 
+        left: 0; 
+    }
+
+    &:hover::after {
+        height: $line-hover-height; 
+    }
+} {% endcomment %}
+

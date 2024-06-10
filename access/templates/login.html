@@ -6,13 +6,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'assets/images/short_brand.svg' %}" type="image/x-icon">
-    <title>Entrar | PetCare</title>
+    <title>Login | PetCare</title>
 
     <link rel="stylesheet" href="{% static '/styles/login/style.css' %}">
 </head>
 <body>
-    <h1>Entrar | PetCare</h1>
-    <h2>Usuário: {{ employee }}</h2>
+    <a href="{% url 'login' %}" class="login">Login</a>
+    <a href="{% url 'signup' %}" class="signup">Cadastro</a>
+    <h1>Faça seu Login</h1>
+    <p>Digite seu e-mail e senha abaixo para entrar na sua conta.</p>
+    {% comment %} <h2>Usuário: {{ employee }}</h2> {% endcomment %}
 
     <form action="{% url 'login' %}" method="post">
         {% csrf_token %}
@@ -26,9 +29,11 @@
             <p>Erro: {{ login_error }}</p>
         {% endif %}
 
+        <p>Esqueceu a senha?</p>
+
         <button type="submit">Entrar</button>
     </form>
+    <img src="{% static 'assets/images/petCare_illustration.svg' %}" alt="{{ imagem.nome }}">
 
-    <span>Não possui cadastro? <a href="{% url 'signup' %}">Cadastre-se aqui.</a></span>
 </body>
 </html>
