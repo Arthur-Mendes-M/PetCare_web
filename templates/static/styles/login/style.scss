@@ -9,10 +9,20 @@ $line-spacing: -5px;
 
 body{
     background: $background;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p{
+        color: $secondary;
+        font-size: 12px;
+    }
+    img{
+        display: inline-block;
+    }
 }
 
-{% comment %} .login {
+
+.login {
     background-color: transparent; 
     border: none; 
     color: $primary; 
@@ -58,5 +68,58 @@ body{
     &:hover::after {
         height: $line-hover-height; 
     }
-} {% endcomment %}
+}
+
+form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    .input-container {
+        position: relative;
+        margin-bottom: 20px;
+    }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            font-size: 1rem;
+
+            &:focus + label,
+            &:not(:placeholder-shown) + label {
+                top: -10px;
+                left: 10px;
+                font-size: 0.8rem;
+                color: #ffeb3b;
+            }
+        }
+
+        label {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            transform: translateY(-50%);
+            background-color: #fff;
+            padding: 0 5px;
+            color: #aaa;
+            transition: all 0.3s;
+        }
+
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: $primary;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: $primary;
+        }
+    }
+}
 

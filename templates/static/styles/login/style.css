@@ -50,9 +50,16 @@ button, input {
 
 body {
   background: #B9B9B9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-body h1 {
-  font-size: 24px;
+body p {
+  color: #6A6E83;
+  font-size: 12px;
+}
+body img {
+  display: inline-block;
 }
 
 .login {
@@ -97,4 +104,57 @@ body h1 {
 }
 .signup:hover::after {
   height: 4px;
+}
+
+form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+form .input-container {
+  position: relative;
+  margin-bottom: 20px;
+}
+form input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+}
+form input:not(:-moz-placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  font-size: 0.8rem;
+  color: #ffeb3b;
+}
+form input:focus + label, form input:not(:placeholder-shown) + label {
+  top: -10px;
+  left: 10px;
+  font-size: 0.8rem;
+  color: #ffeb3b;
+}
+form label {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  background-color: #fff;
+  padding: 0 5px;
+  color: #aaa;
+  transition: all 0.3s;
+}
+form button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFC000;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+form button:hover {
+  background-color: #FFC000;
 }/*# sourceMappingURL=style.css.map */

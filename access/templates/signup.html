@@ -18,26 +18,31 @@
     <p>Preencha as informações e crie sua conta.</p>
     <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
-
-        <label for="image">Foto</label>
-        <input type="file" name="image">
-        <br/>
-        <label for="name">Nome</label>
-        <input type="text" name="name" required>
-        <br/>
-        <label for="email">E-mail</label>
-        <input type="email" name="email" required>
-        <br/>
-        <label for="password">Senha</label>
-        <input type="password" name="password" required>
-        <br/>
-        <label for="role">Cargo</label>
-        <input type="text" name="role">
+        <div class="input-container">
+            <label for="image">Foto</label>
+            <input type="file" name="image">
+        </div>
+        <div class="input-container">
+            <label for="name">Nome</label>
+            <input type="text" name="name" required>
+        </div>
+        <div class="input-container">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" required>
+        </div>
+        <div class="input-container">
+            <label for="password">Senha</label>
+            <input type="password" name="password" required>
+        </div>
+        <div class="input-container">
+            <label for="role">Cargo</label>
+            <input type="text" name="role">
+        </div>
         <p>{{ signup_error }}</p>
-        <br/>
-        <input type="checkbox" id="checkbox" name="checkbox">
-        <label for="checkbox">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
-        <br/>
+        <div class="input-checkbox">
+            <input type="checkbox" id="checkbox" name="checkbox">
+            <label for="checkbox">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
+        </div>
         <button type="submit">Cadastre-se</button>
     </form>
     
