@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from django.urls import reverse
+from django.urls import reverse, resolve
 from django.http import HttpResponse, HttpResponseNotFound
 from django.template.loader import get_template
 
@@ -12,11 +12,10 @@ class AuthenticateRoutes:
         current_employee = session_handler(request, 'employee', False, 'get')
         response = self.get_response(request)
 
-        if not current_employee and not request.path == reverse('login') and not request.path == reverse('signup'):
+        target_path = request.path
+
+        if not current_employee and target_path != reverse('login') and target_path != reverse('signup'):
             return redirect(reverse('login'))
-        elif current_employee and (request.path == reverse('login') or request.path == reverse('signup')):
-            # if the content isn't passed for response, keep the same page (just return success code - 204)
-            return HttpResponse(status=204)
         
         return response
 
