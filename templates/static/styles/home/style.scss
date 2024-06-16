@@ -1,4 +1,69 @@
 
-h1 {
-    color: aquamarine;
+.table_container {
+    max-width: 100%;
+    position: relative;
+    overflow: auto;
+    flex-grow: 1;
+}
+
+table {
+    position: absolute;
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    background-color: var(--white);
+
+    thead {
+        width: 100%;
+        font-weight: 500;
+        background-color: var(--white_gray_secondary);
+        border-bottom: 1px solid var(--saturated_gray);
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    td {
+        padding: .4rem;
+
+        &:not(:last-child) {
+            border-right: 1px solid var(--saturated_gray);
+        }
+
+        &:first-child, &:last-child {
+            text-align: center;
+        }
+
+        &:has(.select_employee), &:has(#select_all_employees) {
+            .select_employee, #select_all_employees {
+                scale: 1.2;
+                cursor: pointer;
+
+                accent-color: var(--yellow_primary);
+            }
+        }
+    }
+
+    tr {
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--saturated_gray);
+        }
+
+        &:has(.select_employee:checked) {
+            border: 2.5px dashed var(--yellow_primary);
+        }
+    }
+    
+    .edit, .delete {
+        padding: .5rem;
+    }
+
+    .edit {
+        color: var(--blue_gray);
+    }
+
+    .delete {
+        color: var(--light_red);
+    }
 }

@@ -1,6 +1,6 @@
 from django.shortcuts import redirect
-from django.urls import reverse, resolve
-from django.http import HttpResponse, HttpResponseNotFound
+from django.urls import reverse
+from django.http import HttpResponseNotFound
 from django.template.loader import get_template
 
 from utils.session_handler import session_handler

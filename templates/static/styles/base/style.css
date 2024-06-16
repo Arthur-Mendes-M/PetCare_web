@@ -144,6 +144,8 @@ body {
 
 main {
   flex-grow: 10;
+  display: flex;
+  flex-direction: column;
 }
 main #top_menu {
   display: flex;
@@ -368,6 +370,15 @@ main #top_menu .secondary_menu nav ul li.current:hover {
 }
 main #current_content {
   padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+main #current_content .content_title {
+  margin-bottom: 1.5rem;
+}
+main #current_content .content_title h2 {
+  font-weight: 500;
 }
 
 @media (max-width: 1024px) {

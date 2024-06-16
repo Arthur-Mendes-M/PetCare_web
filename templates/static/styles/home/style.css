@@ -1,3 +1,53 @@
-h1 {
-  color: aquamarine;
+.table_container {
+  max-width: 100%;
+  position: relative;
+  overflow: auto;
+  flex-grow: 1;
+}
+
+table {
+  position: absolute;
+  border-collapse: collapse;
+  border: none;
+  width: 100%;
+  background-color: var(--white);
+}
+table thead {
+  width: 100%;
+  font-weight: 500;
+  background-color: var(--white_gray_secondary);
+  border-bottom: 1px solid var(--saturated_gray);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+table td {
+  padding: 0.4rem;
+}
+table td:not(:last-child) {
+  border-right: 1px solid var(--saturated_gray);
+}
+table td:first-child, table td:last-child {
+  text-align: center;
+}
+table td:has(.select_employee) .select_employee, table td:has(.select_employee) #select_all_employees, table td:has(#select_all_employees) .select_employee, table td:has(#select_all_employees) #select_all_employees {
+  scale: 1.2;
+  cursor: pointer;
+  accent-color: var(--yellow_primary);
+}
+table tr:not(:last-child) {
+  border-bottom: 1px solid var(--saturated_gray);
+}
+table tr:has(.select_employee:checked) {
+  border: 2.5px dashed var(--yellow_primary);
+}
+table .edit, table .delete {
+  padding: 0.5rem;
+}
+table .edit {
+  color: var(--blue_gray);
+}
+table .delete {
+  color: var(--light_red);
 }/*# sourceMappingURL=style.css.map */

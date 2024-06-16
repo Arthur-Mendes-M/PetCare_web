@@ -6,7 +6,50 @@
     <link rel="stylesheet" href="{% static '/styles/home/style.css' %}">
 {% endblock %}
 
+{% block content_title %}Gerenciamento de funcionários{% endblock %}
 {% block content %}
-    <h1>Página inicial</h1>
-    <!-- <h2>Sessão: {{ request.session.employee }}</h2> -->
+    <h2>{{ page_obj }}</h2>
+
+    <div class="table_container">
+        <table>
+            <thead>
+                <tr>
+                    <td><input type="checkbox" id="select_all_employees"></td>
+                    <td>Funcionário</td>
+                    <td>E-mail</td>
+                    <td>Cargo</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody id="employees_list">
+                {% for employee in employees_list %}
+                    <tr>
+                        <td><input type="checkbox" class="select_employee" value={{ employee.id }}></td>
+                        <td>{{employee.name}}</td>
+                        <td>{{employee.email}}</td>
+                        <td>{{employee.role}}</td>
+                        <td>
+                            <a href="{% url 'edit_employee' %}?employee_id={{ employee.id }}" class="action edit" value={{ employee.id }}>
+                                <i data-lucide="square-pen"></i>
+                            </a>
+                            <a href="{% url 'delete_employee' %}?employees_id={{ employee.id }}" class="action delete" value={{ employee.id }}>
+                                <i data-lucide="trash-2"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let select_all_employees = document.getElementById('select_all_employees')
+    let selects_employees = document.querySelectorAll('.select_employee')
+
+    select_all_employees.addEventListener('click', () => {
+        selects_employees.forEach(select => select.checked = select_all_employees.checked)
+    })
+</script>
 {% endblock %}

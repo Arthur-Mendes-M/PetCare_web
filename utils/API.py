@@ -44,7 +44,7 @@ class Employees:
         )
     
     @abstractmethod
-    def update_one(self, id, new_data, new_files):
+    def update_one(self, id, new_data, new_files=None):
         return requests.patch(
             url=self.build_url(id),
             data=new_data,

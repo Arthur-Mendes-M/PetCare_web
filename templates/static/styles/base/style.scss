@@ -84,6 +84,9 @@ body {
 
 main {
     flex-grow: 10;
+    display: flex;
+    flex-direction: column;
+
     #top_menu {
         @include flexBox($content: space-between, $gap: 3rem);
         position: relative;
@@ -296,6 +299,17 @@ main {
 
     #current_content {
         padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+        .content_title {
+            margin-bottom: 1.5rem;
+
+            h2 {
+                font-weight: 500;
+            }
+        }
     }
 }
 
