@@ -133,7 +133,7 @@ main {
                 }
             }
 
-            .config {
+            #add_register_on_page {
                 @include flexBox();
                 padding: .8rem;
                 border: none;
@@ -331,7 +331,7 @@ main {
 
             .search_bar {
                 
-                .config {
+                #add_register_on_page {
                     display: none;
                 }
             }

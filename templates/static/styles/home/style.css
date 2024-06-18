@@ -149,10 +149,10 @@ table .delete {
 .modal .modal_title p {
   font-weight: 400;
 }
-.modal.edit {
+.modal.edit, .modal.create {
   border: 2px solid var(--blue_gray);
 }
-.modal.edit .modal_title {
+.modal.edit .modal_title, .modal.create .modal_title {
   color: var(--blue_gray);
 }
 .modal.delete {

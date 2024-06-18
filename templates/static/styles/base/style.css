@@ -204,7 +204,7 @@ main #top_menu .search_bar .input .search_button svg {
 main #top_menu .search_bar .input .search_button:hover svg {
   color: var(--yellow_secondary);
 }
-main #top_menu .search_bar .config {
+main #top_menu .search_bar #add_register_on_page {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -222,7 +222,7 @@ main #top_menu .search_bar .config {
   width: 50px;
   height: 50px;
 }
-main #top_menu .search_bar .config:hover {
+main #top_menu .search_bar #add_register_on_page:hover {
   background-color: var(--yellow_secondary);
 }
 main #top_menu .user_profile {
@@ -391,7 +391,7 @@ main #current_content .content_title h2 {
   main #top_menu {
     gap: 1rem;
   }
-  main #top_menu .search_bar .config {
+  main #top_menu .search_bar #add_register_on_page {
     display: none;
   }
   main #top_menu .secondary_menu nav ul.mobile_version {
