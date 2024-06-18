@@ -44,7 +44,7 @@ a {
   color: var(--black);
 }
 
-button, input {
+button, input, select {
   font-family: "Inter";
   background: none;
   border: none;
@@ -191,7 +191,7 @@ table .delete {
   display: flex;
   flex-direction: column;
 }
-.modal .modal_content .field:has(input:disabled) {
+.modal .modal_content .field:has(input:disabled, select:disabled) {
   opacity: 0.4;
 }
 .modal .modal_content .field:has(input:required) {
@@ -204,7 +204,7 @@ table .delete {
   right: 0;
   top: 0;
 }
-.modal .modal_content .field input {
+.modal .modal_content .field input, .modal .modal_content .field select {
   border-bottom: 1px solid var(--blue_gray);
   padding-left: 0.4rem;
   height: 1.3rem;

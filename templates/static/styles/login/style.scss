@@ -98,33 +98,34 @@ form {
         position: relative;
         margin-bottom: 20px;
     }
-        input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            outline: none;
-            font-size: 1rem;
 
-            &:focus + label,
-            &:not(:placeholder-shown) + label {
-                top: -10px;
-                left: 10px;
-                font-size: 0.8rem;
-                color: #ffeb3b;
-            }
-        }
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        font-size: 1rem;
 
-        label {
-            position: absolute;
-            top: 50%;
-            left: 15px;
-            transform: translateY(-50%);
-            background-color: #fff;
-            padding: 0 5px;
-            color: #aaa;
-            transition: all 0.3s;
+        &:focus + label,
+        &:not(:placeholder-shown) + label {
+            top: -10px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: #ffeb3b;
         }
+    }
+
+    label {
+        position: absolute;
+        top: 50%;
+        left: 15px;
+        transform: translateY(-50%);
+        background-color: #fff;
+        padding: 0 5px;
+        color: #aaa;
+        transition: all 0.3s;
+    }
 
     button {
         padding: 10px;

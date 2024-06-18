@@ -44,7 +44,7 @@ a {
   color: var(--black);
 }
 
-button, input {
+button, input, select {
   font-family: "Inter";
   background: none;
   border: none;

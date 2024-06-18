@@ -170,7 +170,7 @@ table {
             display: flex;
             flex-direction: column;
 
-            &:has(input:disabled) {
+            &:has(input:disabled, select:disabled) {
                 opacity: 0.4;
             }
 
@@ -186,7 +186,7 @@ table {
                 }
             }
 
-            input {
+            input, select {
                 border-bottom: 1px solid var(--blue_gray);
                 padding-left: .4rem;
                 height: 1.3rem;

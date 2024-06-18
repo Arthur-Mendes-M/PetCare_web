@@ -90,7 +90,10 @@
 
             <div class="field">
                 <label for="role">Cargo</label>
-                <input type="text" name="role">
+                <select name="role">
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Visitante">Visitante</option>
+                </select>
             </div>
 
             <div class="modal_actions">
@@ -120,7 +123,10 @@
 
             <div class="field">
                 <label for="role">Cargo</label>
-                <input type="text" name="role">
+                <select name="role">
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Visitante">Visitante</option>
+                </select>
             </div>
 
             <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A alteração será aplicada para todos os registros selecionados.</span></p>
@@ -152,7 +158,10 @@
 
             <div class="field">
                 <label for="role">Cargo</label>
-                <input type="text" name="role">
+                <select name="role">
+                    <option value="Administrativo">Administrativo</option>
+                    <option value="Visitante">Visitante</option>
+                </select>
             </div>
 
             <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
@@ -212,7 +221,7 @@
         
         let name = modal_element.querySelector('input[name=name]')
         let email = modal_element.querySelector('input[name=email]')
-        let role = modal_element.querySelector('input[name=role]')
+        let role = modal_element.querySelector('select[name=role]')
 
         let selected_name = tr_parent.querySelector('.name')
         let selected_email = tr_parent.querySelector('.email')
@@ -284,7 +293,7 @@
         let employees_id = edit_form.getAttribute('data-employee-index')
         let name = edit_form.querySelector('input[name=name]')
         let email = edit_form.querySelector('input[name=email]')
-        let role = edit_form.querySelector('input[name=role]')
+        let role = edit_form.querySelector('select[name=role]')
 
         let all_checked_employees = document.querySelectorAll('.select_employee:checked')
         
