@@ -16,6 +16,8 @@ class AuthenticateRoutes:
 
         if not current_employee and target_path != reverse('login') and target_path != reverse('signup'):
             return redirect(reverse('login'))
+        if current_employee and target_path == reverse('login'):
+            return redirect(reverse('home'))
         
         return response
 

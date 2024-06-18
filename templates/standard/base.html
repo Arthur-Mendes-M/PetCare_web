@@ -100,10 +100,10 @@
                 </button>
 
                 <div class="user_photo">
-                    {% if request.session.employee.avatar_url == none %}
-                        <img src="https://source.unsplash.com/random?pet&dogs&cats&animals" alt={{ request.session.employee.name }}>
-                    {% else %}
+                    {% if request.session.employee.avatar_url %}
                         <img src={{ request.session.employee.avatar_url }} alt={{ request.session.employee.name }}>
+                    {% else %}
+                        <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ request.session.employee.name }} />
                     {% endif %}
                 </div>
             </div>
@@ -163,6 +163,11 @@
                         </li>
                     </ul>
                 </nav>
+
+                <button class="logout" type="button">
+                    <i data-lucide="truck"></i>
+                    Sair do sistema
+                </button>
             </div>
         </header>
 

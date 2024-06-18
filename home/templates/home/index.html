@@ -25,9 +25,24 @@
                 {% for employee in employees_list %}
                     <tr>
                         <td><input type="checkbox" class="select_employee" value={{ employee.id }}></td>
-                        <td class="name">{{employee.name}}</td>
+                        <td class="name">
+                            <div>
+                                {% if employee.avatar_url %}
+                                    <img srcset="{{ employee.avatar_url }}" alt={{ employee.name }} class="profile_avatar" />
+                                {% else %}
+                                    <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ employee.name }} class="profile_avatar" />
+                                {% endif %}
+                                {{employee.name}}
+                            </div>
+                        </td>
                         <td class="email">{{employee.email}}</td>
-                        <td class="role">{{employee.role}}</td>
+                        <td class="role">
+                            {% if employee.role %}
+                                {{ employee.role }}
+                            {% else %}
+                                {{ 'Não especificado' }}
+                            {% endif %}
+                        </td>
                         <td>
                             <!-- href="{% url 'edit_employee' %}?employee_id={{ employee.id }}" -->
                             <button class="action edit" value={{ employee.id }}>
@@ -51,11 +66,11 @@
             <p>Insira as informações do novo funcionário abaixo:</p>
         </div>
 
-        <form method="post" action="" class="modal_content create_form">
+        <form method="post" action="{% url 'create_employee' %}" class="modal_content create_form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="field">
-                <label for="avatar_url">Foto</label>
-                <input type="file" name="avatar_url">
+                <label for="image">Foto</label>
+                <input type="file" name="image">
             </div>
 
             <div class="field">
@@ -75,7 +90,7 @@
 
             <div class="field">
                 <label for="role">Cargo</label>
-                <input type="text" name="role" required>
+                <input type="text" name="role">
             </div>
 
             <div class="modal_actions">
@@ -105,7 +120,7 @@
 
             <div class="field">
                 <label for="role">Cargo</label>
-                <input type="text" name="role" required>
+                <input type="text" name="role">
             </div>
 
             <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A alteração será aplicada para todos os registros selecionados.</span></p>
@@ -127,17 +142,17 @@
             {% csrf_token %}
             <div class="field">
                 <label for="name">Nome</label>
-                <input type="text" name="name" required>
+                <input type="text" name="name">
             </div>
 
             <div class="field">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email">
             </div>
 
             <div class="field">
                 <label for="role">Cargo</label>
-                <input type="text" name="role" required>
+                <input type="text" name="role">
             </div>
 
             <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
@@ -159,17 +174,20 @@
 
     let all_edit_employee_buttons = document.querySelectorAll('.action.edit')
     let all_delete_employee_buttons = document.querySelectorAll('.action.delete')
+
     let create_modal = document.querySelector('.modal.create')
+    let confirm_create_modal = create_modal.querySelector('.action.confirm')
     let cancel_create_modal = create_modal.querySelector('.action.cancel')
+    let create_form = document.querySelector('.create_form')
 
     let edit_modal = document.querySelector('.modal.edit')
-    let delete_modal = document.querySelector('.modal.delete')
     let confirm_edit_modal = edit_modal.querySelector('.action.confirm')
     let cancel_edit_modal = edit_modal.querySelector('.action.cancel')
+    let edit_form = document.querySelector('.edit_form')
+    
+    let delete_modal = document.querySelector('.modal.delete')
     let confirm_delete_modal = delete_modal.querySelector('.action.confirm')
     let cancel_delete_modal = delete_modal.querySelector('.action.cancel')
-
-    let edit_form = document.querySelector('.edit_form')
     let delete_form = document.querySelector('.delete_form')
 
     select_all_employees.addEventListener('click', () => {
@@ -227,9 +245,9 @@
             email.disabled = false
             role.disabled = false 
 
-            name.value = selected_name.textContent
-            email.value = selected_email.textContent
-            role.value = selected_role.textContent
+            name.value = selected_name.textContent.trim()
+            email.value = selected_email.textContent.trim()
+            role.value = selected_role.textContent.trim()
 
             modal_element.classList.remove('show_alert')
 

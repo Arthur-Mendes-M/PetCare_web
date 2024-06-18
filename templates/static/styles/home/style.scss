@@ -44,6 +44,27 @@ table {
                 accent-color: var(--yellow_primary);
             }
         }
+
+        &.name {
+            width: fit-content;
+
+            & > div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: .5rem;
+                flex-wrap: wrap;
+                width: fit-content;
+                text-align: center;
+            }
+
+            .profile_avatar {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
     }
 
     tr {
@@ -151,6 +172,18 @@ table {
 
             &:has(input:disabled) {
                 opacity: 0.4;
+            }
+
+            &:has(input:required) {
+                position: relative;
+
+                &::before {
+                    position: absolute;
+                    content: '*';
+                    color: var(--light_red);
+                    right: 0;
+                    top: 0;
+                }
             }
 
             input {

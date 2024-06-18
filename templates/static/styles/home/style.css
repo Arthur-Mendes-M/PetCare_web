@@ -88,6 +88,27 @@ table td:has(.select_employee) .select_employee, table td:has(.select_employee) 
   cursor: pointer;
   accent-color: var(--yellow_primary);
 }
+table td.name {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+table td.name > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+}
+table td.name .profile_avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
 table tr:not(:last-child) {
   border-bottom: 1px solid var(--saturated_gray);
 }
@@ -172,6 +193,16 @@ table .delete {
 }
 .modal .modal_content .field:has(input:disabled) {
   opacity: 0.4;
+}
+.modal .modal_content .field:has(input:required) {
+  position: relative;
+}
+.modal .modal_content .field:has(input:required)::before {
+  position: absolute;
+  content: "*";
+  color: var(--light_red);
+  right: 0;
+  top: 0;
 }
 .modal .modal_content .field input {
   border-bottom: 1px solid var(--blue_gray);

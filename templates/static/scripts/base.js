@@ -5,7 +5,7 @@ let hamburger_menu_middle_bar = document.querySelector("#hamburger_menu span")
 
 let secondary_menu = document.querySelector(".secondary_menu")
 
-let logout_button = document.getElementById("logout")
+let logout_buttons = document.querySelectorAll(".logout")
 
 let all_menu_links = document.querySelectorAll('#side_menu nav ul li, .secondary_menu nav ul li')
 
@@ -24,10 +24,12 @@ hamburger_menu.addEventListener('click', () => {
     secondary_menu.classList.toggle('show')
 })
 
-logout_button.addEventListener('click', () => {
-    let confirmation = confirm("Você realmente deseja sair do sistema?")
-
-    if (confirmation) {
-        window.location.href = '/logout'
-    }
+logout_buttons.forEach(button => {
+    button.addEventListener('click', () => {
+        let confirmation = confirm("Você realmente deseja sair do sistema?")
+    
+        if (confirmation) {
+            window.location.href = '/logout'
+        }
+    })
 })

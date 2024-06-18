@@ -63,22 +63,22 @@ body {
             }
         }
     }
+}
 
-    #logout {
-        @include flexBox($direction: row-reverse, $gap: 1rem);
-        border: none;
-        background: none;
+.logout {
+    @include flexBox($direction: row-reverse, $gap: 1rem);
+    border: none;
+    background: none;
 
-        border-radius: .5rem;
-        width: 100%;
-        padding: .5rem;
-        transition: all .25s linear;
-        cursor: pointer;
+    border-radius: .5rem;
+    width: 100%;
+    padding: .5rem;
+    transition: all .25s linear;
+    cursor: pointer;
 
-        &:hover {
-            background-color: var(--light_red);
-            color: var(--white);
-        }
+    &:hover {
+        background-color: var(--light_red);
+        color: var(--white);
     }
 }
 
@@ -88,16 +88,16 @@ main {
     flex-direction: column;
 
     #top_menu {
-        @include flexBox($content: space-between, $gap: 3rem);
+        @include flexBox($content: space-between, $gap: 2rem);
         position: relative;
 
         width: 100%;
         background-color: var(--white);    
         padding: 1rem 1.5rem;
+        z-index: 10;
 
         .search_bar {
-            @include flexBox($content: space-between, $gap: 2rem);
-            width: 100%;
+            @include flexBox($content: space-between, $gap: 1rem);
             flex-grow: 1;
 
             .input {
@@ -261,7 +261,8 @@ main {
                     &.mobile_version {
                         display: none;
                         border-top: 1px solid var(--yellow_primary);
-                        padding-top: .5rem;
+                        border-bottom: 1px solid var(--yellow_primary);
+                        padding: .5rem 0;
                     }
 
                     li {
@@ -295,6 +296,10 @@ main {
                     }
                 }
             }
+
+            .logout {
+                display: none;
+            }
         }
     }
 
@@ -317,24 +322,13 @@ main {
 @media (max-width: 1024px) {
     #side_menu {
         display: none;
-        // position: absolute;
-        // width: 90%;
-        // max-width: 450px;
-        // z-index: 1;
-
-        // transform: translateX(-100%);
     }
 
     main {
         #top_menu {
+            flex-wrap: wrap;
             gap: 1rem;
-
-            .search_bar {
-                
-                #add_register_on_page {
-                    display: none;
-                }
-            }
+            justify-content: center;
 
             .secondary_menu {
                 nav {
@@ -343,6 +337,11 @@ main {
                             display: flex;
                         }
                     }
+                }
+
+                .logout {
+                    display: flex;
+                    margin-top: 1rem;
                 }
             }
         }
