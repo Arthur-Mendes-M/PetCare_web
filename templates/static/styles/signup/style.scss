@@ -9,7 +9,7 @@ $line-spacing: -5px;
 
 
 body{
-    background: $background;
+    background: #FFF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,6 +22,41 @@ body{
     }
 }
 
+.container{
+    margin-top: 100px;
+}
+
+.input-foto{
+    margin-top: 30px;
+}
+.input-name{
+    margin-top: 10px;
+}
+.input-email{
+    margin-top: 10px;
+}
+.input-password{
+    margin-top: 10px;
+}
+.input-cargo{
+    margin-top: 10px;
+}
+.input-checkbox{
+    margin-top: 10px;
+}
+
+.links{
+
+}
+
+.title {
+    margin-top: 100px;
+}
+
+.paragraph{
+    margin-top: 50px;
+}
+
 .signup{
     background-color: transparent; 
     border: none; 
@@ -29,6 +64,8 @@ body{
     font-size: 16px; 
     cursor: pointer;
     position: relative; 
+    font-size: 25px;
+    margin-left: 10px;
 
     &::after {
         content: ""; 
@@ -53,6 +90,7 @@ body{
     font-size: 16px; 
     cursor: pointer;
     position: relative; 
+    font-size: 25px;
 
     &::after {
         content: ""; 

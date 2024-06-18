@@ -51,7 +51,7 @@ button, input {
 }
 
 body {
-  background: #B9B9B9;
+  background: #FFF;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -64,6 +64,42 @@ body img {
   display: inline-block;
 }
 
+.container {
+  margin-top: 100px;
+}
+
+.input-foto {
+  margin-top: 30px;
+}
+
+.input-name {
+  margin-top: 10px;
+}
+
+.input-email {
+  margin-top: 10px;
+}
+
+.input-password {
+  margin-top: 10px;
+}
+
+.input-cargo {
+  margin-top: 10px;
+}
+
+.input-checkbox {
+  margin-top: 10px;
+}
+
+.title {
+  margin-top: 100px;
+}
+
+.paragraph {
+  margin-top: 50px;
+}
+
 .signup {
   background-color: transparent;
   border: none;
@@ -71,6 +107,8 @@ body img {
   font-size: 16px;
   cursor: pointer;
   position: relative;
+  font-size: 25px;
+  margin-left: 10px;
 }
 .signup::after {
   content: "";
@@ -93,6 +131,7 @@ body img {
   font-size: 16px;
   cursor: pointer;
   position: relative;
+  font-size: 25px;
 }
 .login::after {
   content: "";

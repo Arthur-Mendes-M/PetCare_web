@@ -12,40 +12,56 @@
 
 </head>
 <body>
-    <a href="{% url 'login' %}" class="login">Login</a>
-    <a href="{% url 'signup' %}" class="signup">Cadastro</a>
-    <h1>Faça seu Cadastro</h1>
-    <p class="paragraph">Preencha as informações e crie sua conta.</p>
-    <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="input-container">
-            <label for="image">Foto</label>
-            <input type="file" name="image">
+
+    <div class="container">
+        <div class="links">
+            <a href="{% url 'login' %}" class="login">Login</a>
+            <a href="{% url 'signup' %}" class="signup">Cadastro</a>
         </div>
-        <div class="input-container">
-            <label for="name">Nome</label>
-            <input type="text" name="name" required>
+
+        <div class="title">
+        <h1>Faça seu Cadastro</h1>
         </div>
-        <div class="input-container">
-            <label for="email">E-mail</label>
-            <input type="email" name="email" required>
+        <div  class="paragraph">
+        <p>Preencha as informações e crie sua conta.</p>
         </div>
-        <div class="input-password">
-            <label for="password">Senha</label>
-            <input type="password" name="password" required>
+
+        <div class="form-group">
+            <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="input-foto">
+                    <label for="image">Foto</label>
+                    <input type="file" name="image">
+                </div>
+                <div class="input-name">
+                    <label for="name">Nome</label>
+                    <input type="text" name="name" required>
+                </div>
+                <div class="input-email">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" required>
+                </div>
+                <div class="input-password">
+                    <label for="password">Senha</label>
+                    <input type="password" name="password" required>
+                </div>
+                <div class="input-cargo">
+                    <label for="role">Cargo</label>
+                    <input type="text" name="role">
+                </div>
+                <p>{{ signup_error }}</p>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="checkbox" name="checkbox">
+                    <label for="checkbox">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
+                </div>
+                <button type="submit">Cadastre-se</button>
+            </form>
         </div>
-        <div class="input-container">
-            <label for="role">Cargo</label>
-            <input type="text" name="role">
-        </div>
-        <p>{{ signup_error }}</p>
-        <div class="input-checkbox">
-            <input type="checkbox" id="checkbox" name="checkbox">
-            <label for="checkbox">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
-        </div>
-        <button type="submit">Cadastre-se</button>
-    </form>
-    <img src="{% static 'assets/images/petCare_illustration.svg' %}" alt="{{ imagem.nome }}">
+    </div>
+
+    <div class="img-container">
+        <img src="{% static 'assets/images/petCare_illustration.svg' %}" alt="{{ imagem.nome }}">
+    </div>
 
 </body>
 </html>
