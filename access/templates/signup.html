@@ -30,31 +30,33 @@
             <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="input-foto">
-                    <label for="image">Foto</label>
-                    <input type="file" name="image">
+                    <input class="file" type="file" name="image">
+                    <div class="labelline">Escolha sua foto</div>
                 </div>
                 <div class="input-name">
-                    <label for="name">Nome</label>
-                    <input type="text" name="name" required>
+                    <input class="name" type="text" name="name" required>
+                    <div class="labelline">Nome</div>
                 </div>
                 <div class="input-email">
-                    <label for="email">E-mail</label>
-                    <input type="email" name="email" required>
+                    <input class="email" type="email" name="email" required>
+                    <div class="labelline">E-mail</div>
                 </div>
                 <div class="input-password">
-                    <label for="password">Senha</label>
-                    <input type="password" name="password" required>
+                    <input class="password" type="password" name="password" required>
+                    <div class="labelline">Senha</div>
                 </div>
                 <div class="input-cargo">
-                    <label for="role">Cargo</label>
-                    <input type="text" name="role">
+                    <input class="cargo" type="text" name="role">
+                    <div class="labelline">Cargo</div>
                 </div>
                 <p>{{ signup_error }}</p>
                 <div class="input-checkbox">
                     <input type="checkbox" id="checkbox" name="checkbox">
                     <label for="checkbox">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
                 </div>
-                <button type="submit">Cadastre-se</button>
+                <div class="button">
+                    <button type="submit">Cadastre-se</button>
+                </div>
             </form>
         </div>
     </div>

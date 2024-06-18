@@ -46,13 +46,16 @@ a {
 
 button, input {
   font-family: "Inter";
+  background: none;
+  border: none;
 }
 
 body {
-  background: #B9B9B9;
+  background: #FFF;
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 body p {
   color: #6A6E83;
@@ -62,6 +65,22 @@ body img {
   display: inline-block;
 }
 
+.container {
+  height: 100%;
+  width: 100%;
+  display: block;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.title {
+  margin-top: 100px;
+}
+
+.paragraph {
+  margin-top: 50px;
+}
+
 .login {
   background-color: transparent;
   border: none;
@@ -69,6 +88,8 @@ body img {
   font-size: 16px;
   cursor: pointer;
   position: relative;
+  font-size: 25px;
+  margin-left: 10px;
 }
 .login::after {
   content: "";
@@ -91,6 +112,7 @@ body img {
   font-size: 16px;
   cursor: pointer;
   position: relative;
+  font-size: 25px;
 }
 .signup::after {
   content: "";
@@ -157,4 +179,10 @@ form button {
 }
 form button:hover {
   background-color: #FFC000;
+}
+
+.img-container {
+  height: 100%;
+  width: 100%;
+  margin-top: 0px;
 }/*# sourceMappingURL=style.css.map */

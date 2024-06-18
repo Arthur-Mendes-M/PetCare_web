@@ -13,6 +13,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
     p{
         color: $secondary;
         font-size: 12px;
@@ -23,26 +24,244 @@ body{
 }
 
 .container{
-    margin-top: 100px;
+    height: 100%;
+    width: 100%;
+    display: block;
+    justify-content: space-around;
+    align-items: center;
+}
+
+form{
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: $primary;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+
+        &:hover {
+            background-color: $primary;
+        }
+    }
 }
 
 .input-foto{
-    margin-top: 30px;
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    .labelline { 
+        position: absolute;
+        font-size: 15px;
+        color: $secondary;
+        padding: 0 20px;
+        margin: 0 20px;
+        background-color: transparent;
+        transition: 0.2s ease;
+    }
 }
-.input-name{
-    margin-top: 10px;
+
+.input-name {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+
+    .labelline { 
+        position: absolute;
+        font-size: 15px;
+        color: $secondary;
+        padding: 0 20px;
+        margin: 0 20px;
+        background-color: transparent;
+        transition: 0.2s ease;
+    }
 }
-.input-email{
-    margin-top: 10px;
+
+.name {
+    position: absolute;
+    width: 350px;
+    height: 50px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 30px;
+    line-height: 10px;
+    border: 2px solid $background;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+    border-radius: 5px;
+
+    &:focus,
+    &:valid {
+        color: $secondary;
+        border: 4px solid $background;
+    }
+
+    &:focus + .labelline,
+    &:valid + .labelline {
+        color: $secondary;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 12px;
+        transform: translate(-15px, -25px) scale(0.88);
+        z-index: 1111111;
+        font-size: 15px;
+    }
 }
-.input-password{
-    margin-top: 10px;
+
+.input-email {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+
+    .labelline { 
+        position: absolute;
+        font-size: 15px;
+        color: $secondary;
+        padding: 0 20px;
+        margin: 0 20px;
+        background-color: transparent;
+        transition: 0.2s ease;
+    }
 }
-.input-cargo{
-    margin-top: 10px;
+
+.email {
+    position: absolute;
+    width: 350px;
+    height: 50px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 30px;
+    line-height: 10px;
+    border: 2px solid $background;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+    border-radius: 5px;
+
+    &:focus,
+    &:valid {
+        color: $secondary;
+        border: 4px solid $background;
+    }
+
+    &:focus + .labelline,
+    &:valid + .labelline {
+        color: $secondary;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 12px;
+        transform: translate(-15px, -16px) scale(0.88);
+        z-index: 1111111;
+    }
 }
+
+.input-password {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+
+    .labelline { 
+        position: absolute;
+        font-size: 15px;
+        color: $secondary;
+        padding: 0 20px;
+        margin: 0 20px;
+        background-color: transparent;
+        transition: 0.2s ease;
+    }
+}
+
+.password {
+    position: absolute;
+    width: 350px;
+    height: 50px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 30px;
+    line-height: 10px;
+    border: 2px solid $background;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+    border-radius: 5px;
+
+    &:focus,
+    &:valid {
+        color: $secondary;
+        border: 4px solid $background;
+    }
+
+    &:focus + .labelline,
+    &:valid + .labelline {
+        color: $secondary;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 12px;
+        transform: translate(-15px, -16px) scale(0.88);
+        z-index: 1111111;
+    }
+}
+
+.input-cargo {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+
+    .labelline { 
+        position: absolute;
+        font-size: 15px;
+        color: $secondary;
+        padding: 0 20px;
+        margin: 0 20px;
+        background-color: transparent;
+        transition: 0.2s ease;
+    }
+}
+
+.cargo {
+    position: absolute;
+    width: 350px;
+    height: 50px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 30px;
+    line-height: 10px;
+    border: 2px solid $background;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+    border-radius: 5px;
+
+    &:focus,
+    &:valid {
+        color: $secondary;
+        border: 4px solid $background;
+    }
+
+    &:focus + .labelline,
+    &:valid + .labelline {
+        color: $secondary;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 12px;
+        transform: translate(-15px, -16px) scale(0.88);
+        z-index: 1111111;
+    }
+}
+
 .input-checkbox{
-    margin-top: 10px;
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
 }
 
 .links{
@@ -106,4 +325,10 @@ body{
     &:hover::after {
         height: $line-hover-height; 
     }
+}
+
+.img-container {
+    height: 100%;
+    width: 100%;
+    margin-top: 0px;
 }

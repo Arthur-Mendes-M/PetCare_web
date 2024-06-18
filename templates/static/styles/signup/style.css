@@ -55,6 +55,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
 body p {
   color: #6A6E83;
@@ -65,31 +66,221 @@ body img {
 }
 
 .container {
-  margin-top: 100px;
+  height: 100%;
+  width: 100%;
+  display: block;
+  justify-content: space-around;
+  align-items: center;
+}
+
+form button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FFC000;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+form button:hover {
+  background-color: #FFC000;
 }
 
 .input-foto {
-  margin-top: 30px;
+  margin-top: 20px;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+}
+.input-foto .labelline {
+  position: absolute;
+  font-size: 15px;
+  color: #6A6E83;
+  padding: 0 20px;
+  margin: 0 20px;
+  background-color: transparent;
+  transition: 0.2s ease;
 }
 
 .input-name {
-  margin-top: 10px;
+  margin-top: 20px;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+}
+.input-name .labelline {
+  position: absolute;
+  font-size: 15px;
+  color: #6A6E83;
+  padding: 0 20px;
+  margin: 0 20px;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+
+.name {
+  position: absolute;
+  width: 350px;
+  height: 50px;
+  outline: none;
+  font-size: 15px;
+  padding: 0 30px;
+  line-height: 10px;
+  border: 2px solid #B9B9B9;
+  background: transparent;
+  transition: 0.1s ease;
+  z-index: 1111;
+  border-radius: 5px;
+}
+.name:focus, .name:valid {
+  color: #6A6E83;
+  border: 4px solid #B9B9B9;
+}
+.name:focus + .labelline, .name:valid + .labelline {
+  color: #6A6E83;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -25px) scale(0.88);
+  z-index: 1111111;
+  font-size: 15px;
 }
 
 .input-email {
-  margin-top: 10px;
+  margin-top: 20px;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+}
+.input-email .labelline {
+  position: absolute;
+  font-size: 15px;
+  color: #6A6E83;
+  padding: 0 20px;
+  margin: 0 20px;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+
+.email {
+  position: absolute;
+  width: 350px;
+  height: 50px;
+  outline: none;
+  font-size: 15px;
+  padding: 0 30px;
+  line-height: 10px;
+  border: 2px solid #B9B9B9;
+  background: transparent;
+  transition: 0.1s ease;
+  z-index: 1111;
+  border-radius: 5px;
+}
+.email:focus, .email:valid {
+  color: #6A6E83;
+  border: 4px solid #B9B9B9;
+}
+.email:focus + .labelline, .email:valid + .labelline {
+  color: #6A6E83;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -16px) scale(0.88);
+  z-index: 1111111;
 }
 
 .input-password {
-  margin-top: 10px;
+  margin-top: 20px;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+}
+.input-password .labelline {
+  position: absolute;
+  font-size: 15px;
+  color: #6A6E83;
+  padding: 0 20px;
+  margin: 0 20px;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+
+.password {
+  position: absolute;
+  width: 350px;
+  height: 50px;
+  outline: none;
+  font-size: 15px;
+  padding: 0 30px;
+  line-height: 10px;
+  border: 2px solid #B9B9B9;
+  background: transparent;
+  transition: 0.1s ease;
+  z-index: 1111;
+  border-radius: 5px;
+}
+.password:focus, .password:valid {
+  color: #6A6E83;
+  border: 4px solid #B9B9B9;
+}
+.password:focus + .labelline, .password:valid + .labelline {
+  color: #6A6E83;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -16px) scale(0.88);
+  z-index: 1111111;
 }
 
 .input-cargo {
-  margin-top: 10px;
+  margin-top: 20px;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+}
+.input-cargo .labelline {
+  position: absolute;
+  font-size: 15px;
+  color: #6A6E83;
+  padding: 0 20px;
+  margin: 0 20px;
+  background-color: transparent;
+  transition: 0.2s ease;
+}
+
+.cargo {
+  position: absolute;
+  width: 350px;
+  height: 50px;
+  outline: none;
+  font-size: 15px;
+  padding: 0 30px;
+  line-height: 10px;
+  border: 2px solid #B9B9B9;
+  background: transparent;
+  transition: 0.1s ease;
+  z-index: 1111;
+  border-radius: 5px;
+}
+.cargo:focus, .cargo:valid {
+  color: #6A6E83;
+  border: 4px solid #B9B9B9;
+}
+.cargo:focus + .labelline, .cargo:valid + .labelline {
+  color: #6A6E83;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -16px) scale(0.88);
+  z-index: 1111111;
 }
 
 .input-checkbox {
-  margin-top: 10px;
+  margin-top: 20px;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
 }
 
 .title {
@@ -145,4 +336,10 @@ body img {
 }
 .login:hover::after {
   height: 4px;
+}
+
+.img-container {
+  height: 100%;
+  width: 100%;
+  margin-top: 0px;
 }/*# sourceMappingURL=style.css.map */

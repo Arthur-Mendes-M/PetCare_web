@@ -8,10 +8,11 @@ $line-hover-height: 4px;
 $line-spacing: -5px;
 
 body{
-    background: $background-gray;
+    background: #FFF;
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
     p{
         color: $secondary-gray;
         font-size: 12px;
@@ -21,14 +22,31 @@ body{
     }
 }
 
+.container{
+    height: 100%;
+    width: 100%;
+    display: block; 
+    justify-content: space-around;
+    align-items: center;
+}
+
+.title {
+    margin-top: 100px;
+}
+
+.paragraph{
+    margin-top: 50px;
+}
 
 .login {
     background-color: transparent; 
     border: none; 
-    color: $primary-yellow;  
+    color: $primary-yellow; 
     font-size: 16px; 
     cursor: pointer;
     position: relative; 
+    font-size: 25px;
+    margin-left: 10px;
 
     &::after {
         content: ""; 
@@ -53,6 +71,7 @@ body{
     font-size: 16px; 
     cursor: pointer;
     position: relative; 
+    font-size: 25px;
 
     &::after {
         content: ""; 
@@ -121,5 +140,11 @@ form {
             background-color: $primary-yellow;
         }
     }
+}
+
+.img-container {
+    height: 100%;
+    width: 100%;
+    margin-top: 0px;
 }
 
