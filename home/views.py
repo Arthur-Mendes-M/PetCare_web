@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.urls import reverse
 from utils.API import Employees
 
@@ -11,17 +11,38 @@ def home(request):
     return render(request, 'home/index.html', context={"employees_list": employees_list})
 
 def edit_employee(request):
-    employee_id = request.GET.get('id')
-    employee_data = request.GET.get('data')
+    employees_id = request.GET.get('employees_id')
+    id_list = None
 
-    Employees().update_one(employee_id, employee_data)
+    employee = {
+        "name": request.GET.get('name'),
+        "email": request.GET.get('email'),
+        "role": request.GET.get('role')
+    }
+
+    if ',' in employees_id:
+        id_list = employees_id.split(',')
+
+    if id_list != None:
+        for id in id_list:
+            Employees().update_one(id, employee)
+    else:
+        Employees().update_one(employees_id, employee)
 
     return redirect(reverse('home'))
 
 
 def delete_employee(request):
     employees_id = request.GET.get('employees_id')
+    id_list = None
 
-    Employees().delete_one(employees_id)
+    if ',' in employees_id:
+        id_list = employees_id.split(',')
+
+    if id_list != None:
+        for id in id_list:
+            Employees().delete_one(id)
+    else:
+        Employees().delete_one(employees_id)
 
     return redirect(reverse('home'))

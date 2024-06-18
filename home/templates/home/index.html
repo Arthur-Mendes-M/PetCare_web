@@ -25,21 +25,88 @@
                 {% for employee in employees_list %}
                     <tr>
                         <td><input type="checkbox" class="select_employee" value={{ employee.id }}></td>
-                        <td>{{employee.name}}</td>
-                        <td>{{employee.email}}</td>
-                        <td>{{employee.role}}</td>
+                        <td class="name">{{employee.name}}</td>
+                        <td class="email">{{employee.email}}</td>
+                        <td class="role">{{employee.role}}</td>
                         <td>
-                            <a href="{% url 'edit_employee' %}?employee_id={{ employee.id }}" class="action edit" value={{ employee.id }}>
+                            <!-- href="{% url 'edit_employee' %}?employee_id={{ employee.id }}" -->
+                            <button class="action edit" value={{ employee.id }}>
                                 <i data-lucide="square-pen"></i>
-                            </a>
-                            <a href="{% url 'delete_employee' %}?employees_id={{ employee.id }}" class="action delete" value={{ employee.id }}>
+                            </button>
+
+                            <!-- href="{% url 'delete_employee' %}?employees_id={{ employee.id }}" -->
+                            <button class="action delete" value={{ employee.id }}>
                                 <i data-lucide="trash-2"></i>
-                            </a>
+                            </button>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+    </div>
+
+    <div class="modal edit">
+        <div class="modal_title">
+            <h2>Alteração de cadastro</h2>
+            <p>Altere as informações do funcionário abaixo:</p>
+        </div>
+
+        <form method="post" action="" class="modal_content edit_form">
+            {% csrf_token %}
+            <div class="field">
+                <label for="name">Nome</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="field">
+                <label for="email">E-mail</label>
+                <input type="text" name="email" required>
+            </div>
+
+            <div class="field">
+                <label for="role">Cargo</label>
+                <input type="text" name="role" required>
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A alteração será aplicada para todos os registros selecionados.</span></p>
+
+            <div class="modal_actions">
+                <button type="reset" class="action cancel">Cancelar</button>
+                <button type="submit" class="action confirm">Atualizar cadastro</button>
+            </div>
+        </form>
+    </div>
+        
+    <div class="modal delete">
+        <div class="modal_title">
+            <h2>Exclusão de cadastro</h2>
+            <p>Confirme se deseje excluir o cadastro do funcionário abaixo:</p>
+        </div>
+
+        <form method="post" action="" class="modal_content delete_form">
+            {% csrf_token %}
+            <div class="field">
+                <label for="name">Nome</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="field">
+                <label for="email">E-mail</label>
+                <input type="text" name="email" required>
+            </div>
+
+            <div class="field">
+                <label for="role">Cargo</label>
+                <input type="text" name="role" required>
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
+
+            <div class="modal_actions">
+                <button type="button" class="action cancel">Cancelar exclusão</button>
+                <button type="submit" class="action confirm">Confirmar</button>
+            </div>
+        </form>
     </div>
 {% endblock %}
 
@@ -48,8 +115,127 @@
     let select_all_employees = document.getElementById('select_all_employees')
     let selects_employees = document.querySelectorAll('.select_employee')
 
+    let all_edit_employee_buttons = document.querySelectorAll('.action.edit')
+    let all_delete_employee_buttons = document.querySelectorAll('.action.delete')
+    let edit_modal = document.querySelector('.modal.edit')
+    let delete_modal = document.querySelector('.modal.delete')
+    let confirm_edit_modal = edit_modal.querySelector('.action.confirm')
+    let cancel_edit_modal = edit_modal.querySelector('.action.cancel')
+    let confirm_delete_modal = delete_modal.querySelector('.action.confirm')
+    let cancel_delete_modal = delete_modal.querySelector('.action.cancel')
+
+    let edit_form = document.querySelector('.edit_form')
+    let delete_form = document.querySelector('.delete_form')
+
     select_all_employees.addEventListener('click', () => {
         selects_employees.forEach(select => select.checked = select_all_employees.checked)
+    })
+
+    cancel_edit_modal.addEventListener('click', () => edit_modal.classList.remove('show'))
+    cancel_delete_modal.addEventListener('click', () => delete_modal.classList.remove('show'))
+
+    function modal_control(modal_element, button_clicked) {
+        let all_checked_employees = document.querySelectorAll('.select_employee:checked')
+
+        let tr_parent = button_clicked.closest('tr')
+        
+        let name = modal_element.querySelector('input[name=name]')
+        let email = modal_element.querySelector('input[name=email]')
+        let role = modal_element.querySelector('input[name=role]')
+
+        let selected_name = tr_parent.querySelector('.name')
+        let selected_email = tr_parent.querySelector('.email')
+        let selected_role = tr_parent.querySelector('.role')
+
+        if(all_checked_employees.length > 1) {
+            name.disabled = true
+            email.disabled = true
+
+            name.value = ''
+            email.value = ''
+            role.value = ''
+
+            modal_element.classList.add('show_alert')
+
+            let data_employee_index = ''
+            
+            all_checked_employees.forEach((employee, idx) => {
+                if((idx + 1) != all_checked_employees.length) {
+                    data_employee_index += `${employee.value},`
+                } else {
+                    data_employee_index += employee.value
+                }
+            })
+
+            modal_element.querySelector('form').setAttribute('data-employee-index', data_employee_index)
+
+        } else {
+            name.disabled = false
+            email.disabled = false
+            role.disabled = false 
+
+            name.value = selected_name.textContent
+            email.value = selected_email.textContent
+            role.value = selected_role.textContent
+
+            modal_element.classList.remove('show_alert')
+
+            modal_element.querySelector('form').setAttribute('data-employee-index', button_clicked.value)
+        }
+
+        if(modal_element === delete_modal) {
+            name.disabled = true
+            email.disabled = true
+            role.disabled = true
+        }
+
+        if(delete_modal.className.includes('show')) {
+            delete_modal.classList.remove('show')
+        }
+
+        modal_element.classList.add('show')
+    }
+
+    all_edit_employee_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(edit_modal, button)
+        })
+    })
+
+    all_delete_employee_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(delete_modal, button)
+        })
+    })
+
+    edit_form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        let employees_id = edit_form.getAttribute('data-employee-index')
+        let name = edit_form.querySelector('input[name=name]')
+        let email = edit_form.querySelector('input[name=email]')
+        let role = edit_form.querySelector('input[name=role]')
+
+        let all_checked_employees = document.querySelectorAll('.select_employee:checked')
+        
+        let query_params = `?employees_id=${employees_id}&`
+
+        if(all_checked_employees.length > 1) {
+            query_params += `role=${role.value}`
+        } else {
+            query_params += `name=${name.value}&email=${email.value}&role=${role.value}`
+        }
+
+        edit_form.setAttribute('action', `${"{% url 'edit_employee' %}"}${query_params}`)
+        edit_form.submit()
+    })
+
+    delete_form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        let employees_id = delete_form.getAttribute('data-employee-index')
+
+        delete_form.setAttribute('action', `${"{% url 'delete_employee' %}"}?employees_id=${employees_id}`)
+        delete_form.submit()
     })
 </script>
 {% endblock %}

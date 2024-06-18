@@ -46,6 +46,8 @@ a {
 
 button, input {
   font-family: "Inter";
+  background: none;
+  border: none;
 }
 
 body {

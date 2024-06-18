@@ -46,6 +46,8 @@ a {
 
 button, input {
   font-family: "Inter";
+  background: none;
+  border: none;
 }
 
 body {
@@ -313,6 +315,7 @@ main #top_menu .secondary_menu {
   padding: 1rem;
   transition: all 0.3s linear;
   border-end-start-radius: 0.5rem;
+  z-index: 1;
 }
 main #top_menu .secondary_menu.show {
   right: 0;

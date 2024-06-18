@@ -246,6 +246,7 @@ main {
             padding: 1rem;
             transition: all .3s linear;
             border-end-start-radius: .5rem;
+            z-index: 1;
 
             &.show {
                 right: 0;

@@ -55,6 +55,8 @@ a {
 
 button, input {
     font-family: 'Inter';
+    background: none;
+    border: none;
 }
 
 @mixin flexBox($direction: row, $items: center, $content: center, $gap: 0, $wrap: nowrap) {
