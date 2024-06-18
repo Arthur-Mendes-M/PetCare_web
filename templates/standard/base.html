@@ -31,37 +31,37 @@
                     <!-- TODO: CHANGE TO APPLICATION LINKS -->
                     <a href="{% url 'home' %}"></a>
                     <div class="icon">
-                        <i data-lucide="users"></i>
+                        <img src="{% static 'assets/icons/mage_users.svg' %}">
                     </div>
                     <div class="name">
                         Funcionários
                     </div>
                 </li>
+                <li data-page="products">
+                    <a href="{% url 'products' %}"></a>
+                    <div class="icon">
+                        <img src="{% static 'assets/icons/products_bag.svg' %}">
+                    </div>
+                    <div class="name">
+                        Produtos
+                    </div>
+                </li>
+                <li data-page="clients">
+                    <a href="{% url 'clients' %}"></a>
+                    <div class="icon">
+                        <img src="{% static 'assets/icons/person_add.svg' %}">
+                    </div>
+                    <div class="name">
+                        Clientes
+                    </div>
+                </li>
                 <li data-page="sales">
                     <a href="{% url 'sales' %}"></a>
                     <div class="icon">
-                        <i data-lucide="shopping-cart"></i>
+                        <img src="{% static 'assets/icons/real_estate_agent.svg' %}">
                     </div>
                     <div class="name">
                         Vendas
-                    </div>
-                </li>
-                <li data-page="analytics">
-                    <a href="{% url 'analytics' %}"></a>
-                    <div class="icon">
-                        <i data-lucide="area-chart"></i>
-                    </div>
-                    <div class="name">
-                        Análises
-                    </div>
-                </li>
-                <li data-page="reports">
-                    <a href="{% url 'reports' %}"></a>
-                    <div class="icon">
-                        <i data-lucide="newspaper"></i>
-                    </div>
-                    <div class="name">
-                        Relatórios
                     </div>
                 </li>
             </ul>
@@ -128,37 +128,37 @@
                             <!-- TODO: create and links the apps on links -->
                             <a href="{% url 'home' %}"></a>
                             <div class="icon">
-                                <i data-lucide="users"></i>
+                                <img src="{% static 'assets/icons/mage_users.svg' %}">
                             </div>
                             <div class="name">
                                 Funcionários
                             </div>
                         </li>
+                        <li data-page="products">
+                            <a href="{% url 'products' %}"></a>
+                            <div class="icon">
+                                <img src="{% static 'assets/icons/products_bag.svg' %}">
+                            </div>
+                            <div class="name">
+                                Produtos
+                            </div>
+                        </li>
+                        <li data-page="clients">
+                            <a href="{% url 'clients' %}"></a>
+                            <div class="icon">
+                                <img src="{% static 'assets/icons/person_add.svg' %}">
+                            </div>
+                            <div class="name">
+                                Clientes
+                            </div>
+                        </li>
                         <li data-page="sales">
                             <a href="{% url 'sales' %}"></a>
                             <div class="icon">
-                                <i data-lucide="shopping-cart"></i>
+                                <img src="{% static 'assets/icons/real_estate_agent.svg' %}">
                             </div>
                             <div class="name">
                                 Vendas
-                            </div>
-                        </li>
-                        <li data-page="analytics">
-                            <a href="{% url 'analytics' %}"></a>
-                            <div class="icon">
-                                <i data-lucide="area-chart"></i>
-                            </div>
-                            <div class="name">
-                                Análises
-                            </div>
-                        </li>
-                        <li data-page="reports">
-                            <a href="{% url 'reports' %}"></a>
-                            <div class="icon">
-                                <i data-lucide="newspaper"></i>
-                            </div>
-                            <div class="name">
-                                Relatórios
                             </div>
                         </li>
                     </ul>
