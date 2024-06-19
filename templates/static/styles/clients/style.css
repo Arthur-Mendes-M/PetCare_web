@@ -1,3 +1,56 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/static/assets/fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+}
+:root {
+  --white: #FFFFFF;
+  --white_gray: #F8F8F8;
+  --white_gray_secondary: #FAFBFB;
+  --saturated_white_gray: #EEEEEE;
+  --saturated_gray: #D0D5DD;
+  --dark_gray: #535353;
+  --light_gray: #6A6E83;
+  --blue_gray: #42526D;
+  --yellow_primary: #FFC000;
+  --yellow_secondary: #e6af0b;
+  --dark_red: #B40B00;
+  --light_red: #F15046;
+  --light_green: #00E096;
+  --black: #1C1C1C;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--saturated_white_gray);
+  color: var(--black);
+  font-size: 18px;
+  font-family: "Inter";
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
+}
+
+button, input, select {
+  font-family: "Inter";
+  background: none;
+  border: none;
+}
+
 .table_container {
   max-width: 100%;
   position: relative;
@@ -63,7 +116,7 @@ table tr:not(:last-child) {
 table tr:has(.select_client:checked) {
   border: 2.5px dashed var(--yellow_primary);
 }
-table .edit, table .delete {
+table .edit, table .delete, table .view {
   padding: 0.5rem;
   border: none;
   background: none;
@@ -74,4 +127,186 @@ table .edit {
 }
 table .delete {
   color: var(--light_red);
+}
+table .view {
+  color: var(--light_green);
+}
+
+.modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  width: 100%;
+  max-width: 400px;
+  max-height: 90%;
+  overflow: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+  background-color: var(--saturated_white_gray);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.25s linear;
+  transform: translateX(100vw);
+}
+.modal.show {
+  transform: translateX(0);
+}
+.modal.show_alert p.alert {
+  display: block;
+}
+.modal p.alert {
+  background-color: var(--dark_red);
+  color: var(--white);
+  font-size: 0.7rem;
+  padding: 0.5rem;
+  display: none;
+}
+.modal .modal_title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.modal .modal_title h2 {
+  font-weight: 500;
+}
+.modal .modal_title p {
+  font-weight: 400;
+}
+.modal.edit, .modal.create, .modal.view {
+  border: 2px solid var(--blue_gray);
+}
+.modal.edit .modal_title, .modal.create .modal_title, .modal.view .modal_title {
+  color: var(--blue_gray);
+}
+.modal.delete {
+  border: 2px solid var(--dark_red);
+}
+.modal.delete .modal_title {
+  color: var(--dark_red);
+}
+.modal.view .modal_content .field:has(input:disabled, select:disabled) {
+  opacity: 1;
+}
+.modal.view .modal_content .field:has(input:disabled, select:disabled) input, .modal.view .modal_content .field:has(input:disabled, select:disabled) select {
+  font-weight: 600;
+}
+.modal.view .modal_content .modal_actions .action.cancel {
+  border: 1px solid var(--light_green);
+  color: var(--light_green);
+}
+.modal.view .modal_content .modal_actions .action.cancel:hover {
+  color: var(--white);
+  background-color: var(--light_green);
+}
+.modal .modal_content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.modal .modal_content .double_field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.modal .modal_content .double_field .field:first-child {
+  flex-grow: 1;
+}
+.modal .modal_content .section_title h3 {
+  font-weight: 300;
+}
+.modal .modal_content .field {
+  display: flex;
+  flex-direction: column;
+}
+.modal .modal_content .field:has(input:disabled, select:disabled) {
+  opacity: 0.4;
+}
+.modal .modal_content .field:has(input:required) {
+  position: relative;
+}
+.modal .modal_content .field:has(input:required)::before {
+  position: absolute;
+  content: "*";
+  color: var(--light_red);
+  right: 0;
+  top: 0;
+}
+.modal .modal_content .field input, .modal .modal_content .field select {
+  border-bottom: 1px solid var(--blue_gray);
+  padding-left: 0.4rem;
+  height: 1.3rem;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) label h3 {
+  font-weight: 300;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .photo {
+  width: 50px;
+  height: 50px;
+  display: none;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .photo img {
+  width: inherit;
+  height: inherit;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .photo.show {
+  display: block;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .default {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .default.hidden {
+  display: none;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) input {
+  display: none;
+}
+.modal .modal_content .modal_actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.modal .modal_content .modal_actions .action {
+  flex-grow: 1;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s linear;
+}
+.modal .modal_content .modal_actions .action:disabled {
+  opacity: 0.4;
+}
+.modal .modal_content .modal_actions .action.confirm {
+  border: 1px solid var(--light_green);
+  color: var(--light_green);
+}
+.modal .modal_content .modal_actions .action.cancel {
+  border: 1px solid var(--blue_gray);
+  color: var(--blue_gray);
+}
+.modal .modal_content .modal_actions .action:hover.confirm {
+  color: var(--white);
+  background-color: var(--light_green);
+}
+.modal .modal_content .modal_actions .action:hover.cancel {
+  color: var(--white);
+  background-color: var(--blue_gray);
 }/*# sourceMappingURL=style.css.map */

@@ -21,6 +21,7 @@
   --yellow_secondary: #e6af0b;
   --dark_red: #B40B00;
   --light_red: #F15046;
+  --light_green: #00E096;
   --black: #1C1C1C;
 }
 
@@ -138,6 +139,8 @@ table .delete {
   z-index: 10;
   width: 100%;
   max-width: 400px;
+  max-height: 90%;
+  overflow: auto;
   height: -moz-fit-content;
   height: fit-content;
   background-color: var(--saturated_white_gray);
@@ -260,8 +263,8 @@ table .delete {
   transition: all 0.25s linear;
 }
 .modal .modal_content .modal_actions .action.confirm {
-  border: 1px solid var(--light_red);
-  color: var(--light_red);
+  border: 1px solid var(--light_green);
+  color: var(--light_green);
 }
 .modal .modal_content .modal_actions .action.cancel {
   border: 1px solid var(--blue_gray);
@@ -269,7 +272,7 @@ table .delete {
 }
 .modal .modal_content .modal_actions .action:hover.confirm {
   color: var(--white);
-  background-color: var(--light_red);
+  background-color: var(--light_green);
 }
 .modal .modal_content .modal_actions .action:hover.cancel {
   color: var(--white);

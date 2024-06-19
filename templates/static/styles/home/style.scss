@@ -104,6 +104,9 @@ table {
     z-index: 10;
     width: 100%;
     max-width: 400px;
+    max-height: 90%;
+    overflow: auto;
+    
     height: fit-content;
     background-color: var(--saturated_white_gray);
     padding: 1rem;
@@ -253,8 +256,8 @@ table {
                 transition: all .25s linear;
                 
                 &.confirm {
-                    border: 1px solid var(--light_red);
-                    color: var(--light_red);
+                    border: 1px solid var(--light_green);
+                    color: var(--light_green);
                 }
 
                 &.cancel {
@@ -265,7 +268,7 @@ table {
                 &:hover {
                     &.confirm {
                         color: var(--white);
-                        background-color: var(--light_red);
+                        background-color: var(--light_green);
                     }
     
                     &.cancel {

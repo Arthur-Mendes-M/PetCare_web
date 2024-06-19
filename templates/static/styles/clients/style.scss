@@ -1,3 +1,5 @@
+@import '../pattern';
+
 .table_container {
     max-width: 100%;
     position: relative;
@@ -75,7 +77,7 @@ table {
         }
     }
     
-    .edit, .delete {
+    .edit, .delete, .view {
         padding: .5rem;
         border: none;
         background: none;
@@ -88,5 +90,247 @@ table {
 
     .delete {
         color: var(--light_red);
+    }
+
+    .view {
+        color: var(--light_green);
+    }
+}
+
+.modal {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    width: 100%;
+    max-width: 400px;
+    max-height: 90%;
+    overflow: auto;
+
+    height: fit-content;
+    background-color: var(--saturated_white_gray);
+    padding: 1rem;
+    border-radius: .5rem;
+    transition: all .25s linear;
+    transform: translateX(100vw);
+
+    &.show {
+        transform: translateX(0);
+    }
+
+    &.show_alert {
+        p.alert {
+            display: block;
+        }
+    }
+
+    p {
+        &.alert {
+            background-color: var(--dark_red);
+            color: var(--white);
+            font-size: .7rem;
+            padding: .5rem;
+            display: none;
+        }
+    }
+
+    .modal_title {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        h2 {
+            font-weight: 500;
+        }
+
+        p {
+            font-weight: 400;
+        }
+    }
+
+    &.edit, &.create, &.view {
+        border: 2px solid var(--blue_gray);
+
+        .modal_title {
+            color: var(--blue_gray);
+        }
+    }
+
+    &.delete {
+        border: 2px solid var(--dark_red);
+
+        .modal_title {
+            color: var(--dark_red);
+        }
+    }
+
+    &.view {
+        .modal_content {
+            .field {
+                &:has(input:disabled, select:disabled) {
+                    opacity: 1;
+
+                    input, select {
+                        font-weight: 600;
+                    }
+                }
+            }
+
+            .modal_actions {
+                .action {
+                    &.cancel {
+                        border: 1px solid var(--light_green);
+                        color: var(--light_green);
+    
+                        &:hover {
+                            color: var(--white);
+                            background-color:  var(--light_green);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .modal_content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .double_field {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: .5rem;
+
+            .field:first-child {
+                flex-grow: 1;
+            }
+        }
+
+        .section_title {
+            h3 {
+                font-weight: 300;
+            }
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+
+            &:has(input:disabled, select:disabled) {
+                opacity: 0.4;
+            }
+
+            &:has(input:required) {
+                position: relative;
+
+                &::before {
+                    position: absolute;
+                    content: '*';
+                    color: var(--light_red);
+                    right: 0;
+                    top: 0;
+                }
+            }
+
+            input, select {
+                border-bottom: 1px solid var(--blue_gray);
+                padding-left: .4rem;
+                height: 1.3rem;
+            }
+
+            &:has(label[for*=image_to_]) {
+                label {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: .5rem;
+                    cursor: pointer;
+
+                    h3 {
+                        font-weight: 300;
+                    }
+                }
+
+                .photo {
+                    width: 50px;
+                    height: 50px;
+                    display: none;
+                    
+                    img {
+                        width: inherit;
+                        height: inherit;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+
+                    &.show {
+                        display: block;
+                    }
+                }
+
+                .default {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    gap: .4rem;
+
+                    &.hidden {
+                        display: none;
+                    }
+                }
+
+                input {
+                    display: none;
+                }
+            }
+        }
+
+        .modal_actions {
+            display: flex;
+            gap: .5rem;
+
+            .action {
+                flex-grow: 1;
+                border-radius: .2rem;
+                padding: .5rem;
+                cursor: pointer;
+                transition: all .25s linear;
+
+                &:disabled {
+                    opacity: 0.4;
+                }
+                
+                &.confirm {
+                    border: 1px solid  var(--light_green);
+                    color:  var(--light_green);
+                }
+
+                &.cancel {
+                    border: 1px solid var(--blue_gray);
+                    color: var(--blue_gray);
+                }
+
+                &:hover {
+                    &.confirm {
+                        color: var(--white);
+                        background-color:  var(--light_green);
+                    }
+    
+                    &.cancel {
+                        color: var(--white);
+                        background-color: var(--blue_gray);
+
+                    }
+                }
+            }
+        }
     }
 }

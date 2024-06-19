@@ -55,4 +55,541 @@
             </tbody>
         </table>
     </div>
+
+    <div class="modal create">
+        <div class="modal_title">
+            <h2>Criação de cadastro</h2>
+            <p>Insira as informações do novo funcionário abaixo:</p>
+        </div>
+
+        <form method="post" action="{% url 'create_client' %}" class="modal_content create_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="field">
+                <label for="image_to_create">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_create">
+            </div>
+
+            <div class="field">
+                <label for="name_to_create">Nome</label>
+                <input type="text" name="name" id="name_to_create" required>
+            </div>
+
+            <div class="field">
+                <label for="email_to_create">E-mail</label>
+                <input type="email" name="email" id="email_to_create" required>
+            </div>
+
+            <div class="field">
+                <label for="password_to_create">Senha</label>
+                <input type="password" name="password" id="password_to_create" required>
+            </div>
+
+            <div class="field">
+                <label for="birthday_to_create">Nascimento</label>
+                <input type="date" name="birthday" id="birthday_to_create" required>
+            </div>
+
+            <div class="section_title">
+                <h3>Endereço</h3>
+            </div>
+
+            <div class="field">
+                <label for="cep_to_create">CEP</label>
+                <input type="number" min="1" name="cep" id="cep_to_create">
+            </div>
+
+            <div class="field">
+                <label for="city_to_create">Cidade</label>
+                <input type="text" name="city" id="city_to_create">
+            </div>
+
+            <div class="field">
+                <label for="neighborhood_to_create">Bairro</label>
+                <input type="text" name="neighborhood" id="neighborhood_to_create">
+            </div>
+
+            <div class="double_field">
+                <div class="field">
+                    <label for="street_to_create">Rua</label>
+                    <input type="text" name="street" id="street_to_create">
+                </div>
+               
+                <div class="field">
+                    <label for="number_to_create">Número</label>
+                    <input type="number" size="5" min="1" name="street_number" id="number_to_create">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="state_to_create">Estado</label>
+                <input type="text" name="state" id="state_to_create">
+            </div>
+
+            <div class="modal_actions">
+                <button type="reset" class="action cancel">Cancelar</button>
+                <button type="submit" class="action confirm">Criar novo cadastro</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="modal edit">
+        <div class="modal_title">
+            <h2>Alteração de cadastro</h2>
+            <p>Altere as informações do funcionário abaixo:</p>
+        </div>
+
+        <form method="post" action="{% url 'edit_client' %}" class="modal_content edit_form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="hidden" id="client_id" name="id">
+
+            <div class="field">
+                <label for="image_to_edit">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_edit">
+            </div>
+
+            <div class="field">
+                <label for="name_to_edit">Nome</label>
+                <input type="text" name="name" id="name_to_edit" required>
+            </div>
+
+            <div class="field">
+                <label for="email_to_edit">E-mail</label>
+                <input type="email" name="email" id="email_to_edit" required>
+            </div>
+
+            <div class="field">
+                <label for="birthday_to_edit">Nascimento</label>
+                <input type="date" name="birthday" id="birthday_to_edit" required>
+            </div>
+
+            <div class="section_title">
+                <h3>Endereço</h3>
+            </div>
+
+            <div class="field">
+                <label for="cep_to_edit">CEP</label>
+                <input type="number" min="1" name="cep" id="cep_to_edit">
+            </div>
+
+            <div class="field">
+                <label for="city_to_edit">Cidade</label>
+                <input type="text" name="city" id="city_to_edit">
+            </div>
+
+            <div class="field">
+                <label for="neighborhood_to_edit">Bairro</label>
+                <input type="text" name="neighborhood" id="neighborhood_to_edit">
+            </div>
+
+            <div class="double_field">
+                <div class="field">
+                    <label for="street_to_edit">Rua</label>
+                    <input type="text" name="street" id="street_to_edit">
+                </div>
+               
+                <div class="field">
+                    <label for="number_to_edit">Número</label>
+                    <input type="number" size="5" min="1" name="street_number" id="number_to_edit">
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="state_to_edit">Estado</label>
+                <input type="text" name="state" id="state_to_edit">
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! Não existem campos que podem ser mutualmente alterados.</span></p>
+
+            <div class="modal_actions">
+                <button type="reset" class="action cancel">Cancelar</button>
+                <button type="submit" class="action confirm">Atualizar cadastro</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="modal view">
+        <div class="modal_title">
+            <h2>Visualização de cadastro</h2>
+            <p>As informações completas do cadastro estão abaixo:</p>
+        </div>
+
+        <form method="get" action="" class="modal_content view_form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="image_to_view">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_view" disabled>
+            </div>
+
+            <div class="field">
+                <label for="name_to_view">Nome</label>
+                <input type="text" name="name" id="name_to_view" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="email_to_view">E-mail</label>
+                <input type="email" name="email" id="email_to_view" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="birthday_to_view">Nascimento</label>
+                <input type="date" name="birthday" id="birthday_to_view" required disabled>
+            </div>
+
+            <div class="section_title">
+                <h3>Endereço</h3>
+            </div>
+
+            <div class="field">
+                <label for="cep_to_view">CEP</label>
+                <input type="number" min="1" name="cep" id="cep_to_view" disabled>
+            </div>
+
+            <div class="field">
+                <label for="city_to_view">Cidade</label>
+                <input type="text" name="city" id="city_to_view" disabled>
+            </div>
+
+            <div class="field">
+                <label for="neighborhood_to_view">Bairro</label>
+                <input type="text" name="neighborhood" id="neighborhood_to_view" disabled>
+            </div>
+
+            <div class="double_field">
+                <div class="field">
+                    <label for="street_to_view">Rua</label>
+                    <input type="text" name="street" id="street_to_view" disabled>
+                </div>
+               
+                <div class="field">
+                    <label for="number_to_view">Número</label>
+                    <input type="number" size="5" min="1" name="street_number" id="number_to_view" disabled>
+                </div>
+            </div>
+
+            <div class="field">
+                <label for="state_to_view">Estado</label>
+                <input type="text" name="state" id="state_to_view" disabled>
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro!</span></p>
+
+            <div class="modal_actions">
+                <button type="button" class="action cancel">Ok</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="modal delete">
+        <div class="modal_title">
+            <h2>Exclusão de cadastro</h2>
+            <p>Confirme se deseje excluir o cadastro do funcionário abaixo:</p>
+        </div>
+
+        <form method="post" action="" class="modal_content delete_form">
+            {% csrf_token %}
+            <div class="field">
+                <label for="name_to_delete">Nome</label>
+                <input type="text" name="name" id="name_to_delete">
+            </div>
+
+            <div class="field">
+                <label for="email_to_delete">E-mail</label>
+                <input type="email" name="email" id="email_to_delete">
+            </div>
+
+            <div class="field">
+                <label for="birthday_to_delete">Nascimento</label>
+                <input type="date" name="birthday" id="birthday_to_delete">
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
+
+            <div class="modal_actions">
+                <button type="button" class="action cancel">Cancelar exclusão</button>
+                <button type="submit" class="action confirm">Confirmar</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Clients select control (visual)
+    let select_all_clients = document.getElementById('select_all_clients')
+    let selects_clients = document.querySelectorAll('.select_client')
+
+    select_all_clients.addEventListener('click', () => {
+        selects_clients.forEach(select => select.checked = select_all_clients.checked)
+    })
+
+    // Modal visual stacking
+    function modal_control(modal_element, button_clicked) {
+        let all_checked_clients = document.querySelectorAll('.select_client:checked')
+
+        let tr_parent = button_clicked.closest('tr')
+        
+        let image = modal_element.querySelector('input[name*=image]')
+        let image_preview = modal_element.querySelector('img.preview')
+        let photo_container = modal_element.querySelector('.photo')
+        let default_container = modal_element.querySelector('.default')
+
+        let selected_image_preview = tr_parent.querySelector('img.profile_avatar')
+
+        let all_inputs = modal_element.querySelectorAll('input')
+
+        if(all_checked_clients.length > 1) {
+            all_inputs.forEach(input => {
+                input.disabled = true
+                input.value = ''
+            })
+
+            if(modal_element.querySelector('img')) {
+                modal_element.querySelector('img').src = ""
+            }
+
+            if(modal_element.querySelector('.confirm') && modal_element != delete_modal) {
+                modal_element.querySelector('.confirm').disabled = true
+            }
+            
+            if(modal_element.querySelector('.photo') && modal_element.querySelector('.default')) {
+                modal_element.querySelector('.photo').classList.remove('show')
+                modal_element.querySelector('.default').classList.remove('hidden')
+            }
+
+            modal_element.classList.add('show_alert')
+
+            let data_client_index = ''
+            
+            all_checked_clients.forEach((client, idx) => {
+                if((idx + 1) != all_checked_clients.length) {
+                    data_client_index += `${client.value},`
+                } else {
+                    data_client_index += client.value
+                }
+            })
+
+            modal_element.querySelector('form').setAttribute('data-client-index', data_client_index)
+        } else {
+            client_id = button_clicked.value
+
+            if(modal_element.querySelector('.confirm')) {
+                modal_element.querySelector('.confirm').disabled = false
+            }
+
+            fetch(`https://api-pet-care.vercel.app/clients/${client_id}?auth=atividadelobianco`).then((response) => response.json()).then((data) => {
+                let client = data[0]
+
+                all_inputs.forEach(input => {
+                    if(modal_element == view_modal || modal_element == delete_modal) {
+                        input.disabled = true
+                    } else {
+                        input.disabled = false
+                    }
+
+                    if(input.name != 'image') {
+
+                        if(input.name == 'cep') {
+                            let cep = client['address'][input.name].replace('-', '')
+                            input.value = cep
+
+                        } else {
+                            input.value = client[input.name] ?? client['address'][input.name]
+                        }
+                    }
+                })
+            })
+
+            if(image_preview && selected_image_preview) {
+                image_preview.src = selected_image_preview.src
+            }
+
+            if(photo_container && default_container) {
+                photo_container.classList.add('show')
+                default_container.classList.add('hidden')
+            }
+
+            modal_element.classList.remove('show_alert')
+
+            modal_element.querySelector('form').setAttribute('data-client-index', client_id)
+        }
+
+        if(delete_modal.className.includes('show')) {
+            delete_modal.classList.remove('show')
+        }
+
+        modal_element.classList.add('show')
+    }
+
+    // Modal variables
+    let add_register_on_page_button = document.getElementById('add_register_on_page')
+
+    let all_edit_client_buttons = document.querySelectorAll('.action.edit')
+    let all_delete_client_buttons = document.querySelectorAll('.action.delete')
+    let all_view_client_buttons = document.querySelectorAll('.action.view')
+
+    let create_modal = document.querySelector('.modal.create')
+    let confirm_create_modal = create_modal.querySelector('.action.confirm')
+    let cancel_create_modal = create_modal.querySelector('.action.cancel')
+    let create_form = document.querySelector('.create_form')
+
+    let edit_modal = document.querySelector('.modal.edit')
+    let confirm_edit_modal = edit_modal.querySelector('.action.confirm')
+    let cancel_edit_modal = edit_modal.querySelector('.action.cancel')
+    let edit_form = document.querySelector('.edit_form')
+
+    let view_modal = document.querySelector('.modal.view')
+    let confirm_view_modal = view_modal.querySelector('.action.confirm')
+    let cancel_view_modal = view_modal.querySelector('.action.cancel')
+    let view_form = document.querySelector('.view_form')
+    
+    let delete_modal = document.querySelector('.modal.delete')
+    let confirm_delete_modal = delete_modal.querySelector('.action.confirm')
+    let cancel_delete_modal = delete_modal.querySelector('.action.cancel')
+    let delete_form = document.querySelector('.delete_form')
+
+    // Modal -> create : showing
+    add_register_on_page_button.addEventListener('click', () => {
+        create_modal.classList.add('show')
+    })
+
+    // Modal images preview control
+    let all_images_labels = document.querySelectorAll('label[for*=image]')
+
+    all_images_labels.forEach(label => {
+        let image_input = label.nextElementSibling
+        let image_preview = label.querySelector('img')
+        let label_photo_container = label.querySelector('.photo')
+        let label_default_container = label.querySelector('.default')
+
+        if(image_input && image_input.files[0]) {
+            image_preview.src = URL.createObjectURL(image_input.files[0])
+
+        } else if (image_input) {
+            image_input.addEventListener('change', () => {
+                image_preview.src = URL.createObjectURL(image_input.files[0])
+                
+                label_photo_container.classList.add('show')
+                label_default_container.classList.add('hidden')
+            })
+        }
+    })
+
+    // Modal cancel action control
+    cancel_create_modal.addEventListener('click', () => {
+        create_modal.classList.remove('show')
+        create_modal.querySelector('form').reset()
+        create_modal.querySelector('input[type=file]').value = ""
+        create_modal.querySelector('img').src = ""
+        
+        create_modal.querySelector('.photo').classList.remove('show')
+        create_modal.querySelector('.default').classList.remove('hidden')
+    })
+    cancel_edit_modal.addEventListener('click', () => {
+        edit_modal.classList.remove('show')
+        edit_modal.querySelector('form').reset()
+        edit_modal.querySelector('input[type=file]').value = ""
+        edit_modal.querySelector('img').src = ""
+        
+        edit_modal.querySelector('.photo').classList.remove('show')
+        edit_modal.querySelector('.default').classList.remove('hidden')
+    })
+    cancel_view_modal.addEventListener('click', () => {
+        view_modal.classList.remove('show')
+        view_modal.querySelector('form').reset()
+        view_modal.querySelector('input[type=file]').value = ""
+        view_modal.querySelector('img').src = ""
+        
+        view_modal.querySelector('.photo').classList.remove('show')
+        view_modal.querySelector('.default').classList.remove('hidden')
+    })
+    cancel_delete_modal.addEventListener('click', () => {
+        delete_modal.classList.remove('show')
+        delete_modal.querySelector('form').reset()
+    })
+
+    // All actions control -> Make modal appear
+    all_edit_client_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(edit_modal, button)
+        })
+    })
+
+    all_view_client_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(view_modal, button)
+        })
+    })
+
+    all_delete_client_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(delete_modal, button)
+        })
+    })
+
+    // Modal forms submit control
+
+    edit_form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        let client_id = edit_form.getAttribute('data-client-index')
+
+        edit_form.querySelector('input[type=hidden]').value = client_id
+        
+        edit_form.submit()
+    })
+
+    delete_form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        let clients_id = delete_form.getAttribute('data-client-index')
+        
+        delete_form.setAttribute('action', `${"{% url 'delete_client' %}"}?clients_id=${clients_id}`)
+
+        delete_form.submit()
+    })
+</script>
 {% endblock %}
