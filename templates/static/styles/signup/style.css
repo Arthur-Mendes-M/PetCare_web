@@ -64,14 +64,16 @@ body p {
 }
 body img {
   display: inline-block;
+  width: 80%;
 }
 
 .container {
-  height: 100%;
-  width: 100%;
+  width: 50%;
   display: block;
-  justify-content: space-around;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  margin-left: 300px;
 }
 
 form button {
@@ -118,6 +120,21 @@ form button:hover {
   margin: 0 20px;
   background-color: transparent;
   transition: 0.2s ease;
+}
+
+.file {
+  position: absolute;
+  margin-top: 20px;
+}
+.file:focus + .labelline, .file:valid + .labelline {
+  color: #6A6E83;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 12px;
+  transform: translate(-15px, -25px) scale(0.88);
+  z-index: 1111111;
+  font-size: 15px;
+  margin-top: 10px;
 }
 
 .name {
@@ -187,8 +204,9 @@ form button:hover {
   height: 30px;
   line-height: 30px;
   padding: 0 12px;
-  transform: translate(-15px, -16px) scale(0.88);
+  transform: translate(-15px, -25px) scale(0.88);
   z-index: 1111111;
+  font-size: 15px;
 }
 
 .input-password {
@@ -230,51 +248,9 @@ form button:hover {
   height: 30px;
   line-height: 30px;
   padding: 0 12px;
-  transform: translate(-15px, -16px) scale(0.88);
+  transform: translate(-15px, -25px) scale(0.88);
   z-index: 1111111;
-}
-
-.input-cargo {
-  margin-top: 20px;
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-}
-.input-cargo .labelline {
-  position: absolute;
   font-size: 15px;
-  color: #6A6E83;
-  padding: 0 20px;
-  margin: 0 20px;
-  background-color: transparent;
-  transition: 0.2s ease;
-}
-
-.cargo {
-  position: absolute;
-  width: 350px;
-  height: 50px;
-  outline: none;
-  font-size: 15px;
-  padding: 0 30px;
-  line-height: 10px;
-  border: 2px solid #B9B9B9;
-  background: transparent;
-  transition: 0.1s ease;
-  z-index: 1111;
-  border-radius: 5px;
-}
-.cargo:focus, .cargo:valid {
-  color: #6A6E83;
-  border: 4px solid #B9B9B9;
-}
-.cargo:focus + .labelline, .cargo:valid + .labelline {
-  color: #6A6E83;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 12px;
-  transform: translate(-15px, -16px) scale(0.88);
-  z-index: 1111111;
 }
 
 .input-checkbox {
@@ -284,8 +260,12 @@ form button:hover {
   line-height: 50px;
 }
 
+.links {
+  margin-top: 20px;
+}
+
 .title {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 
 .paragraph {
@@ -339,8 +319,37 @@ form button:hover {
   height: 4px;
 }
 
+.input-checkbox {
+  margin-top: 20px;
+}
+.input-checkbox label {
+  color: #6A6E83;
+  font-size: 12px;
+}
+
+.button button {
+  margin-top: 30px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
 .img-container {
   height: 100%;
-  width: 100%;
+  width: 50%;
   margin-top: 0px;
+}
+
+@media screen and (max-width: 1300px) {
+  .img-container {
+    display: none;
+  }
+}
+@media screen and (max-width: 320px) {
+  .img-container {
+    display: none;
+  }
+  .container {
+    margin-left: none;
+  }
 }/*# sourceMappingURL=style.css.map */
