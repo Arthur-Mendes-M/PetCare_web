@@ -12,14 +12,15 @@
         {% csrf_token %}
 
         <div class="field">
-            {% if request.session.employee.avatar_url %}
-                <img src="{{ request.session.employee.avatar_url }}" alt={{ request.session.employee.name }} />
-            {% else %}
-                <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ request.session.employee.name }} />
-            {% endif %}
+            <label for="image_to_edit_profile">
+                {% if request.session.employee.avatar_url %}
+                    <img src="{{ request.session.employee.avatar_url }}" alt={{ request.session.employee.name }} class="preview" />
+                {% else %}
+                    <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ request.session.employee.name }} class="preview" />
+                {% endif %}
+            </label>
 
-            <label for="image">Foto</label>
-            <input type="file" name="image">
+            <input type="file" name="image" id="image_to_edit_profile">
         </div>
 
         <div class="field">
@@ -32,8 +33,28 @@
             <input type="email" name="email" required value="{{ request.session.employee.email }}">
         </div>
 
-        <div class="modal_actions">
-            <button type="submit" class="action confirm">Salvar alterações</button>
+        <div class="actions">
+            <button type="submit" class="action confirm">Atualizar cadastro</button>
         </div>
     </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        let all_images_labels = document.querySelectorAll('label[for*=image]')
+
+        all_images_labels.forEach(label => {
+            let image_input = label.nextElementSibling
+            let image_preview = label.querySelector('img')
+
+            if(image_input && image_input.files[0]) {
+                image_preview.src = URL.createObjectURL(image_input.files[0])
+
+            } else if (image_input) {
+                image_input.addEventListener('change', () => {
+                    image_preview.src = URL.createObjectURL(image_input.files[0])
+                })
+            }
+        })
+    </script>
 {% endblock %}

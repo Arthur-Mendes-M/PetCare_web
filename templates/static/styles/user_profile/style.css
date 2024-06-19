@@ -1,1 +1,73 @@
-/*# sourceMappingURL=style.css.map */
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+form .field {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 500px;
+}
+form .field:has(input:disabled, select:disabled) {
+  opacity: 0.4;
+}
+form .field:has(input:required) {
+  position: relative;
+}
+form .field:has(input:required)::before {
+  position: absolute;
+  content: "*";
+  color: var(--light_red);
+  right: 0;
+  top: 0;
+}
+form .field input, form .field select {
+  border-bottom: 1px solid var(--blue_gray);
+  padding-left: 0.4rem;
+  height: 1.3rem;
+}
+form .field:has(label[for*=image_to_]) {
+  width: 150px;
+  height: 150px;
+}
+form .field:has(label[for*=image_to_]) label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+form .field:has(label[for*=image_to_]) img {
+  width: 150px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+form .field:has(label[for*=image_to_]) input {
+  display: none;
+}
+form .actions {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 500px;
+}
+form .actions .action {
+  flex-grow: 1;
+  border-radius: 0.2rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.25s linear;
+}
+form .actions .action.confirm {
+  border: 1px solid var(--light_red);
+  color: var(--light_red);
+}
+form .actions .action:hover.confirm {
+  color: var(--white);
+  background-color: var(--light_red);
+}/*# sourceMappingURL=style.css.map */
