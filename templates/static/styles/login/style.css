@@ -65,6 +65,9 @@ body .img-container img {
   display: inline-block;
   width: 80%;
 }
+body .main {
+  display: flex;
+}
 
 .container {
   width: 50%;
