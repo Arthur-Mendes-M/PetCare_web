@@ -28,7 +28,7 @@
                         <td class="name">
                             <div>
                                 {% if employee.avatar_url %}
-                                    <img srcset="{{ employee.avatar_url }}" alt={{ employee.name }} class="profile_avatar" />
+                                    <img src="{{ employee.avatar_url }}" alt={{ employee.name }} class="profile_avatar" />
                                 {% else %}
                                     <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ employee.name }} class="profile_avatar" />
                                 {% endif %}
@@ -69,28 +69,41 @@
         <form method="post" action="{% url 'create_employee' %}" class="modal_content create_form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="field">
-                <label for="image">Foto</label>
-                <input type="file" name="image">
+                <label for="image_to_create">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_create">
             </div>
 
             <div class="field">
-                <label for="name">Nome</label>
-                <input type="text" name="name" required>
+                <label for="name_to_create">Nome</label>
+                <input type="text" name="name" id="name_to_create" required>
             </div>
 
             <div class="field">
-                <label for="email">E-mail</label>
-                <input type="email" name="email" required>
+                <label for="email_to_create">E-mail</label>
+                <input type="email" name="email" id="email_to_create" required>
             </div>
 
             <div class="field">
-                <label for="password">Senha</label>
-                <input type="password" name="password" required>
+                <label for="password_to_create">Senha</label>
+                <input type="password" name="password" id="password_to_create" required>
             </div>
 
             <div class="field">
-                <label for="role">Cargo</label>
-                <select name="role">
+                <label for="role_to_create">Cargo</label>
+                <select name="role" id="role_to_create">
                     <option value="Administrativo">Administrativo</option>
                     <option value="Visitante">Visitante</option>
                 </select>
@@ -109,21 +122,40 @@
             <p>Altere as informações do funcionário abaixo:</p>
         </div>
 
-        <form method="post" action="" class="modal_content edit_form">
+        <form method="post" action="" class="modal_content edit_form" enctype="multipart/form-data">
             {% csrf_token %}
+
             <div class="field">
-                <label for="name">Nome</label>
-                <input type="text" name="name" required>
+                <label for="image_to_edit">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_edit">
             </div>
 
             <div class="field">
-                <label for="email">E-mail</label>
-                <input type="email" name="email" required>
+                <label for="name_to_edit">Nome</label>
+                <input type="text" name="name" id="name_to_edit" required>
             </div>
 
             <div class="field">
-                <label for="role">Cargo</label>
-                <select name="role">
+                <label for="email_to_edit">E-mail</label>
+                <input type="email" name="email" id="email_to_edit" required>
+            </div>
+
+            <div class="field">
+                <label for="role_to_edit">Cargo</label>
+                <select name="role" id="role_to_edit">
                     <option value="Administrativo">Administrativo</option>
                     <option value="Visitante">Visitante</option>
                 </select>
@@ -147,18 +179,18 @@
         <form method="post" action="" class="modal_content delete_form">
             {% csrf_token %}
             <div class="field">
-                <label for="name">Nome</label>
-                <input type="text" name="name">
+                <label for="name_to_delete">Nome</label>
+                <input type="text" name="name_to_delete">
             </div>
 
             <div class="field">
-                <label for="email">E-mail</label>
-                <input type="email" name="email">
+                <label for="email_to_delete">E-mail</label>
+                <input type="email" name="email" id="email_to_delete">
             </div>
 
             <div class="field">
-                <label for="role">Cargo</label>
-                <select name="role">
+                <label for="role_to_delete">Cargo</label>
+                <select name="role" id="role_to_delete">
                     <option value="Administrativo">Administrativo</option>
                     <option value="Visitante">Visitante</option>
                 </select>
@@ -198,6 +230,27 @@
     let confirm_delete_modal = delete_modal.querySelector('.action.confirm')
     let cancel_delete_modal = delete_modal.querySelector('.action.cancel')
     let delete_form = document.querySelector('.delete_form')
+    
+    let all_images_labels = document.querySelectorAll('label[for*=image]')
+
+    all_images_labels.forEach(label => {
+        let image_input = label.nextElementSibling
+        let image_preview = label.querySelector('img')
+        let label_photo_container = label.querySelector('.photo')
+        let label_default_container = label.querySelector('.default')
+
+        if(image_input && image_input.files[0]) {
+            image_preview.src = URL.createObjectURL(image_input.files[0])
+
+        } else if (image_input) {
+            image_input.addEventListener('change', () => {
+                image_preview.src = URL.createObjectURL(image_input.files[0])
+                
+                label_photo_container.classList.add('show')
+                label_default_container.classList.add('hidden')
+            })
+        }
+    })
 
     select_all_employees.addEventListener('click', () => {
         selects_employees.forEach(select => select.checked = select_all_employees.checked)
@@ -209,25 +262,50 @@
 
     cancel_create_modal.addEventListener('click', () => {
         create_modal.classList.remove('show')
+        create_modal.querySelector('form').reset()
+        create_modal.querySelector('input[type=file]').value = ""
+        create_modal.querySelector('img').src = ""
+        
+        create_modal.querySelector('.photo').classList.remove('show')
+        create_modal.querySelector('.default').classList.remove('hidden')
     })
-
-    cancel_edit_modal.addEventListener('click', () => edit_modal.classList.remove('show'))
-    cancel_delete_modal.addEventListener('click', () => delete_modal.classList.remove('show'))
+    cancel_edit_modal.addEventListener('click', () => {
+        edit_modal.classList.remove('show')
+        edit_modal.querySelector('form').reset()
+        edit_modal.querySelector('input[type=file]').value = ""
+        edit_modal.querySelector('img').src = ""
+        
+        edit_modal.querySelector('.photo').classList.remove('show')
+        edit_modal.querySelector('.default').classList.remove('hidden')
+    })
+    cancel_delete_modal.addEventListener('click', () => {
+        delete_modal.classList.remove('show')
+        delete_modal.querySelector('form').reset()
+    })
 
     function modal_control(modal_element, button_clicked) {
         let all_checked_employees = document.querySelectorAll('.select_employee:checked')
 
         let tr_parent = button_clicked.closest('tr')
         
-        let name = modal_element.querySelector('input[name=name]')
-        let email = modal_element.querySelector('input[name=email]')
-        let role = modal_element.querySelector('select[name=role]')
+        let image = modal_element.querySelector('input[name*=image]')
+        let image_preview = modal_element.querySelector('img.preview')
+        let photo_container = modal_element.querySelector('.photo')
+        let default_container = modal_element.querySelector('.default')
 
+        let name = modal_element.querySelector('input[name*=name]')
+        let email = modal_element.querySelector('input[name*=email]')
+        let role = modal_element.querySelector('select[name*=role]')
+
+        let selected_image_preview = tr_parent.querySelector('img.profile_avatar')
         let selected_name = tr_parent.querySelector('.name')
         let selected_email = tr_parent.querySelector('.email')
         let selected_role = tr_parent.querySelector('.role')
 
         if(all_checked_employees.length > 1) {
+            if (image)
+                image.disabled = true 
+
             name.disabled = true
             email.disabled = true
 
@@ -250,6 +328,19 @@
             modal_element.querySelector('form').setAttribute('data-employee-index', data_employee_index)
 
         } else {
+            if (image) {
+                image.disabled = false 
+            }
+
+            if(image_preview && selected_image_preview) {
+                image_preview.src = selected_image_preview.src
+            }
+
+            if(photo_container && default_container) {
+                photo_container.classList.add('show')
+                default_container.classList.add('hidden')
+            }
+
             name.disabled = false
             email.disabled = false
             role.disabled = false 
@@ -291,9 +382,9 @@
     edit_form.addEventListener('submit', (event) => {
         event.preventDefault()
         let employees_id = edit_form.getAttribute('data-employee-index')
-        let name = edit_form.querySelector('input[name=name]')
-        let email = edit_form.querySelector('input[name=email]')
-        let role = edit_form.querySelector('select[name=role]')
+        let name = edit_form.querySelector('input[name*=name]')
+        let email = edit_form.querySelector('input[name*=email]')
+        let role = edit_form.querySelector('select[name*=role]')
 
         let all_checked_employees = document.querySelectorAll('.select_employee:checked')
         

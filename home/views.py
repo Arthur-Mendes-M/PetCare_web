@@ -32,6 +32,7 @@ def create_employee(request):
 
 def edit_employee(request):
     employees_id = request.GET.get('employees_id')
+    file = request.FILES if request.FILES else None
     id_list = None
 
     employee = {
@@ -47,7 +48,7 @@ def edit_employee(request):
         for id in id_list:
             Employees().update_one(id, employee)
     else:
-        Employees().update_one(employees_id, employee)
+        Employees().update_one(employees_id, employee, file)
 
     return redirect(reverse('home'))
 

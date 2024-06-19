@@ -6,8 +6,34 @@
     <link rel="stylesheet" href="{% static '/styles/user_profile/style.css' %}">
 {% endblock %}
 
+{% block content_title %}Perfil{% endblock %}
 {% block content %}
-    <h1>Perfil</h1>
-    <h2>Nome: {{ request.session.employee.name }}</h2>
-    <h2>Email: {{ request.session.employee.email }}</h2>
+    <form action="{% url 'edit_profile' %}?employee_id={{ request.session.employee.id }}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="field">
+            {% if request.session.employee.avatar_url %}
+                <img src="{{ request.session.employee.avatar_url }}" alt={{ request.session.employee.name }} />
+            {% else %}
+                <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ request.session.employee.name }} />
+            {% endif %}
+
+            <label for="image">Foto</label>
+            <input type="file" name="image">
+        </div>
+
+        <div class="field">
+            <label for="name">Nome</label>
+            <input type="text" name="name" required value="{{ request.session.employee.name }}">
+        </div>
+
+        <div class="field">
+            <label for="email">E-mail</label>
+            <input type="email" name="email" required value="{{ request.session.employee.email }}">
+        </div>
+
+        <div class="modal_actions">
+            <button type="submit" class="action confirm">Salvar alterações</button>
+        </div>
+    </form>
 {% endblock %}

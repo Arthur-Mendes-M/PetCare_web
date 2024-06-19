@@ -209,6 +209,45 @@ table .delete {
   padding-left: 0.4rem;
   height: 1.3rem;
 }
+.modal .modal_content .field:has(label[for*=image_to_]) label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) label h3 {
+  font-weight: 300;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .photo {
+  width: 50px;
+  height: 50px;
+  display: none;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .photo img {
+  width: inherit;
+  height: inherit;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .photo.show {
+  display: block;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .default {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) .default.hidden {
+  display: none;
+}
+.modal .modal_content .field:has(label[for*=image_to_]) input {
+  display: none;
+}
 .modal .modal_content .modal_actions {
   display: flex;
   gap: 0.5rem;
