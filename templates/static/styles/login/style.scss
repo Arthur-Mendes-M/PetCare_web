@@ -1,8 +1,8 @@
 @import '../pattern';
 
-$background-gray: #B9B9B9;
-$primary-yellow: #FFC000;
-$secondary-gray: #6A6E83;
+$background: #B9B9B9;
+$primary: #FFC000;
+$secondary: #6A6E83;
 $line-height: 2px;
 $line-hover-height: 4px;
 $line-spacing: -5px;
@@ -14,34 +14,140 @@ body{
     align-items: center;
     min-height: 100vh;
     p{
-        color: $secondary-gray;
+        color: $secondary;
         font-size: 12px;
     }
-    img{
+    .img-container img{
         display: inline-block;
+        width: 80%;
     }
 }
 
 .container{
-    height: 100%;
-    width: 100%;
-    display: block; 
-    justify-content: space-around;
+    width: 50%;
+    display: block;
+    justify-content: center;
     align-items: center;
 }
 
-.title {
-    margin-top: 100px;
+form{
+    padding: 10px;
+    button {
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: $primary;
+        color: #fff;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+    
+        &:hover {
+                background-color: $primary;
+        }
+    }
+}
+.input-email {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+
+    .labelline { 
+        position: absolute;
+        font-size: 15px;
+        color: $secondary;
+        padding: 0 20px;
+        margin: 0 20px;
+        background-color: transparent;
+        transition: 0.2s ease;
+    }
 }
 
-.paragraph{
-    margin-top: 50px;
+.email {
+    position: absolute;
+    width: 350px;
+    height: 50px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 30px;
+    line-height: 10px;
+    border: 2px solid $background;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+    border-radius: 5px;
+
+    &:focus,
+    &:valid {
+        color: $secondary;
+        border: 4px solid $background;
+    }
+
+    &:focus + .labelline,
+    &:valid + .labelline {
+        color: $secondary;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 12px;
+        transform: translate(-15px, -25px) scale(0.88);
+        z-index: 1111111;
+        font-size: 15px;
+    }
 }
 
+.input-password {
+    margin-top: 20px;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+
+    .labelline { 
+        position: absolute;
+        font-size: 15px;
+        color: $secondary;
+        padding: 0 20px;
+        margin: 0 20px;
+        background-color: transparent;
+        transition: 0.2s ease;
+    }
+}
+
+.password {
+    position: absolute;
+    width: 350px;
+    height: 50px;
+    outline: none;
+    font-size: 15px;
+    padding: 0 30px;
+    line-height: 10px;
+    border: 2px solid $background;
+    background: transparent;
+    transition: 0.1s ease;
+    z-index: 1111;
+    border-radius: 5px;
+
+    &:focus,
+    &:valid {
+        color: $secondary;
+        border: 4px solid $background;
+    }
+
+    &:focus + .labelline,
+    &:valid + .labelline {
+        color: $secondary;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 12px;
+        transform: translate(-15px, -25px) scale(0.88);
+        z-index: 1111111;
+        font-size: 15px;
+    }
+}
 .login {
     background-color: transparent; 
     border: none; 
-    color: $primary-yellow; 
+    color: $primary; 
     font-size: 16px; 
     cursor: pointer;
     position: relative; 
@@ -53,7 +159,7 @@ body{
         display: block;
         width: 100%; 
         height: $line-height; 
-        background-color: $primary-yellow; 
+        background-color: $primary; 
         position: absolute;
         bottom: $line-spacing; 
         left: 0; 
@@ -67,7 +173,7 @@ body{
 .signup{
     background-color: transparent; 
     border: none; 
-    color: $secondary-gray; 
+    color: $secondary; 
     font-size: 16px; 
     cursor: pointer;
     position: relative; 
@@ -78,7 +184,7 @@ body{
         display: block;
         width: 100%; 
         height: $line-height; 
-        background-color: $primary-yellow; 
+        background-color: $primary; 
         position: absolute;
         bottom: $line-spacing; 
         left: 0; 
@@ -88,64 +194,26 @@ body{
         height: $line-hover-height; 
     }
 }
-
-form {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-
-    .input-container {
-        position: relative;
-        margin-bottom: 20px;
-    }
-
-    input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        font-size: 1rem;
-
-        &:focus + label,
-        &:not(:placeholder-shown) + label {
-            top: -10px;
-            left: 10px;
-            font-size: 0.8rem;
-            color: #ffeb3b;
-        }
-    }
-
-    label {
-        position: absolute;
-        top: 50%;
-        left: 15px;
-        transform: translateY(-50%);
-        background-color: #fff;
-        padding: 0 5px;
-        color: #aaa;
-        transition: all 0.3s;
-    }
-
-    button {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: $primary-yellow;
-        color: #fff;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &:hover {
-            background-color: $primary-yellow;
-        }
-    }
+.links{
+    margin-top: 20px;
 }
 
+.title {
+    margin-top: 50px;
+}
+
+.paragraph{
+    margin-top: 50px;
+}
+
+.button button{
+    margin-top: 30px;
+}
 .img-container {
     height: 100%;
-    width: 100%;
+    width: 50%;
     margin-top: 0px;
+    display: inline-block;
 }
+
 

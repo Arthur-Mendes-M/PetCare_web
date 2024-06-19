@@ -14,19 +14,16 @@
 <body>
 
     <div class="container">
-        <div class="links">
             <a href="{% url 'login' %}" class="login">Login</a>
             <a href="{% url 'signup' %}" class="signup">Cadastro</a>
-        </div>
 
         <div class="title">
-        <h1>Faça seu Cadastro</h1>
+            <h1>Faça seu Cadastro</h1>
         </div>
         <div  class="paragraph">
-        <p>Preencha as informações e crie sua conta.</p>
+            <p>Preencha as informações e crie sua conta.</p>
         </div>
 
-        <div class="form-group">
             <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="input-foto">
@@ -45,20 +42,16 @@
                     <input class="password" type="password" name="password" required>
                     <div class="labelline">Senha</div>
                 </div>
-                <div class="input-cargo">
-                    <input class="cargo" type="text" name="role">
-                    <div class="labelline">Cargo</div>
-                </div>
                 <p>{{ signup_error }}</p>
                 <div class="input-checkbox">
                     <input type="checkbox" id="checkbox" name="checkbox">
-                    <label for="checkbox">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
+                    <label for="checkbox" class="label">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
                 </div>
                 <div class="button">
                     <button type="submit">Cadastre-se</button>
                 </div>
             </form>
-        </div>
+
     </div>
 
     <div class="img-container">

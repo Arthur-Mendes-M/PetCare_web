@@ -11,9 +11,10 @@
     <link rel="stylesheet" href="{% static '/styles/login/style.css' %}">
 <body>
     <div class="container">
-        <a href="{% url 'login' %}" class="login">Login</a>
-        <a href="{% url 'signup' %}" class="signup">Cadastro</a>
-    
+        <div class="links">
+            <a href="{% url 'login' %}" class="login">Login</a>
+            <a href="{% url 'signup' %}" class="signup">Cadastro</a>
+        </div>
         <div class="title">
             <h1>Faça seu Login</h1>
         </div>
@@ -24,18 +25,20 @@
 
         <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            <div class="input-container">
-                <label for="email">E-mail</label>
-                <input type="email" name="email" autofocus>
+            <div class="input-email">
+                <input class="email" type="email" name="email" required>
+                <div class="labelline">E-mail</div>
             </div>
-            <div class="input-container">
-                <label for="password">Senha</label>
-                <input type="password" name="password">
+            <div class="input-password">
+                <input class="password" type="password" name="password" required>
+                <div class="labelline">Senha</div>
             </div>
             {% if login_error  %}
                 <p>Erro: {{ login_error }}</p>
             {% endif %}
-            <button type="submit">Entrar</button>
+            <div class="button">
+                <button type="submit">Entrar</button>
+            </div>
         </form>
     </div>
 
