@@ -1,4 +1,92 @@
+.table_container {
+    max-width: 100%;
+    position: relative;
+    overflow: auto;
+    flex-grow: 1;
+}
 
-h1 {
-    color: blue;
+table {
+    position: absolute;
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    background-color: var(--white);
+
+    thead {
+        width: 100%;
+        font-weight: 500;
+        background-color: var(--white_gray_secondary);
+        border-bottom: 1px solid var(--saturated_gray);
+        position: sticky;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    td {
+        padding: .4rem;
+
+        &:not(:last-child) {
+            border-right: 1px solid var(--saturated_gray);
+        }
+
+        &:first-child, &:last-child {
+            text-align: center;
+        }
+
+        &:has(.select_client), &:has(#select_all_clients) {
+            .select_client, #select_all_clients {
+                scale: 1.2;
+                cursor: pointer;
+
+                accent-color: var(--yellow_primary);
+            }
+        }
+
+        &.name {
+            width: fit-content;
+
+            & > div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: .5rem;
+                flex-wrap: wrap;
+                width: fit-content;
+                text-align: center;
+            }
+
+            .profile_avatar {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    tr {
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--saturated_gray);
+        }
+
+        &:has(.select_client:checked) {
+            border: 2.5px dashed var(--yellow_primary);
+        }
+    }
+    
+    .edit, .delete {
+        padding: .5rem;
+        border: none;
+        background: none;
+        cursor: pointer;
+    }
+
+    .edit {
+        color: var(--blue_gray);
+    }
+
+    .delete {
+        color: var(--light_red);
+    }
 }

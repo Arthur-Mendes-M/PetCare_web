@@ -1,3 +1,77 @@
-h1 {
-  color: blue;
+.table_container {
+  max-width: 100%;
+  position: relative;
+  overflow: auto;
+  flex-grow: 1;
+}
+
+table {
+  position: absolute;
+  border-collapse: collapse;
+  border: none;
+  width: 100%;
+  background-color: var(--white);
+}
+table thead {
+  width: 100%;
+  font-weight: 500;
+  background-color: var(--white_gray_secondary);
+  border-bottom: 1px solid var(--saturated_gray);
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+table td {
+  padding: 0.4rem;
+}
+table td:not(:last-child) {
+  border-right: 1px solid var(--saturated_gray);
+}
+table td:first-child, table td:last-child {
+  text-align: center;
+}
+table td:has(.select_client) .select_client, table td:has(.select_client) #select_all_clients, table td:has(#select_all_clients) .select_client, table td:has(#select_all_clients) #select_all_clients {
+  scale: 1.2;
+  cursor: pointer;
+  accent-color: var(--yellow_primary);
+}
+table td.name {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+table td.name > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  width: -moz-fit-content;
+  width: fit-content;
+  text-align: center;
+}
+table td.name .profile_avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+table tr:not(:last-child) {
+  border-bottom: 1px solid var(--saturated_gray);
+}
+table tr:has(.select_client:checked) {
+  border: 2.5px dashed var(--yellow_primary);
+}
+table .edit, table .delete {
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+table .edit {
+  color: var(--blue_gray);
+}
+table .delete {
+  color: var(--light_red);
 }/*# sourceMappingURL=style.css.map */

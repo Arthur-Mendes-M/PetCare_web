@@ -1,12 +1,58 @@
 {% extends 'standard/base.html' %}
 {% load static %}
 
-{% block title %}Cliente{% endblock %}
+{% block title %}Clientes{% endblock %}
 {% block links %}
     <link rel="stylesheet" href="{% static '/styles/clients/style.css' %}">
 {% endblock %}
 
+{% block content_title %}Gerenciamento de clientes{% endblock %}
 {% block content %}
-    <h1>Página de cliente</h1>
-    <!-- <h2>Sessão: {{ request.session.employee }}</h2> -->
+    <div class="table_container">
+        <table>
+            <thead>
+                <tr>
+                    <td><input type="checkbox" id="select_all_clients"></td>
+                    <td>Cliente</td>
+                    <td>E-mail</td>
+                    <td>Nascimento</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody id="clients_list">
+                {% for client in clients_list %}
+                    <tr>
+                        <td><input type="checkbox" class="select_client" value={{ client.id }}></td>
+                        <td class="name">
+                            <div>
+                                {% if client.avatar_url %}
+                                    <img src="{{ client.avatar_url }}" alt={{ client.name }} class="profile_avatar" />
+                                {% else %}
+                                    <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ client.name }} class="profile_avatar" />
+                                {% endif %}
+                                {{client.name}}
+                            </div>
+                        </td>
+                        <td class="email">{{client.email}}</td>
+                        <td class="birthday">
+                            {{ client.birthday }}
+                        </td>
+                        <td>
+                            <button class="action edit" value={{ client.id }}>
+                                <i data-lucide="square-pen"></i>
+                            </button>
+
+                            <button class="action view" value={{ client.id }}>
+                                <i data-lucide="eye"></i>
+                            </button>
+
+                            <button class="action delete" value={{ client.id }}>
+                                <i data-lucide="trash-2"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
