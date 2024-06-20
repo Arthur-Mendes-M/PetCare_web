@@ -7,217 +7,200 @@ $line-height: 2px;
 $line-hover-height: 4px;
 $line-spacing: -5px;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body{
     background: #FFF;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    p{
+    padding-top: 1rem;
+
+    .paragraph {
         color: $secondary;
-        font-size: 12px;
+        font-size: clamp(10px, 1vw, 24px);
+        text-align: center;
+        margin-top: 20px
     }
-    .img-container img{
-        display: inline-block;
-        width: 80%;
+
+    .img-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 80%;
+            min-width: 730px;
+            height: auto;
+        }
     }
+
+    .img-container-small {
+        justify-content: center;
+
+        @media (min-width: 700px) {
+            img {
+                width: 22rem;
+            }
+
+        }
+    } 
 
     .main {
         display: flex;
+
+        &.small {
+            gap: 0;
+            flex-direction: column-reverse;
+
+            .login-section, .signup-section {
+                align-content: center;
+                padding-left: 0;
+        
+                .login-container, .signup-container {
+                    padding: none;
+                    min-width: none;
+
+                    .title {
+                        margin-top: 1rem;
+                    }
+                }
+            }
+        }
     }
-}
 
-.container{
-    width: 50%;
-    display: block;
-    justify-content: center;
-    align-items: center;
-}
+    .login-section, .signup-section {
+        align-content: center;
+        padding-left: 3rem;
 
-form{
-    padding: 10px;
-    button {
-        padding: 10px;
-        border: none;
-        border-radius: 5px;
-        background-color: $primary;
-        color: #fff;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: all 0.3s;
+        .login-container, .signup-container {
+            padding: 0 8rem 8rem 8rem;
+            min-width: 600px;
+        }
+    }
     
-        &:hover {
+    .links {
+        display: flex;
+        justify-content: space-evenly;
+        margin-top: 20px;
+        font-size: clamp(12px, 2vw, 24px);
+    }
+
+
+    .title {
+        margin-top: 8rem;
+        text-align: center;
+        font-size: clamp(12px, 1.5vw, 24px);
+    }
+
+    .button button{
+        margin-top: 30px;
+        width: 100%
+    }
+
+    form{
+        padding: 10px;
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: $primary;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        
+            &:hover {
                 background-color: $primary;
+            }
+        }
+    }
+
+    .email, .password {
+        position: absolute;
+        width: 100%;
+        height: 50px;
+        outline: none;
+        font-size: 15px;
+        padding: 0 30px;
+        line-height: 10px;
+        border: 2px solid $background;
+        background: transparent;
+        transition: 0.1s ease;
+        z-index: 1111;
+        border-radius: 5px;
+    
+        &:focus,
+        &:valid {
+            color: $secondary;
+            border: 4px solid $background;
+        }
+    
+        &:focus + .labelline,
+        &:valid + .labelline {
+            color: $secondary;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 12px;
+            transform: translate(-15px, -25px) scale(0.88);
+            z-index: 1111111;
+            font-size: 15px;
+        }
+    }
+    
+    .input-email, .input-password {
+        margin-top: 20px;
+        position: relative;
+        height: 50px;
+        line-height: 50px;
+    
+        .labelline { 
+            position: absolute;
+            font-size: 15px;
+            color: $secondary;
+            padding: 0 20px;
+            margin: 0 20px;
+            background-color: transparent;
+            transition: 0.2s ease;
+        }
+    }
+    
+    .login, .signup {
+        background-color: transparent; 
+        border: none; 
+        color: $primary; 
+        cursor: pointer;
+        position: relative; 
+        margin-left: 10px;
+    
+        &::after {
+            content: ""; 
+            display: block;
+            width: 100%; 
+            height: $line-height; 
+            background-color: $primary; 
+            position: absolute;
+            bottom: $line-spacing; 
+            left: 0; 
+        }
+    
+        &:hover::after {
+            height: $line-hover-height; 
+            background-color: $primary; 
+        }
+    }
+
+    .signup {
+        color: $secondary; 
+        
+        &::after {
+            background-color: $secondary; 
         }
     }
 }
-.input-email {
-    margin-top: 20px;
-    position: relative;
-    height: 50px;
-    line-height: 50px;
-
-    .labelline { 
-        position: absolute;
-        font-size: 15px;
-        color: $secondary;
-        padding: 0 20px;
-        margin: 0 20px;
-        background-color: transparent;
-        transition: 0.2s ease;
-    }
-}
-
-.email {
-    position: absolute;
-    width: 350px;
-    height: 50px;
-    outline: none;
-    font-size: 15px;
-    padding: 0 30px;
-    line-height: 10px;
-    border: 2px solid $background;
-    background: transparent;
-    transition: 0.1s ease;
-    z-index: 1111;
-    border-radius: 5px;
-
-    &:focus,
-    &:valid {
-        color: $secondary;
-        border: 4px solid $background;
-    }
-
-    &:focus + .labelline,
-    &:valid + .labelline {
-        color: $secondary;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 12px;
-        transform: translate(-15px, -25px) scale(0.88);
-        z-index: 1111111;
-        font-size: 15px;
-    }
-}
-
-.input-password {
-    margin-top: 20px;
-    position: relative;
-    height: 50px;
-    line-height: 50px;
-
-    .labelline { 
-        position: absolute;
-        font-size: 15px;
-        color: $secondary;
-        padding: 0 20px;
-        margin: 0 20px;
-        background-color: transparent;
-        transition: 0.2s ease;
-    }
-}
-
-.password {
-    position: absolute;
-    width: 350px;
-    height: 50px;
-    outline: none;
-    font-size: 15px;
-    padding: 0 30px;
-    line-height: 10px;
-    border: 2px solid $background;
-    background: transparent;
-    transition: 0.1s ease;
-    z-index: 1111;
-    border-radius: 5px;
-
-    &:focus,
-    &:valid {
-        color: $secondary;
-        border: 4px solid $background;
-    }
-
-    &:focus + .labelline,
-    &:valid + .labelline {
-        color: $secondary;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 12px;
-        transform: translate(-15px, -25px) scale(0.88);
-        z-index: 1111111;
-        font-size: 15px;
-    }
-}
-.login {
-    background-color: transparent; 
-    border: none; 
-    color: $primary; 
-    font-size: 16px; 
-    cursor: pointer;
-    position: relative; 
-    font-size: 25px;
-    margin-left: 10px;
-
-    &::after {
-        content: ""; 
-        display: block;
-        width: 100%; 
-        height: $line-height; 
-        background-color: $primary; 
-        position: absolute;
-        bottom: $line-spacing; 
-        left: 0; 
-    }
-
-    &:hover::after {
-        height: $line-hover-height; 
-    }
-}
-
-.signup{
-    background-color: transparent; 
-    border: none; 
-    color: $secondary; 
-    font-size: 16px; 
-    cursor: pointer;
-    position: relative; 
-    font-size: 25px;
-
-    &::after {
-        content: ""; 
-        display: block;
-        width: 100%; 
-        height: $line-height; 
-        background-color: $primary; 
-        position: absolute;
-        bottom: $line-spacing; 
-        left: 0; 
-    }
-
-    &:hover::after {
-        height: $line-hover-height; 
-    }
-}
-.links{
-    margin-top: 20px;
-}
-
-.title {
-    margin-top: 50px;
-}
-
-.paragraph{
-    margin-top: 50px;
-}
-
-.button button{
-    margin-top: 30px;
-}
-.img-container {
-    height: 100%;
-    width: 50%;
-    margin-top: 0px;
-    display: inline-block;
-}
-
-

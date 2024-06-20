@@ -10,53 +10,103 @@
 
     <link rel="stylesheet" href="{% static '/styles/signup/style.css' %}">
 
+    <!-- LUCIDE ICONS - Development version -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <!-- LUCIDE ICONS - Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
 </head>
 <body>
+    <div id="main" class="main">
+        <div class="signup-section"> 
+            <div class="signup-container">
+                <div class="links">
+                    <a href="{% url 'login' %}" class="login">Login</a>
+                    <a href="{% url 'signup' %}" class="signup">Cadastrar-se</a>
+                </div>
+                <div class="title">
+                    <h1>Cadastro</h1>
+                </div>
+                <div  class="paragraph">
+                    <p>Preencha as informações e crie sua conta.</p>
+                </div>
 
-    <div class="container">
-            <a href="{% url 'login' %}" class="login">Login</a>
-            <a href="{% url 'signup' %}" class="signup">Cadastro</a>
+                    <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="field">
+                            <label for="image_to_create">
+                                <div class="photo-title">
+                                    <h3>Foto</h3>
+                                </div>
+            
+                                {% comment %} <div class="photo">
+                                    <img src="" class="preview">
+                                </div> {% endcomment %}
+            
+                                <div class="default">
+                                    <i data-lucide="cloud-upload"></i>
+                                    <small>Fazer upload de uma imagem</small>
+                                </div>
+                            </label>
+                            <input type="file" name="image" id="image_to_create">
+                        </div>
+                        <div class="input-name">
+                            <input class="name" type="text" name="name" required>
+                            <div class="labelline">Nome</div>
+                        </div>
+                        <div class="input-email">
+                            <input class="email" type="email" name="email" required>
+                            <div class="labelline">E-mail</div>
+                        </div>
+                        <div class="input-password">
+                            <input class="password" type="password" name="password" required>
+                            <div class="labelline">Senha</div>
+                        </div>
+                        <p>{{ signup_error }}</p>
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="checkbox" name="checkbox">
+                            <label for="checkbox" class="label">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
+                        </div>
+                        <div class="button">
+                            <button type="submit">Cadastre-se</button>
+                        </div>
+                    </form>
 
-        <div class="title">
-            <h1>Faça seu Cadastro</h1>
+            </div>
         </div>
-        <div  class="paragraph">
-            <p>Preencha as informações e crie sua conta.</p>
+
+        <div id="img-container" class="img-container">
+            <img src="{% static 'assets/images/test.svg' %}" alt="PetCare logo">
         </div>
 
-            <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <div class="input-foto">
-                    <input class="file" type="file" name="image">
-                    <div class="labelline">Escolha sua foto</div>
-                </div>
-                <div class="input-name">
-                    <input class="name" type="text" name="name" required>
-                    <div class="labelline">Nome</div>
-                </div>
-                <div class="input-email">
-                    <input class="email" type="email" name="email" required>
-                    <div class="labelline">E-mail</div>
-                </div>
-                <div class="input-password">
-                    <input class="password" type="password" name="password" required>
-                    <div class="labelline">Senha</div>
-                </div>
-                <p>{{ signup_error }}</p>
-                <div class="input-checkbox">
-                    <input type="checkbox" id="checkbox" name="checkbox">
-                    <label for="checkbox" class="label">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
-                </div>
-                <div class="button">
-                    <button type="submit">Cadastre-se</button>
-                </div>
-            </form>
-
+        <div id="img-container-small" class="img-container-small">
+            <img src="{% static 'assets/images/petCare_illustration_small.svg' %}" alt="PetCare logo">
+        </div>
     </div>
 
-    <div class="img-container">
-        <img src="{% static 'assets/images/petCare_illustration.svg' %}" alt="{{ imagem.nome }}">
-    </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="{% static 'scripts/base.js' %}"></script>
+    <script> 
+        function updateImageContainer() {
+            let mainElement = document.getElementById('main');
+            let imgContainer = document.getElementById('img-container');
+            let imgContainerSmall = document.getElementById('img-container-small');
+            let width = window.innerWidth;
 
+            if (width < 900) { // Tela pequena
+                mainElement.classList.add('small');
+                imgContainer.style.display = 'none';
+                imgContainerSmall.style.display = 'flex';
+            } else { // Tela grande
+                mainElement.classList.remove('small');
+                imgContainer.style.display = 'flex';
+                imgContainerSmall.style.display = 'none';
+            }
+        }
+
+        window.addEventListener('resize', updateImageContainer);
+        window.addEventListener('load', updateImageContainer);
+    </script>
 </body>
 </html>
