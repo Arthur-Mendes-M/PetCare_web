@@ -84,6 +84,7 @@ body .img-container img {
 }
 body .img-container-small {
   justify-content: center;
+  display: none;
 }
 @media (min-width: 700px) {
   body .img-container-small img {
