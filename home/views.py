@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from utils.API import Employees
+from utils.session_handler import session_handler
 import random
 
 def home(request):
@@ -35,6 +36,8 @@ def edit_employee(request):
     file = request.FILES if request.FILES else None
     id_list = None
 
+    current_user = session_handler(request, 'employee', None, 'get')
+
     employee = {
         "name": request.GET.get('name'),
         "email": request.GET.get('email'),
@@ -46,9 +49,16 @@ def edit_employee(request):
 
     if id_list != None:
         for id in id_list:
-            Employees().update_one(id, employee)
+            updated_employee = Employees().update_one(id, employee)
+
+            if current_user['id'] == id:
+                session_handler(request, 'employee', updated_employee, 'set')
+
     else:
-        Employees().update_one(employees_id, employee, file)
+        updated_employee = Employees().update_one(employees_id, employee, file)
+
+        if current_user['id'] == employees_id:
+            session_handler(request, 'employee', updated_employee, 'set')
 
     return redirect(reverse('home'))
 

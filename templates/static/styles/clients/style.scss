@@ -23,6 +23,15 @@ table {
         top: 0;
         left: 0;
         z-index: 1;
+
+        tr {
+            td {
+
+                &:nth-child(4) {
+                    text-align: center;
+                }
+            }
+        }
     }
 
     td {
@@ -64,6 +73,10 @@ table {
                 border-radius: 50%;
                 object-fit: cover;
             }
+        }
+
+        &.birthday {
+            text-align: center;
         }
     }
 

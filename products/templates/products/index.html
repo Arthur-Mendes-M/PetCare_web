@@ -290,6 +290,26 @@
 
 {% block scripts %}
 <script>
+    // Utils function - Datetime casting
+    function formatDate(isoDate, type = "datetime") {
+        const dt = new Date(isoDate);
+        let formattedDate = "";
+
+        const day = String(dt.getUTCDate()).padStart(2, '0');
+        const month = String(dt.getUTCMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const year = dt.getUTCFullYear();
+        const hours = String(dt.getUTCHours()).padStart(2, '0');
+        const minutes = String(dt.getUTCMinutes()).padStart(2, '0');
+
+        if (type === "date") {
+            formattedDate = `${day}/${month}/${year}`;
+        } else {
+            formattedDate = `${day}/${month}/${year} às ${hours}:${minutes}`;
+        }
+
+        return formattedDate;
+    }
+    
     // Products select control (visual)
     let select_all_products = document.getElementById('select_all_products')
     let selects_products = document.querySelectorAll('.select_product')
@@ -363,7 +383,11 @@
                     }
 
                     if(input.name != 'image' && product[input?.name]) {
-                        input.value = product[input.name]
+                        if(input.name == 'last_refill') {
+                            input.value = formatDate(product["last_refill"])
+                        } else {
+                            input.value = product[input.name]
+                        }
                     }
                 })
             })
