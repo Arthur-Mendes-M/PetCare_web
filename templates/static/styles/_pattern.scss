@@ -55,10 +55,14 @@ a {
     color: var(--black);
 }
 
-button, input, select {
+button, input, select, textarea {
     font-family: 'Inter';
     background: none;
     border: none;
+}
+
+textarea {
+    resize: none;
 }
 
 @mixin flexBox($direction: row, $items: center, $content: center, $gap: 0, $wrap: nowrap) {

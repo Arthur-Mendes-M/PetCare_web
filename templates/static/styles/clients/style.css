@@ -45,10 +45,14 @@ a {
   color: var(--black);
 }
 
-button, input, select {
+button, input, select, textarea {
   font-family: "Inter";
   background: none;
   border: none;
+}
+
+textarea {
+  resize: none;
 }
 
 .table_container {
@@ -190,9 +194,6 @@ table .view {
 }
 .modal.view .modal_content .field:has(input:disabled, select:disabled) {
   opacity: 1;
-}
-.modal.view .modal_content .field:has(input:disabled, select:disabled) input, .modal.view .modal_content .field:has(input:disabled, select:disabled) select {
-  font-weight: 600;
 }
 .modal.view .modal_content .modal_actions .action.cancel {
   border: 1px solid var(--light_green);

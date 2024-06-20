@@ -59,7 +59,7 @@
     <div class="modal create">
         <div class="modal_title">
             <h2>Criação de cadastro</h2>
-            <p>Insira as informações do novo funcionário abaixo:</p>
+            <p>Insira as informações do novo cliente abaixo:</p>
         </div>
 
         <form method="post" action="{% url 'create_client' %}" class="modal_content create_form" enctype="multipart/form-data">
@@ -149,7 +149,7 @@
     <div class="modal edit">
         <div class="modal_title">
             <h2>Alteração de cadastro</h2>
-            <p>Altere as informações do funcionário abaixo:</p>
+            <p>Altere as informações do cliente abaixo:</p>
         </div>
 
         <form method="post" action="{% url 'edit_client' %}" class="modal_content edit_form" enctype="multipart/form-data">
@@ -326,7 +326,7 @@
     <div class="modal delete">
         <div class="modal_title">
             <h2>Exclusão de cadastro</h2>
-            <p>Confirme se deseje excluir o cadastro do funcionário abaixo:</p>
+            <p>Confirme se deseje excluir o cadastro do cliente abaixo:</p>
         </div>
 
         <form method="post" action="" class="modal_content delete_form">
@@ -421,7 +421,7 @@
                 modal_element.querySelector('.confirm').disabled = false
             }
 
-            fetch(`https://api-pet-care.vercel.app/clients/${client_id}?auth=atividadelobianco`).then((response) => response.json()).then((data) => {
+            fetch(`{{ api_url }}/${client_id}{{ api_token }}`).then((response) => response.json()).then((data) => {
                 let client = data[0]
 
                 all_inputs.forEach(input => {

@@ -8,15 +8,517 @@
 
 {% block content_title %}Gerenciamento de produtos{% endblock %}
 {% block content %}
-    <h1>Página de produtos</h1>
+    <div class="table_container">
+        <table>
+            <thead>
+                <tr>
+                    <td><input type="checkbox" id="select_all_products"></td>
+                    <td>Produto</td>
+                    <td>Último abastecimento</td>
+                    <td>Qtd. Estoque</td>
+                    <td>Preço de venda</td>
+                    <td>Ações</td>
+                </tr>
+            </thead>
+            <tbody id="products_list">
+                {% for product in products_list %}
+                    <tr>
+                        <td><input type="checkbox" class="select_product" value={{ product.id }}></td>
+                        <td class="name">
+                            <div>
+                                {% if product.image_url %}
+                                    <img src="{{ product.image_url }}" alt={{ product.name }} class="profile_avatar" />
+                                {% else %}
+                                    <img src="{% static 'assets/images/default_image_' %}{{ random_number }}.jpg" alt={{ product.name }} class="profile_avatar" />
+                                {% endif %}
+                                {{product.name}}
+                            </div>
+                        </td>
+                        <td class="last_refill">{{product.last_refill_formatted}}</td>
+                        <td class="quantity_in_stock">
+                            {{ product.quantity_in_stock }}
+                        </td>
+                        <td class="sale_price">
+                            R$ {{ product.sale_price }}
+                        </td>
+                        <td>
+                            <button class="action edit" value={{ product.id }}>
+                                <i data-lucide="square-pen"></i>
+                            </button>
+
+                            <button class="action view" value={{ product.id }}>
+                                <i data-lucide="eye"></i>
+                            </button>
+
+                            <button class="action delete" value={{ product.id }}>
+                                <i data-lucide="trash-2"></i>
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="modal create">
+        <div class="modal_title">
+            <h2>Cadastro de produtos</h2>
+            <p>Insira as informações do novo produto abaixo:</p>
+        </div>
+
+        <form method="post" action="{% url 'create_product' %}" class="modal_content create_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="field">
+                <label for="image_to_create">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_create">
+            </div>
+
+            <div class="field">
+                <label for="name_to_create">Nome</label>
+                <input type="text" name="name" id="name_to_create" required>
+            </div>
+
+            <div class="field">
+                <label for="description_to_create">Descrição</label>
+                <textarea maxlength="130" name="description" id="description_to_create" required></textarea>
+            </div>
+
+            <div class="field">
+                <label for="quantity_to_create">Quantidade em estoque</label>
+                <input type="number" name="quantity_in_stock" id="quantity_to_create" required>
+            </div>
+
+            <div class="field">
+                <label for="sale_to_create">Preço de venda</label>
+                <input type="number" step="0.01" min="0.01" name="sale_price" id="sale_to_create" required>
+            </div>
+
+            <div class="field">
+                <label for="purchase_to_create">Preço de compra</label>
+                <input type="number" step="0.01" min="0.01" name="purchase_price" id="purchase_to_create" required>
+            </div>
+
+            <div class="modal_actions">
+                <button type="reset" class="action cancel">Cancelar</button>
+                <button type="submit" class="action confirm">Cadastrar novo produto</button>
+            </div>
+        </form>
+    </div>
 
 
+    <div class="modal edit">
+        <div class="modal_title">
+            <h2>Alteração de cadastro</h2>
+            <p>Altere as informações do produto abaixo:</p>
+        </div>
 
-    <!-- <h2>Sessão: {{ request.session.employee }}</h2> -->
+        <form method="post" action="{% url 'edit_product' %}" class="modal_content edit_form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <input type="hidden" id="product_id" name="id">
+
+            <div class="field">
+                <label for="image_to_edit">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_edit">
+            </div>
+
+            <div class="field">
+                <label for="name_to_edit">Nome</label>
+                <input type="text" name="name" id="name_to_edit" required>
+            </div>
+
+            <div class="field">
+                <label for="description_to_edit">Descrição</label>
+                <textarea maxlength="130" name="description" id="description_to_edit" required></textarea>
+            </div>
+
+            <div class="field">
+                <label for="quantity_to_edit">Quantidade em estoque</label>
+                <input type="number" name="quantity_in_stock" id="quantity_to_edit" required>
+            </div>
+
+            <div class="field">
+                <label for="sale_to_edit">Preço de venda</label>
+                <input type="number" step="0.01" min="0.01" name="sale_price" id="sale_to_edit" required>
+            </div>
+
+            <div class="field">
+                <label for="purchase_to_edit">Preço de compra</label>
+                <input type="number" step="0.01" min="0.01" name="purchase_price" id="purchase_to_edit" required>
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! Não existem campos que podem ser mutualmente alterados.</span></p>
+
+            <div class="modal_actions">
+                <button type="reset" class="action cancel">Cancelar</button>
+                <button type="submit" class="action confirm">Atualizar cadastro</button>
+            </div>
+        </form>
+    </div>
+
+
+    <div class="modal view">
+        <div class="modal_title">
+            <h2>Visualização de cadastro</h2>
+            <p>As informações completas do cadastro estão abaixo:</p>
+        </div>
+
+        <form method="get" action="" class="modal_content view_form" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="field">
+                <label for="image_to_view">
+                    <div class="title">
+                        <h3>Foto</h3>
+                    </div>
+
+                    <div class="photo">
+                        <img src="" class="preview">
+                    </div>
+
+                    <div class="default">
+                        <i data-lucide="cloud-upload"></i>
+                        <small>Fazer upload de uma imagem</small>
+                    </div>
+                </label>
+                <input type="file" name="image" id="image_to_view" disabled>
+            </div>
+
+            <div class="field">
+                <label for="name_to_view">Nome</label>
+                <input type="text" name="name" id="name_to_view" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="code_to_view">Código</label>
+                <input type="text" name="code" id="code_to_view" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="description_to_view">Descrição</label>
+                <textarea maxlength="130" name="description" id="description_to_view" required disabled></textarea>
+            </div>
+
+            <div class="field">
+                <label for="quantity_to_view">Quantidade em estoque</label>
+                <input type="number" name="quantity_in_stock" id="quantity_to_view" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="sale_to_view">Preço de venda</label>
+                <input type="number" step="0.01" min="0.01" name="sale_price" id="sale_to_view" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="purchase_to_view">Preço de compra</label>
+                <input type="number" step="0.01" min="0.01" name="purchase_price" id="purchase_to_view" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="refill_to_view">Último abastecimento</label>
+                <input type="datetime" name="last_refill" id="refill_to_view" required disabled>
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro!</span></p>
+
+            <div class="modal_actions">
+                <button type="button" class="action cancel">Ok</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="modal delete">
+        <div class="modal_title">
+            <h2>Exclusão de produto</h2>
+            <p>Confirme se deseje excluir o produto cadastrado abaixo:</p>
+        </div>
+
+        <form method="post" action="" class="modal_content delete_form">
+            {% csrf_token %}
+            <div class="field">
+                <label for="name_to_delete">Nome</label>
+                <input type="text" name="name" id="name_to_delete" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="code_to_delete">Código</label>
+                <input type="text" name="code" id="code_to_delete" required disabled>
+            </div>
+
+            <div class="field">
+                <label for="description_to_delete">Descrição</label>
+                <textarea maxlength="130" name="description" id="description_to_delete" required disabled></textarea>
+            </div>
+
+            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
+
+            <div class="modal_actions">
+                <button type="button" class="action cancel">Cancelar exclusão</button>
+                <button type="submit" class="action confirm">Confirmar</button>
+            </div>
+        </form>
+    </div>
+
 {% endblock %}
 
 {% block scripts %}
 <script>
+    // Products select control (visual)
+    let select_all_products = document.getElementById('select_all_products')
+    let selects_products = document.querySelectorAll('.select_product')
+
+    select_all_products.addEventListener('click', () => {
+        selects_products.forEach(select => select.checked = select_all_products.checked)
+    })
+
+    // Modal visual stacking
+    function modal_control(modal_element, button_clicked) {
+        let all_checked_products = document.querySelectorAll('.select_product:checked')
+
+        let tr_parent = button_clicked.closest('tr')
+        
+        let image = modal_element.querySelector('input[name*=image]')
+        let image_preview = modal_element.querySelector('img.preview')
+        let photo_container = modal_element.querySelector('.photo')
+        let default_container = modal_element.querySelector('.default')
+
+        let selected_image_preview = tr_parent.querySelector('img.profile_avatar')
+
+        let all_inputs = modal_element.querySelectorAll('input, textarea')
+
+        if(all_checked_products.length > 1) {
+            all_inputs.forEach(input => {
+                input.disabled = true
+                input.value = ''
+            })
+
+            if(modal_element.querySelector('img')) {
+                modal_element.querySelector('img').src = ""
+            }
+
+            if(modal_element.querySelector('.confirm') && modal_element != delete_modal) {
+                modal_element.querySelector('.confirm').disabled = true
+            }
+            
+            if(modal_element.querySelector('.photo') && modal_element.querySelector('.default')) {
+                modal_element.querySelector('.photo').classList.remove('show')
+                modal_element.querySelector('.default').classList.remove('hidden')
+            }
+
+            modal_element.classList.add('show_alert')
+
+            let data_product_index = ''
+            
+            all_checked_products.forEach((product, idx) => {
+                if((idx + 1) != all_checked_products.length) {
+                    data_product_index += `${product.value},`
+                } else {
+                    data_product_index += product.value
+                }
+            })
+
+            modal_element.querySelector('form').setAttribute('data-product-index', data_product_index)
+        } else {
+            product_id = button_clicked.value
+
+            if(modal_element.querySelector('.confirm')) {
+                modal_element.querySelector('.confirm').disabled = false
+            }
+
+            fetch(`{{ api_url }}/${product_id}{{ api_token }}`).then((response) => response.json()).then((data) => {
+                let product = data[0]
+
+                all_inputs.forEach(input => {
+                    console.log(product)
+                    console.log(input.name)
+                    console.log(product[input.name])
+
+
+                    if(modal_element == view_modal || modal_element == delete_modal) {
+                        input.disabled = true
+                    } else {
+                        input.disabled = false
+                    }
+
+                    if(input.name != 'image' && product[input?.name]) {
+                        input.value = product[input.name]
+                    }
+                })
+            })
+
+            if(image_preview && selected_image_preview) {
+                image_preview.src = selected_image_preview.src
+            }
+
+            if(photo_container && default_container) {
+                photo_container.classList.add('show')
+                default_container.classList.add('hidden')
+            }
+
+            modal_element.classList.remove('show_alert')
+
+            modal_element.querySelector('form').setAttribute('data-product-index', product_id)
+        }
+
+        if(delete_modal.className.includes('show')) {
+            delete_modal.classList.remove('show')
+        }
+
+        modal_element.classList.add('show')
+    }
+
+    // Modal variables
+    let add_register_on_page_button = document.getElementById('add_register_on_page')
+
+    let all_edit_product_buttons = document.querySelectorAll('.action.edit')
+    let all_delete_product_buttons = document.querySelectorAll('.action.delete')
+    let all_view_product_buttons = document.querySelectorAll('.action.view')
+
+    let create_modal = document.querySelector('.modal.create')
+    let confirm_create_modal = create_modal.querySelector('.action.confirm')
+    let cancel_create_modal = create_modal.querySelector('.action.cancel')
+    let create_form = document.querySelector('.create_form')
+
+    let edit_modal = document.querySelector('.modal.edit')
+    let confirm_edit_modal = edit_modal.querySelector('.action.confirm')
+    let cancel_edit_modal = edit_modal.querySelector('.action.cancel')
+    let edit_form = document.querySelector('.edit_form')
+
+    let view_modal = document.querySelector('.modal.view')
+    let confirm_view_modal = view_modal.querySelector('.action.confirm')
+    let cancel_view_modal = view_modal.querySelector('.action.cancel')
+    let view_form = document.querySelector('.view_form')
     
+    let delete_modal = document.querySelector('.modal.delete')
+    let confirm_delete_modal = delete_modal.querySelector('.action.confirm')
+    let cancel_delete_modal = delete_modal.querySelector('.action.cancel')
+    let delete_form = document.querySelector('.delete_form')
+
+    // Modal -> create : showing
+    add_register_on_page_button.addEventListener('click', () => {
+        create_modal.classList.add('show')
+    })
+
+    // Modal images preview control
+    let all_images_labels = document.querySelectorAll('label[for*=image]')
+
+    all_images_labels.forEach(label => {
+        let image_input = label.nextElementSibling
+        let image_preview = label.querySelector('img')
+        let label_photo_container = label.querySelector('.photo')
+        let label_default_container = label.querySelector('.default')
+
+        if(image_input && image_input.files[0]) {
+            image_preview.src = URL.createObjectURL(image_input.files[0])
+
+        } else if (image_input) {
+            image_input.addEventListener('change', () => {
+                image_preview.src = URL.createObjectURL(image_input.files[0])
+                
+                label_photo_container.classList.add('show')
+                label_default_container.classList.add('hidden')
+            })
+        }
+    })
+
+    // Modal cancel action control
+    cancel_create_modal.addEventListener('click', () => {
+        create_modal.classList.remove('show')
+        create_modal.querySelector('form').reset()
+        create_modal.querySelector('input[type=file]').value = ""
+        create_modal.querySelector('img').src = ""
+        
+        create_modal.querySelector('.photo').classList.remove('show')
+        create_modal.querySelector('.default').classList.remove('hidden')
+    })
+    cancel_edit_modal.addEventListener('click', () => {
+        edit_modal.classList.remove('show')
+        edit_modal.querySelector('form').reset()
+        edit_modal.querySelector('input[type=file]').value = ""
+        edit_modal.querySelector('img').src = ""
+        
+        edit_modal.querySelector('.photo').classList.remove('show')
+        edit_modal.querySelector('.default').classList.remove('hidden')
+    })
+    cancel_view_modal.addEventListener('click', () => {
+        view_modal.classList.remove('show')
+        view_modal.querySelector('form').reset()
+        view_modal.querySelector('input[type=file]').value = ""
+        view_modal.querySelector('img').src = ""
+        
+        view_modal.querySelector('.photo').classList.remove('show')
+        view_modal.querySelector('.default').classList.remove('hidden')
+    })
+    cancel_delete_modal.addEventListener('click', () => {
+        delete_modal.classList.remove('show')
+        delete_modal.querySelector('form').reset()
+    })
+
+    // All actions control -> Make modal appear
+    all_edit_product_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(edit_modal, button)
+        })
+    })
+
+    all_view_product_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(view_modal, button)
+        })
+    })
+
+    all_delete_product_buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            modal_control(delete_modal, button)
+        })
+    })
+
+    // Modal forms submit control
+
+    edit_form.addEventListener('submit', (event) => {
+        event.preventDefault()
+        let product_id = edit_form.getAttribute('data-product-index')
+
+        edit_form.querySelector('input[type=hidden]').value = product_id
+        
+        edit_form.submit()
+    })
+
+    delete_form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        let products_id = delete_form.getAttribute('data-product-index')
+        
+        delete_form.setAttribute('action', `${"{% url 'delete_product' %}"}?products_id=${products_id}`)
+
+        delete_form.submit()
+    })
 </script>
 {% endblock %}

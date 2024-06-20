@@ -45,10 +45,14 @@ a {
   color: var(--black);
 }
 
-button, input, select {
+button, input, select, textarea {
   font-family: "Inter";
   background: none;
   border: none;
+}
+
+textarea {
+  resize: none;
 }
 
 body {

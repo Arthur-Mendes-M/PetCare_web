@@ -173,10 +173,6 @@ table {
             .field {
                 &:has(input:disabled, select:disabled) {
                     opacity: 1;
-
-                    input, select {
-                        font-weight: 600;
-                    }
                 }
             }
 

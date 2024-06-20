@@ -1,17 +1,17 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from utils.API import Clients
 import random
 import json
+import os
 
 from django.views.decorators.csrf import csrf_exempt
-
 
 def clients(request):
     random_number = random.randint(1, 7)
     clients_list = Clients().get_all().json()
 
-    return render(request, 'clients/index.html', context={'clients_list': clients_list, 'random_number': random_number})
+    return render(request, 'clients/index.html', context={'clients_list': clients_list, 'random_number': random_number, "api_url": f"{os.getenv('PETCARE_API_URL')}clients", "api_token": f"?auth={os.getenv('PETCARE_AUTH_TOKEN')}"})
 
 def create_client(request): 
     files = request.FILES if (request.FILES and 'image' in request.FILES) else None
