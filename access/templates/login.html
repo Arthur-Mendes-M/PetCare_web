@@ -2,50 +2,80 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-<hedisplay:>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{% static 'assets/images/short_brand.svg' %}" type="image/x-icon">
     <title>Login | PetCare</title>
 
     <link rel="stylesheet" href="{% static '/styles/login/style.css' %}">
+</head>
 <body>
-    <div class="main">
-        <div class="container">
-            <div class="links">
-                <a href="{% url 'login' %}" class="login">Login</a>
-                <a href="{% url 'signup' %}" class="signup">Cadastro</a>
-            </div>
-            <div class="title">
-                <h1>Faça seu Login</h1>
-            </div>
-            <div class="paragraph">
-                <p>Digite seu e-mail e senha abaixo para entrar na sua conta.</p>
-            </div>
-            {% comment %} <h2>Usuário: {{ employee }}</h2> {% endcomment %}
+    <div id="main" class="main">
+        <div class="login-section">
+            <div class="login-container">
+                <div class="links">
+                    <a href="{% url 'login' %}" class="login">Login</a>
+                    <a href="{% url 'signup' %}" class="signup">Cadastrar-se</a>
+                </div>
+                <div class="title">
+                    <h1>Login</h1>
+                </div>
+                <div class="paragraph">
+                    <p>Preencha os campos para entrar na sua conta.</p>
+                </div>
+                {% comment %} <h2>Usuário: {{ employee }}</h2> {% endcomment %}
 
-            <form action="{% url 'login' %}" method="post">
-                {% csrf_token %}
-                <div class="input-email">
-                    <input class="email" type="email" name="email" required>
-                    <div class="labelline">E-mail</div>
-                </div>
-                <div class="input-password">
-                    <input class="password" type="password" name="password" required>
-                    <div class="labelline">Senha</div>
-                </div>
-                {% if login_error  %}
-                    <p>Erro: {{ login_error }}</p>
-                {% endif %}
-                <div class="button">
-                    <button type="submit">Entrar</button>
-                </div>
-            </form>
+                <form action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
+                    <div class="input-email">
+                        <input class="email" type="email" name="email" required>
+                        <div class="labelline">E-mail</div>
+                    </div>
+                    <div class="input-password">
+                        <input class="password" type="password" name="password" required>
+                        <div class="labelline">Senha</div>
+                    </div>
+                    {% if login_error  %}
+                        <p>Erro: {{ login_error }}</p>
+                    {% endif %}
+                    <div class="button">
+                        <button type="submit">Entrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="img-container" class="img-container">
+            <img src="{% static 'assets/images/test.svg' %}" alt="PetCare logo">
         </div>
 
-        <div class="img-container">
-            <img src="{% static 'assets/images/petCare_illustration.svg' %}" alt="{{ imagem.nome }}">
+        <div id="img-container-small" class="img-container-small">
+            <img src="{% static 'assets/images/petCare_illustration_small.svg' %}" alt="PetCare logo">
         </div>
     </div>
+
+    {% block scripts %}
+        <script>
+            function updateImageContainer() {
+                let mainElement = document.getElementById('main');
+                let imgContainer = document.getElementById('img-container');
+                let imgContainerSmall = document.getElementById('img-container-small');
+                let width = window.innerWidth;
+
+                if (width < 900) { // Tela pequena
+                    mainElement.classList.add('small');
+                    imgContainer.style.display = 'none';
+                    imgContainerSmall.style.display = 'flex';
+                } else { // Tela grande
+                    mainElement.classList.remove('small');
+                    imgContainer.style.display = 'flex';
+                    imgContainerSmall.style.display = 'none';
+                }
+            }
+
+            window.addEventListener('resize', updateImageContainer);
+            window.addEventListener('load', updateImageContainer);
+        </script>
+    {% endblock %}
 </body>
 </html>

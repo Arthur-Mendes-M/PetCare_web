@@ -51,8 +51,15 @@ button, input, select, textarea {
   border: none;
 }
 
+<<<<<<< HEAD
 textarea {
   resize: none;
+=======
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+>>>>>>> 79a49038b9affead6dd0d5378bd4037e400e1502
 }
 
 body {
@@ -61,30 +68,79 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  padding-top: 1rem;
 }
-body p {
+body .paragraph {
   color: #6A6E83;
-  font-size: 12px;
+  font-size: clamp(10px, 1vw, 24px);
+  text-align: center;
+  margin-top: 20px;
+}
+body .img-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 body .img-container img {
-  display: inline-block;
   width: 80%;
+  min-width: 730px;
+  height: auto;
+}
+body .img-container-small {
+  justify-content: center;
+  display: none;
+}
+@media (min-width: 700px) {
+  body .img-container-small img {
+    width: 22rem;
+  }
 }
 body .main {
   display: flex;
 }
-
-.container {
-  width: 50%;
-  display: block;
-  justify-content: center;
-  align-items: center;
+body .main.small {
+  gap: 0;
+  flex-direction: column-reverse;
 }
-
-form {
+body .main.small .login-section, body .main.small .signup-section {
+  align-content: center;
+  padding-left: 0;
+}
+body .main.small .login-section .login-container, body .main.small .login-section .signup-container, body .main.small .signup-section .login-container, body .main.small .signup-section .signup-container {
+  padding: none;
+  min-width: none;
+}
+body .main.small .login-section .login-container .title, body .main.small .login-section .signup-container .title, body .main.small .signup-section .login-container .title, body .main.small .signup-section .signup-container .title {
+  margin-top: 1rem;
+}
+body .login-section, body .signup-section {
+  align-content: center;
+  padding-left: 3rem;
+}
+body .login-section .login-container, body .login-section .signup-container, body .signup-section .login-container, body .signup-section .signup-container {
+  padding: 0 8rem 8rem 8rem;
+  min-width: 600px;
+}
+body .links {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  font-size: clamp(12px, 2vw, 24px);
+}
+body .title {
+  margin-top: 8rem;
+  text-align: center;
+  font-size: clamp(12px, 1.5vw, 24px);
+}
+body .button button {
+  margin-top: 30px;
+  width: 100%;
+}
+body form {
   padding: 10px;
 }
-form button {
+body form button {
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -94,29 +150,12 @@ form button {
   cursor: pointer;
   transition: all 0.3s;
 }
-form button:hover {
+body form button:hover {
   background-color: #FFC000;
 }
-
-.input-email {
-  margin-top: 20px;
-  position: relative;
-  height: 50px;
-  line-height: 50px;
-}
-.input-email .labelline {
+body .email, body .password {
   position: absolute;
-  font-size: 15px;
-  color: #6A6E83;
-  padding: 0 20px;
-  margin: 0 20px;
-  background-color: transparent;
-  transition: 0.2s ease;
-}
-
-.email {
-  position: absolute;
-  width: 350px;
+  width: 100%;
   height: 50px;
   outline: none;
   font-size: 15px;
@@ -128,11 +167,11 @@ form button:hover {
   z-index: 1111;
   border-radius: 5px;
 }
-.email:focus, .email:valid {
+body .email:focus, body .email:valid, body .password:focus, body .password:valid {
   color: #6A6E83;
   border: 4px solid #B9B9B9;
 }
-.email:focus + .labelline, .email:valid + .labelline {
+body .email:focus + .labelline, body .email:valid + .labelline, body .password:focus + .labelline, body .password:valid + .labelline {
   color: #6A6E83;
   height: 30px;
   line-height: 30px;
@@ -141,14 +180,13 @@ form button:hover {
   z-index: 1111111;
   font-size: 15px;
 }
-
-.input-password {
+body .input-email, body .input-password {
   margin-top: 20px;
   position: relative;
   height: 50px;
   line-height: 50px;
 }
-.input-password .labelline {
+body .input-email .labelline, body .input-password .labelline {
   position: absolute;
   font-size: 15px;
   color: #6A6E83;
@@ -157,46 +195,15 @@ form button:hover {
   background-color: transparent;
   transition: 0.2s ease;
 }
-
-.password {
-  position: absolute;
-  width: 350px;
-  height: 50px;
-  outline: none;
-  font-size: 15px;
-  padding: 0 30px;
-  line-height: 10px;
-  border: 2px solid #B9B9B9;
-  background: transparent;
-  transition: 0.1s ease;
-  z-index: 1111;
-  border-radius: 5px;
-}
-.password:focus, .password:valid {
-  color: #6A6E83;
-  border: 4px solid #B9B9B9;
-}
-.password:focus + .labelline, .password:valid + .labelline {
-  color: #6A6E83;
-  height: 30px;
-  line-height: 30px;
-  padding: 0 12px;
-  transform: translate(-15px, -25px) scale(0.88);
-  z-index: 1111111;
-  font-size: 15px;
-}
-
-.login {
+body .login, body .signup {
   background-color: transparent;
   border: none;
   color: #FFC000;
-  font-size: 16px;
   cursor: pointer;
   position: relative;
-  font-size: 25px;
   margin-left: 10px;
 }
-.login::after {
+body .login::after, body .signup::after {
   content: "";
   display: block;
   width: 100%;
@@ -206,52 +213,13 @@ form button:hover {
   bottom: -5px;
   left: 0;
 }
-.login:hover::after {
+body .login:hover::after, body .signup:hover::after {
   height: 4px;
+  background-color: #FFC000;
 }
-
-.signup {
-  background-color: transparent;
-  border: none;
+body .signup {
   color: #6A6E83;
-  font-size: 16px;
-  cursor: pointer;
-  position: relative;
-  font-size: 25px;
 }
-.signup::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: #FFC000;
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-}
-.signup:hover::after {
-  height: 4px;
-}
-
-.links {
-  margin-top: 20px;
-}
-
-.title {
-  margin-top: 50px;
-}
-
-.paragraph {
-  margin-top: 50px;
-}
-
-.button button {
-  margin-top: 30px;
-}
-
-.img-container {
-  height: 100%;
-  width: 50%;
-  margin-top: 0px;
-  display: inline-block;
+body .signup::after {
+  background-color: #6A6E83;
 }/*# sourceMappingURL=style.css.map */
