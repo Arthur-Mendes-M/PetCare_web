@@ -16,6 +16,7 @@
             <div class="login-container">
                 <div class="links">
                     <a href="{% url 'login' %}" class="login">Login</a>
+<<<<<<< Updated upstream
                     <a href="{% url 'signup' %}" class="signup">Cadastrar-se</a>
                 </div>
                 <div class="title">
@@ -23,6 +24,15 @@
                 </div>
                 <div class="paragraph">
                     <p>Preencha os campos para entrar na sua conta.</p>
+=======
+                    <a href="{% url 'signup' %}" class="signup">Cadastro</a>
+                </div>
+                <div class="title">
+                    <h1>Faça seu login</h1>
+                </div>
+                <div class="paragraph">
+                    <p>Digite seu e-mail e senha abaixo para entrar na sua conta.</p>
+>>>>>>> Stashed changes
                 </div>
                 {% comment %} <h2>Usuário: {{ employee }}</h2> {% endcomment %}
 
@@ -60,6 +70,10 @@
                 let mainElement = document.getElementById('main');
                 let imgContainer = document.getElementById('img-container');
                 let imgContainerSmall = document.getElementById('img-container-small');
+<<<<<<< Updated upstream
+=======
+                let imgElement = document.getElementById('img-element');
+>>>>>>> Stashed changes
                 let width = window.innerWidth;
 
                 if (width < 900) { // Tela pequena

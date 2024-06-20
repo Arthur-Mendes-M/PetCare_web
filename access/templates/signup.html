@@ -21,6 +21,7 @@
     <div id="main" class="main">
         <div class="signup-section"> 
             <div class="signup-container">
+<<<<<<< Updated upstream
                 <div class="links">
                     <a href="{% url 'login' %}" class="login">Login</a>
                     <a href="{% url 'signup' %}" class="signup">Cadastrar-se</a>
@@ -83,11 +84,71 @@
         <div id="img-container-small" class="img-container-small">
             <img src="{% static 'assets/images/petCare_illustration_small.svg' %}" alt="PetCare logo">
         </div>
+=======
+                    <a href="{% url 'login' %}" class="login">Login</a>
+                    <a href="{% url 'signup' %}" class="signup">Cadastro</a>
+
+                <div class="title">
+                    <h1>Faça seu cadastro</h1>
+                </div>
+                <div  class="paragraph">
+                    <p>Preencha as informações e crie sua conta.</p>
+                </div>
+
+                    <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="field">
+                            <label for="image_to_create">
+                                <div class="photo-title">
+                                    <h3>Foto</h3>
+                                </div>
+            
+                                {% comment %} <div class="photo">
+                                    <img src="" class="preview">
+                                </div> {% endcomment %}
+            
+                                <div class="default">
+                                    <i data-lucide="cloud-upload"></i>
+                                    <small>Fazer upload de uma imagem</small>
+                                </div>
+                            </label>
+                            <input type="file" name="image" id="image_to_create">
+                        </div>
+                        <div class="input-name">
+                            <input class="name" type="text" name="name" required>
+                            <div class="labelline">Nome</div>
+                        </div>
+                        <div class="input-email">
+                            <input class="email" type="email" name="email" required>
+                            <div class="labelline">E-mail</div>
+                        </div>
+                        <div class="input-password">
+                            <input class="password" type="password" name="password" required>
+                            <div class="labelline">Senha</div>
+                        </div>
+                        <p>{{ signup_error }}</p>
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="checkbox" name="checkbox">
+                            <label for="checkbox" class="label">Eu li e concordo com os <a href="" class="terms">Termos de Serviço</a> e <a href="" class="politics">Política de Privacidade</a>.</label>
+                        </div>
+                        <div class="button">
+                            <button type="submit">Cadastre-se</button>
+                        </div>
+                    </form>
+
+            </div>
+        </div>
+
+        <div class="img-container">
+            <img src="{% static 'assets/images/test.svg' %}" alt="PetCare logo">
+        </div>
+>>>>>>> Stashed changes
     </div>
 
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="{% static 'scripts/base.js' %}"></script>
     <script> 
+<<<<<<< Updated upstream
         function updateImageContainer() {
             let mainElement = document.getElementById('main');
             let imgContainer = document.getElementById('img-container');
@@ -107,6 +168,28 @@
 
         window.addEventListener('resize', updateImageContainer);
         window.addEventListener('load', updateImageContainer);
+=======
+        let all_images_labels = document.querySelectorAll('label[for*=image]')
+
+        all_images_labels.forEach(label => {
+            let image_input = label.nextElementSibling
+            let image_preview = label.querySelector('img')
+            let label_photo_container = label.querySelector('.photo')
+            let label_default_container = label.querySelector('.default')
+    
+            if(image_input && image_input.files[0]) {
+                image_preview.src = URL.createObjectURL(image_input.files[0])
+    
+            } else if (image_input) {
+                image_input.addEventListener('change', () => {
+                    image_preview.src = URL.createObjectURL(image_input.files[0])
+                    
+                    label_photo_container.classList.add('show')
+                    label_default_container.classList.add('hidden')
+                })
+            }
+        })
+>>>>>>> Stashed changes
     </script>
 </body>
 </html>

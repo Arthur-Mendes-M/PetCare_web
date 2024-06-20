@@ -21,11 +21,19 @@ body{
     min-height: 100vh;
     padding-top: 1rem;
 
+<<<<<<< Updated upstream
     .paragraph {
         color: $secondary;
         font-size: clamp(10px, 1vw, 24px);
         text-align: center;
         margin-top: 20px
+=======
+    p {
+        color: $secondary;
+        font-size: 12px;
+        text-align: center;
+        padding: 0 1rem;
+>>>>>>> Stashed changes
     }
 
     .img-container {
@@ -43,7 +51,16 @@ body{
 
     .img-container-small {
         justify-content: center;
+<<<<<<< Updated upstream
         display: none;
+=======
+
+        @media (max-width: 480px) {
+            img {
+                width: 70%;
+            }
+        }
+>>>>>>> Stashed changes
 
         @media (min-width: 700px) {
             img {
@@ -60,6 +77,7 @@ body{
             gap: 0;
             flex-direction: column-reverse;
 
+<<<<<<< Updated upstream
             .login-section, .signup-section {
                 align-content: center;
                 padding-left: 0;
@@ -67,6 +85,15 @@ body{
                 .login-container, .signup-container {
                     padding: none;
                     min-width: none;
+=======
+            .login-section {
+                align-content: center;
+                padding-left: 0;
+        
+                .login-container {
+                    padding: 0;
+                    min-width: 0;
+>>>>>>> Stashed changes
 
                     .title {
                         margin-top: 1rem;
@@ -76,11 +103,19 @@ body{
         }
     }
 
+<<<<<<< Updated upstream
     .login-section, .signup-section {
         align-content: center;
         padding-left: 3rem;
 
         .login-container, .signup-container {
+=======
+    .login-section {
+        align-content: center;
+        padding-left: 3rem;
+
+        .login-container {
+>>>>>>> Stashed changes
             padding: 0 8rem 8rem 8rem;
             min-width: 600px;
         }
@@ -89,6 +124,7 @@ body{
     .links {
         display: flex;
         justify-content: space-evenly;
+<<<<<<< Updated upstream
         margin-top: 20px;
         font-size: clamp(12px, 2vw, 24px);
     }
@@ -98,6 +134,13 @@ body{
         margin-top: 8rem;
         text-align: center;
         font-size: clamp(12px, 1.5vw, 24px);
+=======
+    }
+
+    .title {
+        margin-top: 8rem;
+        text-align: center;
+>>>>>>> Stashed changes
     }
 
     .button button{
@@ -176,8 +219,15 @@ body{
         background-color: transparent; 
         border: none; 
         color: $primary; 
+<<<<<<< Updated upstream
         cursor: pointer;
         position: relative; 
+=======
+        font-size: 16px; 
+        cursor: pointer;
+        position: relative; 
+        font-size: 25px;
+>>>>>>> Stashed changes
         margin-left: 10px;
     
         &::after {
@@ -204,4 +254,10 @@ body{
             background-color: $secondary; 
         }
     }
+<<<<<<< Updated upstream
+=======
+    .links, .paragraph {
+        margin-top: 20px;
+    }
+>>>>>>> Stashed changes
 }
