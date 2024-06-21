@@ -76,21 +76,18 @@
         <header id="top_menu">
             <div class="search_bar">
                 <div class="input">
-                    <input type="text" placeholder="Buscar...">
+                    <input type="text" placeholder="Buscar..." id="search">
     
                     <button type="button" class="search_button">
                         <i data-lucide="search"></i>
                     </button>
                 </div>
 
-                <!-- <button type="button" class="config">
-                    <i data-lucide="sliders-horizontal"></i>
-                </button>  -->
-
-                <button type="button" id="add_register_on_page">
-                    <!-- <i data-lucide="sliders-horizontal"></i> -->
-                    <i data-lucide="circle-plus"></i>
-                </button>
+                {% if request.session.employee.role == 'Administrativo' %}
+                    <button type="button" id="add_register_on_page">
+                        <i data-lucide="circle-plus"></i>
+                    </button>
+                {% endif %}
             </div>
     
             <div class="user_profile">

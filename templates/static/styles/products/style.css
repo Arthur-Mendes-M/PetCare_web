@@ -228,10 +228,10 @@ table .view {
 .modal .modal_content .field:has(input:disabled, select:disabled, textarea:disabled) {
   opacity: 0.4;
 }
-.modal .modal_content .field:has(input:required) {
+.modal .modal_content .field:has(input:required, textarea:required) {
   position: relative;
 }
-.modal .modal_content .field:has(input:required)::before {
+.modal .modal_content .field:has(input:required, textarea:required)::before {
   position: absolute;
   content: "*";
   color: var(--light_red);
@@ -262,8 +262,8 @@ table .view {
   font-weight: 300;
 }
 .modal .modal_content .field:has(label[for*=image_to_]) .photo {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: none;
 }
 .modal .modal_content .field:has(label[for*=image_to_]) .photo img {

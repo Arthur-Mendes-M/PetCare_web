@@ -307,14 +307,15 @@ body .signup::after {
   font-weight: 300;
 }
 .field:has(label[for*=image_to_]) .photo {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: none;
 }
 .field:has(label[for*=image_to_]) .photo img {
   width: inherit;
   height: inherit;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   border-radius: 50%;
 }
 .field:has(label[for*=image_to_]) .photo.show {
@@ -410,6 +411,4 @@ body .signup::after {
   .signup-container {
     min-width: 600px;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

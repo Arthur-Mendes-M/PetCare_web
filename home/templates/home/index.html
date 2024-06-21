@@ -16,7 +16,10 @@
                     <td>Funcionário</td>
                     <td>E-mail</td>
                     <td>Cargo</td>
-                    <td>Ações</td>
+
+                    {% if request.session.employee.role == 'Administrativo' %}
+                        <td>Ações</td>
+                    {% endif %}
                 </tr>
             </thead>
             <tbody id="employees_list">
@@ -41,17 +44,19 @@
                                 {{ 'Não especificado' }}
                             {% endif %}
                         </td>
-                        <td>
-                            <!-- href="{% url 'edit_employee' %}?employee_id={{ employee.id }}" -->
-                            <button class="action edit" value={{ employee.id }}>
-                                <i data-lucide="square-pen"></i>
-                            </button>
+                        {% if request.session.employee.role == 'Administrativo' %}
+                            <td>
+                                <!-- href="{% url 'edit_employee' %}?employee_id={{ employee.id }}" -->
+                                <button class="action edit" value={{ employee.id }}>
+                                    <i data-lucide="square-pen"></i>
+                                </button>
 
-                            <!-- href="{% url 'delete_employee' %}?employees_id={{ employee.id }}" -->
-                            <button class="action delete" value={{ employee.id }}>
-                                <i data-lucide="trash-2"></i>
-                            </button>
-                        </td>
+                                <!-- href="{% url 'delete_employee' %}?employees_id={{ employee.id }}" -->
+                                <button class="action delete" value={{ employee.id }}>
+                                    <i data-lucide="trash-2"></i>
+                                </button>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </tbody>
@@ -59,148 +64,148 @@
     </div>
 
     <div class="modal create">
-        <div class="modal_title">
-            <h2>Criação de cadastro</h2>
-            <p>Insira as informações do novo funcionário abaixo:</p>
-        </div>
-
-        <form method="post" action="{% url 'create_employee' %}" class="modal_content create_form" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div class="field">
-                <label for="image_to_create">
-                    <div class="title">
-                        <h3>Foto</h3>
-                    </div>
-
-                    <div class="photo">
-                        <img src="" class="preview">
-                    </div>
-
-                    <div class="default">
-                        <i data-lucide="cloud-upload"></i>
-                        <small>Fazer upload de uma imagem</small>
-                    </div>
-                </label>
-                <input type="file" name="image" id="image_to_create">
+            <div class="modal_title">
+                <h2>Criação de cadastro</h2>
+                <p>Insira as informações do novo funcionário abaixo:</p>
             </div>
 
-            <div class="field">
-                <label for="name_to_create">Nome</label>
-                <input type="text" name="name" id="name_to_create" required>
-            </div>
+            <form method="post" action="{% url 'create_employee' %}" class="modal_content create_form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="field">
+                    <label for="image_to_create">
+                        <div class="title">
+                            <h3>Foto</h3>
+                        </div>
 
-            <div class="field">
-                <label for="email_to_create">E-mail</label>
-                <input type="email" name="email" id="email_to_create" required>
-            </div>
+                        <div class="photo">
+                            <img src="" class="preview">
+                        </div>
 
-            <div class="field">
-                <label for="password_to_create">Senha</label>
-                <input type="password" name="password" id="password_to_create" required>
-            </div>
+                        <div class="default">
+                            <i data-lucide="cloud-upload"></i>
+                            <small>Fazer upload de uma imagem</small>
+                        </div>
+                    </label>
+                    <input type="file" name="image" id="image_to_create">
+                </div>
 
-            <div class="field">
-                <label for="role_to_create">Cargo</label>
-                <select name="role" id="role_to_create">
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Visitante">Visitante</option>
-                </select>
-            </div>
+                <div class="field">
+                    <label for="name_to_create">Nome</label>
+                    <input type="text" name="name" id="name_to_create" required>
+                </div>
 
-            <div class="modal_actions">
-                <button type="reset" class="action cancel">Cancelar</button>
-                <button type="submit" class="action confirm">Criar novo cadastro</button>
-            </div>
-        </form>
+                <div class="field">
+                    <label for="email_to_create">E-mail</label>
+                    <input type="email" name="email" id="email_to_create" required>
+                </div>
+
+                <div class="field">
+                    <label for="password_to_create">Senha</label>
+                    <input type="password" name="password" id="password_to_create" required>
+                </div>
+
+                <div class="field">
+                    <label for="role_to_create">Cargo</label>
+                    <select name="role" id="role_to_create">
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Visitante">Visitante</option>
+                    </select>
+                </div>
+
+                <div class="modal_actions">
+                    <button type="reset" class="action cancel">Cancelar</button>
+                    <button type="submit" class="action confirm">Criar novo cadastro</button>
+                </div>
+            </form>
     </div>
 
     <div class="modal edit">
-        <div class="modal_title">
-            <h2>Alteração de cadastro</h2>
-            <p>Altere as informações do funcionário abaixo:</p>
-        </div>
-
-        <form method="post" action="" class="modal_content edit_form" enctype="multipart/form-data">
-            {% csrf_token %}
-
-            <div class="field">
-                <label for="image_to_edit">
-                    <div class="title">
-                        <h3>Foto</h3>
-                    </div>
-
-                    <div class="photo">
-                        <img src="" class="preview">
-                    </div>
-
-                    <div class="default">
-                        <i data-lucide="cloud-upload"></i>
-                        <small>Fazer upload de uma imagem</small>
-                    </div>
-                </label>
-                <input type="file" name="image" id="image_to_edit">
+            <div class="modal_title">
+                <h2>Alteração de cadastro</h2>
+                <p>Altere as informações do funcionário abaixo:</p>
             </div>
 
-            <div class="field">
-                <label for="name_to_edit">Nome</label>
-                <input type="text" name="name" id="name_to_edit" required>
-            </div>
+            <form method="post" action="" class="modal_content edit_form" enctype="multipart/form-data">
+                {% csrf_token %}
 
-            <div class="field">
-                <label for="email_to_edit">E-mail</label>
-                <input type="email" name="email" id="email_to_edit" required>
-            </div>
+                <div class="field">
+                    <label for="image_to_edit">
+                        <div class="title">
+                            <h3>Foto</h3>
+                        </div>
 
-            <div class="field">
-                <label for="role_to_edit">Cargo</label>
-                <select name="role" id="role_to_edit">
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Visitante">Visitante</option>
-                </select>
-            </div>
+                        <div class="photo">
+                            <img src="" class="preview">
+                        </div>
 
-            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A alteração será aplicada para todos os registros selecionados.</span></p>
+                        <div class="default">
+                            <i data-lucide="cloud-upload"></i>
+                            <small>Fazer upload de uma imagem</small>
+                        </div>
+                    </label>
+                    <input type="file" name="image" id="image_to_edit">
+                </div>
 
-            <div class="modal_actions">
-                <button type="reset" class="action cancel">Cancelar</button>
-                <button type="submit" class="action confirm">Atualizar cadastro</button>
-            </div>
-        </form>
+                <div class="field">
+                    <label for="name_to_edit">Nome</label>
+                    <input type="text" name="name" id="name_to_edit" required>
+                </div>
+
+                <div class="field">
+                    <label for="email_to_edit">E-mail</label>
+                    <input type="email" name="email" id="email_to_edit" required>
+                </div>
+
+                <div class="field">
+                    <label for="role_to_edit">Cargo</label>
+                    <select name="role" id="role_to_edit">
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Visitante">Visitante</option>
+                    </select>
+                </div>
+
+                <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A alteração será aplicada para todos os registros selecionados.</span></p>
+
+                <div class="modal_actions">
+                    <button type="reset" class="action cancel">Cancelar</button>
+                    <button type="submit" class="action confirm">Atualizar cadastro</button>
+                </div>
+            </form>
     </div>
-        
+
     <div class="modal delete">
-        <div class="modal_title">
-            <h2>Exclusão de cadastro</h2>
-            <p>Confirme se deseje excluir o cadastro do funcionário abaixo:</p>
-        </div>
-
-        <form method="post" action="" class="modal_content delete_form">
-            {% csrf_token %}
-            <div class="field">
-                <label for="name_to_delete">Nome</label>
-                <input type="text" name="name_to_delete">
+            <div class="modal_title">
+                <h2>Exclusão de cadastro</h2>
+                <p>Confirme se deseje excluir o cadastro do funcionário abaixo:</p>
             </div>
 
-            <div class="field">
-                <label for="email_to_delete">E-mail</label>
-                <input type="email" name="email" id="email_to_delete">
-            </div>
+            <form method="post" action="" class="modal_content delete_form">
+                {% csrf_token %}
+                <div class="field">
+                    <label for="name_to_delete">Nome</label>
+                    <input type="text" name="name_to_delete">
+                </div>
 
-            <div class="field">
-                <label for="role_to_delete">Cargo</label>
-                <select name="role" id="role_to_delete">
-                    <option value="Administrativo">Administrativo</option>
-                    <option value="Visitante">Visitante</option>
-                </select>
-            </div>
+                <div class="field">
+                    <label for="email_to_delete">E-mail</label>
+                    <input type="email" name="email" id="email_to_delete">
+                </div>
 
-            <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
+                <div class="field">
+                    <label for="role_to_delete">Cargo</label>
+                    <select name="role" id="role_to_delete">
+                        <option value="Administrativo">Administrativo</option>
+                        <option value="Visitante">Visitante</option>
+                    </select>
+                </div>
 
-            <div class="modal_actions">
-                <button type="button" class="action cancel">Cancelar exclusão</button>
-                <button type="submit" class="action confirm">Confirmar</button>
-            </div>
-        </form>
+                <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
+
+                <div class="modal_actions">
+                    <button type="button" class="action cancel">Cancelar exclusão</button>
+                    <button type="submit" class="action confirm">Confirmar</button>
+                </div>
+            </form>
     </div>
 {% endblock %}
 
@@ -254,7 +259,7 @@
         selects_employees.forEach(select => select.checked = select_all_employees.checked)
     })
 
-    add_register_on_page_button.addEventListener('click', () => {
+    add_register_on_page_button?.addEventListener('click', () => {
         create_modal.classList.add('show')
     })
 
@@ -365,13 +370,13 @@
         modal_element.classList.add('show')
     }
 
-    all_edit_employee_buttons.forEach(button => {
+    all_edit_employee_buttons?.forEach(button => {
         button.addEventListener('click', () => {
             modal_control(edit_modal, button)
         })
     })
 
-    all_delete_employee_buttons.forEach(button => {
+    all_delete_employee_buttons?.forEach(button => {
         button.addEventListener('click', () => {
             modal_control(delete_modal, button)
         })

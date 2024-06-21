@@ -228,8 +228,8 @@ table .delete {
   font-weight: 300;
 }
 .modal .modal_content .field:has(label[for*=image_to_]) .photo {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   display: none;
 }
 .modal .modal_content .field:has(label[for*=image_to_]) .photo img {

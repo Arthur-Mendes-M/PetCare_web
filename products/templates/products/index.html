@@ -42,17 +42,21 @@
                             R$ {{ product.sale_price }}
                         </td>
                         <td>
-                            <button class="action edit" value={{ product.id }}>
-                                <i data-lucide="square-pen"></i>
-                            </button>
+                            {% if request.session.employee.role == 'Administrativo' %}
+                                <button class="action edit" value={{ product.id }}>
+                                    <i data-lucide="square-pen"></i>
+                                </button>
+                            {% endif %}
 
                             <button class="action view" value={{ product.id }}>
                                 <i data-lucide="eye"></i>
                             </button>
 
-                            <button class="action delete" value={{ product.id }}>
-                                <i data-lucide="trash-2"></i>
-                            </button>
+                            {% if request.session.employee.role == 'Administrativo' %}                            
+                                <button class="action delete" value={{ product.id }}>
+                                    <i data-lucide="trash-2"></i>
+                                </button>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -94,7 +98,7 @@
 
             <div class="field">
                 <label for="description_to_create">Descrição</label>
-                <textarea maxlength="130" name="description" id="description_to_create" required></textarea>
+                <textarea maxlength="180" name="description" id="description_to_create" required></textarea>
             </div>
 
             <div class="field">
@@ -156,7 +160,7 @@
 
             <div class="field">
                 <label for="description_to_edit">Descrição</label>
-                <textarea maxlength="130" name="description" id="description_to_edit" required></textarea>
+                <textarea maxlength="180" name="description" id="description_to_edit" required></textarea>
             </div>
 
             <div class="field">
@@ -223,7 +227,7 @@
 
             <div class="field">
                 <label for="description_to_view">Descrição</label>
-                <textarea maxlength="130" name="description" id="description_to_view" required disabled></textarea>
+                <textarea maxlength="180" name="description" id="description_to_view" required disabled></textarea>
             </div>
 
             <div class="field">
@@ -274,7 +278,7 @@
 
             <div class="field">
                 <label for="description_to_delete">Descrição</label>
-                <textarea maxlength="130" name="description" id="description_to_delete" required disabled></textarea>
+                <textarea maxlength="180" name="description" id="description_to_delete" required disabled></textarea>
             </div>
 
             <p class="alert">ATENÇÃO: <span>Você selecionou mais de um registro! A exclusão será aplicada para todos os registros selecionados.</span></p>
@@ -441,7 +445,7 @@
     let delete_form = document.querySelector('.delete_form')
 
     // Modal -> create : showing
-    add_register_on_page_button.addEventListener('click', () => {
+    add_register_on_page_button?.addEventListener('click', () => {
         create_modal.classList.add('show')
     })
 
@@ -501,19 +505,19 @@
     })
 
     // All actions control -> Make modal appear
-    all_edit_product_buttons.forEach(button => {
+    all_edit_product_buttons?.forEach(button => {
         button.addEventListener('click', () => {
             modal_control(edit_modal, button)
         })
     })
 
-    all_view_product_buttons.forEach(button => {
+    all_view_product_buttons?.forEach(button => {
         button.addEventListener('click', () => {
             modal_control(view_modal, button)
         })
     })
 
-    all_delete_product_buttons.forEach(button => {
+    all_delete_product_buttons?.forEach(button => {
         button.addEventListener('click', () => {
             modal_control(delete_modal, button)
         })
