@@ -24,7 +24,6 @@
                 <div class="paragraph">
                     <p>Preencha os campos para entrar na sua conta.</p>
                 </div>
-                {% comment %} <h2>Usuário: {{ employee }}</h2> {% endcomment %}
 
                 <form action="{% url 'login' %}" method="post">
                     {% csrf_token %}

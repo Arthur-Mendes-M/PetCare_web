@@ -1,0 +1,68 @@
+@import '../pattern';
+
+.content_title {
+  display: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 2rem;
+  text-align: center;
+  height: 70vh;
+  justify-content: center;
+
+  .img-container {
+
+    img {
+      width: clamp(11rem, 50%, 50rem);
+      max-width: 100%;
+      height: auto;
+    }
+  }
+
+  h1 {
+    font-size: clamp(1rem, 3vh, 4rem);
+  }
+
+  a {
+    display: inline-block; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    color: white; 
+    background-color: #FFC000; 
+    border: 2px solid #FFC000;
+    border-radius: 5px; 
+    text-align: center; 
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s; 
+
+    &:hover {
+    background-color: white; 
+    color: #FFC000; 
+    border-color: #FFC000; 
+}
+}
+
+
+}
+
+@media (max-height: 700px){
+  .container {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 800px){
+  .img-container {
+    margin-bottom: 2rem;
+  }
+}
+
+@media (min-height: 1000px){
+  .img-container {
+    margin-bottom: 4rem;
+  }
+}

@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("/static/assets/fonts/Inter/Inter-VariableFont_slnt,wght.ttf");
+}
+:root {
+  --white: #FFFFFF;
+  --white_gray: #F8F8F8;
+  --white_gray_secondary: #FAFBFB;
+  --saturated_white_gray: #EEEEEE;
+  --saturated_gray: #D0D5DD;
+  --dark_gray: #535353;
+  --light_gray: #6A6E83;
+  --blue_gray: #42526D;
+  --yellow_primary: #FFC000;
+  --yellow_secondary: #e6af0b;
+  --dark_red: #B40B00;
+  --light_red: #F15046;
+  --light_green: #00E096;
+  --black: #1C1C1C;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--saturated_white_gray);
+  color: var(--black);
+  font-size: 18px;
+  font-family: "Inter";
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--black);
+}
+
+button, input, select, textarea {
+  font-family: "Inter";
+  background: none;
+  border: none;
+}
+
+textarea {
+  resize: none;
+}
+
+.content_title {
+  display: none;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 2rem;
+  text-align: center;
+  height: 70vh;
+  justify-content: center;
+}
+.container .img-container img {
+  width: clamp(11rem, 50%, 50rem);
+  max-width: 100%;
+  height: auto;
+}
+.container h1 {
+  font-size: clamp(1rem, 3vh, 4rem);
+}
+.container a {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #FFC000;
+  border: 2px solid #FFC000;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+.container a:hover {
+  background-color: white;
+  color: #FFC000;
+  border-color: #FFC000;
+}
+
+@media (max-height: 700px) {
+  .container {
+    height: 100vh;
+  }
+}
+@media (min-width: 800px) {
+  .img-container {
+    margin-bottom: 2rem;
+  }
+}
+@media (min-height: 1000px) {
+  .img-container {
+    margin-bottom: 4rem;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */
