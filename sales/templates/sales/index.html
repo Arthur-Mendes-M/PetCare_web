@@ -9,90 +9,113 @@
 
 {% block content_title %}Registrar vendas presenciais{% endblock %}
 {% block content %}
-    <form action="" method="post">
-        <div class="section">
-            <div class="title">
-                <h3>Selecionar produtos</h3>
-            </div>
-
-            <div class="fields_container">
-                <div class="field">
-                    <select name="product" id="product">
-                        <option value="">Produto</option>
-
-                        <!-- Percorrer a lista de produtos (id - nome) -->
-                    </select>
+    <div class="form_container">
+        <form action="{% url 'create_sale' %}" method="post">
+            {% csrf_token %}
+    
+            <div class="section">
+                <div class="title">
+                    <h3>Selecionar produtos</h3>
                 </div>
+    
+                <div id="products_section">
+                    <div class="fields_container product">
+                        <div class="field">
+                            <label for="product">Produto</label>
+        
+                            <input list="products_list" id="product" name="product[]" required>
+                            <datalist id="products_list">
+                                {% for product in products_list %}
+                                    <option value="{{ product.id }}" data-product-price="{{ product.sale_price }}">{{ product.name }}</option>
+                                {% endfor %}
+                            </datalist>
+                        </div>
+        
+                        <div class="field">
+                            <label for="quantity">Quantidade</label>
+                            <input type="number" min="1" step="1" name="quantity[]" id="quantity" required>
+                        </div>
+        
+                        <div class="field double">
+                            <div>
+                                <label for="total_unit_product">Sub total</label>
+                                <input type="number" name="total_unit_product" id="total_unit_product" disabled>
+                            </div>
 
-                <div class="field">
-                    <label for="quantity_in_stock">Quantidade</label>
-                    <input type="text" name="quantity_in_stock" id="quantity_in_stock">
+                            <div>
+                                <label for="total_unit_product">Valor unitário</label>
+                                <input type="number" name="unit_product_price" id="unit_product_price" disabled>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="field">
-                    <label for="total_unit_product"></label>
-                    <input type="text" name="total_unit_product" id="total_unit_product">
-                </div>
-            </div>
-
-            <button type="button">
-                Adicionar produto
-                <i data-lucide="plus"></i>
-            </button>
-        </div>
-
-        <div class="section">
-            <div class="title">
-                <h3>Selecionar cliente</h3>
-            </div>
-
-            <div class="fields_container">
-                <div class="field">
-                    <label for="client">Cliente</label>
-
-                    <input list="clients_list" id="client" name="client">
-                    <datalist id="clients_list">
-                        <option value="x">X</option>
-                        <option value="y">Y</option>
-                        <option value="1. Arthur">1. Arthur</option>
-                        <option value="2. Mendes">2. Mendes</option>
-
-                        <!-- Percorrer a lista de clientes (id - nome) -->
-                    </datalist>
-                </div>
-
-                <div class="field">
-                    <label for="client_email"></label>
-                    <input type="email" name="client_email" id="client_email">
+    
+                <div class="actions">
+                    <button type="button" id="add_product">
+                        Adicionar produto
+                        <i data-lucide="plus"></i>
+                    </button>
+        
+                    <button type="button" id="remove_product">
+                        Remover último produto
+                        <i data-lucide="plus"></i>
+                    </button>
                 </div>
             </div>
-        </div>
-
-        <div class="section">
-            <div class="title">
-                <h3>Selecionar meio de pagamento</h3>
-            </div>
-
-            <div class="fields_container">
-                <div class="field">
-                    <select name="payment_method" id="payment_method" required>
-                        <option value="">Meio de pagamento</option>
-                        <option value="Crédito">Cartão de CRÉDITO</option>
-                        <option value="Débito">Cartão de DÉBITO</option>
-                        <option value="Boleto bancário">Boleto bancário</option>
-                        <option value="PIX">PIX</option>
-                    </select>
+    
+            <div class="section">
+                <div class="title">
+                    <h3>Selecionar cliente</h3>
                 </div>
-
-                <div class="field">
-                    <label for="total">Valor total da compra</label>
-                    <input type="number" name="total" id="total" disabled>
+    
+                <div class="fields_container">
+                    <div class="field">
+                        <label for="client">Cliente</label>
+    
+                        <input list="clients_list" id="client" name="client" required>
+                        <datalist id="clients_list">
+                            {% for client in clients_list %}
+                                <option value="{{ client.id }}" data-client-email="{{ client.email }}">{{ client.name }}</option>
+                            {% endfor %}
+                        </datalist>
+                    </div>
+    
+                    <div class="field">
+                        <label for="client_email">E-mail</label>
+                        <input type="email" name="client_email" id="client_email" disabled>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <button type="submit">Finalizar compra</button>
-    </form>
+    
+            <div class="section">
+                <div class="title">
+                    <h3>Selecionar meio de pagamento</h3>
+                </div>
+    
+                <div class="fields_container">
+                    <div class="field">
+                        <label for="payment_method">Meio de pagamento</label>
+    
+                        <input list="payment_method_list" id="payment_method" name="payment_method" required>
+                        <datalist id="payment_method_list">
+                            <option value="Cartão de CRÉDITO">Cartão de CRÉDITO</option>
+                            <option value="Cartão de DÉBITO">Cartão de DÉBITO</option>
+                            <option value="Boleto bancário">Boleto bancário</option>
+                            <option value="PIX">PIX</option>
+                        </datalist>
+                    </div>
+    
+                    <div class="field">
+                        <label for="total">Valor total da compra</label>
+                        <input type="number" name="total" id="total" disabled>
+                    </div>
+                </div>
+            </div>
+    
+            <button type="submit">Finalizar compra</button>
+        </form>
+    </div>
+    
 
     <div id="sale_created_alert">
         <div class="title">
@@ -105,10 +128,156 @@
             <h3>Venda registrada com sucesso</h3>
         </div>
     </div>
+
+    <div id="sale_not_created_alert">
+        <div class="title">
+            <svg xmlns="http://www.w3.org/2000/svg" width="125" height="125" viewBox="0 0 125 125" fill="none">
+                <path d="M80.0596 88.8397L88.8395 80.0598L71.2797 62.5L88.8395 44.9402L80.0596 36.1603L62.4998 53.7201L44.94 36.1603L36.1601 44.9402L53.7199 62.5L36.1601 80.0598L44.94 88.8397L62.4998 71.2799L80.0596 88.8397ZM106.399 106.4C100.327 112.472 93.4665 117.026 85.8192 120.061C78.1719 123.096 70.3988 124.615 62.4998 124.618C54.6008 124.621 46.8276 123.102 39.1803 120.061C31.533 117.02 24.673 112.466 18.6002 106.4C12.5275 100.333 7.97362 93.4726 4.9387 85.8194C1.90378 78.1663 0.384852 70.3931 0.381926 62.5C0.379 54.6069 1.89793 46.8337 4.9387 39.1806C7.97948 31.5274 12.5333 24.6674 18.6002 18.6004C24.6672 12.5335 31.5272 7.97968 39.1803 4.93891C46.8335 1.89813 54.6067 0.379199 62.4998 0.382125C70.3929 0.385052 78.1675 1.90252 85.8236 4.93451C93.4797 7.96651 100.338 12.5218 106.399 18.6004C112.46 24.6791 117.014 31.5391 120.061 39.1805C123.108 46.822 124.626 54.5951 124.618 62.5C124.609 70.4048 123.091 78.1794 120.065 85.8238C117.039 93.4682 112.484 100.327 106.399 106.4Z" fill="#F24E1E"/>
+            </svg>
+        </div>
+
+        <div class="warning">
+            <h3>Alguma coisa deu errado :/</h3>
+            <h5>Por favor, tente novamente.</h5>
+            <p>Lembre-se se verificar se os produtos escolhidos possuem a quantidade necessária para essa venda em estoque, além de ter preenchido os dados corretamente.</p>
+        </div>
+    </div>
 {% endblock %}
 
-{% block script %}
+{% block scripts %}
 <script>
-    // Adicionar um event listener no carregamento da página, se vier com "sale_was_created" como true, adicionar a class "show" ao container de venda efetuada e setTimeOut para remover essa classe.
+    // Success and error after save sale
+    window.addEventListener('DOMContentLoaded', () => {
+        let sale_created_alert = document.getElementById('sale_created_alert')
+        let sale_not_created_alert = document.getElementById('sale_not_created_alert')
+
+        if("{{ sale_was_created }}" == "true") {
+            sale_created_alert.classList.add('show')
+
+            setTimeout(() => {
+                sale_created_alert.classList.remove('show')
+            }, 2000)
+        } else if("{{ sale_was_created }}" == "false") {
+            sale_not_created_alert.classList.add('show')
+
+            setTimeout(() => {
+                sale_not_created_alert.classList.remove('show')
+            }, 2000)
+        }
+    })
+
+
+    // Auto update of total purchase
+    setInterval(() => {
+        let all_product_prices = document.querySelectorAll('input[name*=total_unit_product]')
+        let total_purchase = 0
+        all_product_prices.forEach(input => {
+            value = input.value ? input.value : 0
+            total_purchase += parseFloat(value)
+        })
+
+        document.getElementById('total').value = total_purchase
+    }, 1000)
+
+    // Quantity of each products control
+    function scan_quantity_datalist() {
+
+        let all_quantities = document.querySelectorAll('input[name*=quantity]')
+        all_quantities.forEach(input => {
+            input.addEventListener('blur', () => {
+                let parent_container = input.closest('.product')
+                let product_selected = parent_container.querySelector('input[name*=product]')
+                let product_unit_price = parent_container.querySelector('input[name*=total_unit_product]')
+
+                let datalist = parent_container.querySelector('datalist')
+                let datalist_option = [...datalist.options]
+
+                datalist_option.forEach(option => {
+                    if(option.value == product_selected.value) {
+                        let unit_price = parseFloat(option.getAttribute('data-product-price')) * input.value
+
+                        product_unit_price.value = unit_price
+
+                        parent_container.querySelector('input[name*=unit_product_price]').value = parseFloat(option.getAttribute('data-product-price'))
+                    } 
+                })
+            })
+        })
+    }
+    scan_quantity_datalist()
+
+    // Email of the selected client control
+    let client_input = document.getElementById('client')
+    let clients_list = document.getElementById('clients_list')
+    let client_email = document.getElementById('client_email')
+
+    client_input.addEventListener('blur', () => {
+        [...clients_list.options].forEach(option => {
+            if(option.value == client_input.value) {
+                client_email.value = option.getAttribute('data-client-email')
+            }
+        })
+    })
+
+    // add and remove products actions control
+    let add_product_button = document.getElementById('add_product')
+    let remove_product_button = document.getElementById('remove_product')
+
+    let products_section_container = document.getElementById('products_section') 
+    let product_container_field = document.querySelector('.fields_container.product')
+
+    add_product_button.addEventListener('click', () => {
+        let product_container_field_clone = product_container_field.cloneNode(true)
+    
+        product_container_field_clone.querySelectorAll('.field').forEach((field, index) => {
+            let label = field.querySelector('label')
+            let inputs = field.querySelectorAll('input')
+            inputs.forEach(input => {
+                input.value = ''
+            
+                input.id = `${input.id}_${index}`
+                label.htmlFor = `${label.htmlFor}_${index}`
+            })
+        })
+
+        products_section_container.appendChild(product_container_field_clone)
+
+        scan_quantity_datalist()
+    })
+
+    remove_product_button.addEventListener('click', () => {
+        let product_containers = document.querySelectorAll('.fields_container.product');
+        if (product_containers.length > 1) {
+            let last_product_container = product_containers[product_containers.length - 1];
+            last_product_container.remove();
+        }
+    });
+
+    // Datalist inputs validation
+    let inputs_of_type_list = document.querySelectorAll('input[list]')
+
+    inputs_of_type_list.forEach(input => {
+        let datalist = input.nextElementSibling
+        let datalist_option = [...datalist.options]
+        let valid = false
+
+        input.addEventListener('input', () => {
+            datalist_option.forEach(option => {
+                if(option.value == input.value) {
+                    valid = true
+                    return
+                }
+            })
+
+            if(valid == false) {
+                input.setCustomValidity('Selecione um valor válido! Os valores corretos ficam na caixa de seleção.')
+            } else {
+                input.setCustomValidity('')
+                input.reportValidity()
+            }
+
+            valid = false
+        })
+    })
 </script>
 {% endblock %}

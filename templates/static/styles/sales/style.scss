@@ -1,4 +1,120 @@
+@import '../pattern';
 
-h1 {
-    color: green;
+.form_container {
+    max-width: 100%;
+    position: relative;
+    overflow: auto;
+    flex-grow: 1;
+}
+
+form {
+    @include flexBox($direction: column, $gap: 1rem);
+    background-color: var(--white_gray);
+    padding: 1.5rem;
+    position: absolute;
+    width: 100%;
+
+    .section {
+        width: 100%;
+
+        .title {
+            margin-bottom: 1rem;
+
+            h3 {
+                font-weight: 600;
+            }
+        }
+
+        #products_section {
+            @include flexBox($direction: column, $items: flex-start, $content: unset, $gap: 1.5rem);
+        }
+
+        .fields_container {
+            @include flexBox($content: space-between, $gap: 1rem, $wrap: wrap);
+            width: 100%;
+
+            .field {
+                @include flexBox($direction: column, $items: flex-start, $content: flex-start, $gap: .5rem);
+                flex-grow: 1;
+
+                input {
+                    border-bottom: 1px solid var(--blue_gray);
+                    padding: .3rem;
+                    width: 100%;
+                }
+
+                &:has(input:disabled) {
+                    opacity: 0.5;
+                }
+
+                &.double {
+                    @include flexBox($gap: .5rem);
+                    max-width: 300px;
+
+                    & > div {
+                        @include flexBox($direction: column, $items: flex-start, $content: flex-start, $gap: .5rem);                        
+                    }
+                }
+            }
+        }
+
+        .actions {
+            @include flexBox($gap: 1rem, $wrap: wrap);
+            width: 100%;
+            margin: 2rem 0;
+
+            button {
+                flex-grow: 1;
+            }
+        }
+    }
+
+    #add_product, #remove_product, button[type=submit]{
+        @include flexBox($gap: .5rem);
+        padding: .5rem 1rem;
+        border-radius: .3rem;
+        border: 1px solid var(--black);
+        color: var(--black);
+        transition: all .25s linear;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--black);
+            color: var(--white);
+        }
+    }
+
+    button[type=submit] {
+        align-self: flex-end;
+    }
+}
+
+#sale_created_alert, #sale_not_created_alert {
+    @include flexBox($direction: column, $gap: .5rem);
+    position: absolute;
+    right: 0;
+    top: 2rem;
+    padding: 1.5rem;
+    background-color: var(--white_gray_secondary);
+    width: fit-content;
+    max-width: 450px;
+    text-align: center;
+    height: fit-content;
+    z-index: 10;
+    border-radius: 1rem;
+    transition: all .25s linear;
+
+    transform: translateX(-100vw);
+
+    svg {
+        max-width: 100px;
+    }
+
+    &.show {
+        transform: translateX(0);
+    }
+
+    p {
+        margin-top: 1rem;
+    }
 }

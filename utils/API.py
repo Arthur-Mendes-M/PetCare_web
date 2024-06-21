@@ -148,3 +148,19 @@ class Products:
         return requests.delete(
             url=self.build_url(id)
         )
+
+class Sales:
+    @abstractmethod
+    def build_url(self, id=None):
+        if not id:
+            return f"{os.getenv('PETCARE_API_URL')}sales/?auth={os.getenv('PETCARE_AUTH_TOKEN')}"
+        elif id:
+            return f"{os.getenv('PETCARE_API_URL')}sales/{id}?auth={os.getenv('PETCARE_AUTH_TOKEN')}"
+    
+    @abstractmethod
+    def save_one(self, data):            
+        return requests.post(
+            url=self.build_url(),
+            headers=json_header,
+            data=json.dumps(data)
+        )
